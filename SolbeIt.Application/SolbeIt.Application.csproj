@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Statics\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolbeIt.DataLayer\SolbeIt.DataLayer.csproj" />
+  </ItemGroup>
+
+</Project>
