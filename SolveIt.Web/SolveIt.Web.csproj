@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Extensions\" />
+    <Folder Include="wwwroot\common\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SolbeIt.IoC\SolbeIt.IoC.csproj" />
+    <ProjectReference Include="..\SolveIt.IoC\SolveIt.IoC.csproj" />
   </ItemGroup>
 
 </Project>

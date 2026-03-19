@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Convertors\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Generators\" />
+    <Folder Include="Paging\" />
+    <Folder Include="Security\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="ViewModels.Options\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\PropertyDictionary.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PropertyDictionary.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\PropertyDictionary.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyDictionary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

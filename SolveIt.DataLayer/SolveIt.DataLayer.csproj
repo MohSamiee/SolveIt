@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="Implementations\" />
+    <Folder Include="Resolver\" />
+    <Folder Include="SeedData\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolveIt.Domain\SolveIt.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

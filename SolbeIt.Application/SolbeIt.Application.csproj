@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SolbeIt.DataLayer\SolbeIt.DataLayer.csproj" />
+    <ProjectReference Include="..\SolbeIt.DataLayer\SolveIt.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>

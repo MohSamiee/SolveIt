@@ -14,7 +14,21 @@
     <Folder Include="ViewModels.Options\" />
     <Folder Include="Utilities\" />
     <Folder Include="Security\" />
-    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\PropertyDictionary.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PropertyDictionary.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\PropertyDictionary.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertyDictionary.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
