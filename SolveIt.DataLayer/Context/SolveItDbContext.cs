@@ -9,4 +9,15 @@ public class SolveItDbContext : DbContext
 
 	}
 	#endregion Constructor
+
+	#region DbSets
+	public DbSet<User> Users { get; set; }
+	#endregion DbSets
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		base.OnModelCreating(modelBuilder);
+
+		modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+	}
 }
