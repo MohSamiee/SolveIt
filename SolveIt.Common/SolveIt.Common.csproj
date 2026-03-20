@@ -10,7 +10,6 @@
     <Folder Include="Convertors\" />
     <Folder Include="Extensions\" />
     <Folder Include="Generators\" />
-    <Folder Include="Paging\" />
     <Folder Include="Security\" />
     <Folder Include="Utilities\" />
     <Folder Include="ViewModels.Options\" />
