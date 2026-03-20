@@ -1,4 +1,5 @@
-﻿using BestShop.Common.Generator;
+﻿using AutoMapper;
+using BestShop.Common.Generator;
 using BestShop.Data.ViewModels;
 using SolveIt.Application.Statics;
 using SolveIt.Common.Security;
@@ -7,13 +8,17 @@ namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
 {
 	private readonly IUserRepository _userRepository;
+	public IMapper _mapper { get; }
 	#region Constructor
 	public UserService(
-		IUserRepository userRepository
+		IUserRepository userRepository,
+		IMapper mapper
 		)
 	{
 		_userRepository = userRepository;
+		_mapper = mapper;
 	}
+
 	#endregion Constructor
 
 	#region Register
@@ -29,14 +34,7 @@ public class UserService : IUserService
 			return new OperationResult<RegisterViewModel, RegisterResult>(false, register, string.Empty, RegisterResult.DuplicateEmail);
 
 		// Add User to database
-		var user = new User
-		{
-			Email = register.Email,
-			NormalizedEmail = register.Email.StringNormalize(),
-			HashedPassword = register.Password.Hash(),
-			EmailActivationCode = CodeGenerator.GenerateActivationEmailCode(),
-			AvatarAddress = PathTools.DefaultUserAvatar
-		};
+		var user = _mapper.Map<User>(register);
 		
 		await _userRepository.AddAsync(user, true);
 		return new OperationResult<RegisterViewModel, RegisterResult>(true, register, string.Empty, RegisterResult.Success);
