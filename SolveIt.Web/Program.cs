@@ -1,4 +1,6 @@
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Services
@@ -16,6 +18,10 @@ builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 #endregion Register Services
 
+
+#region Register  Others
+builder.Services.RegisterOthers();
+#endregion Register  Others
 #endregion Services
 
 #region Midlewares

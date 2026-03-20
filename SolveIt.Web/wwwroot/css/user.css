@@ -94,7 +94,7 @@
 .user-page form > .inner .input-layer span:before{
     position: absolute;
     height: 12px;
-    width: 1px;
+    width: 0px;
     top: 6px;
     right: 31px;
     background-color: #d2d6e1;
@@ -106,7 +106,7 @@
 .user-page form > .inner .input-layer span:after{
     position: absolute;
     height: 9px;
-    width: 1px;
+    width: 0px;
     top: 8px;
     right: 35px;
     background-color: #d2d6e1;

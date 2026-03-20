@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using BestShop.Common.Generator;
-using BestShop.Data.ViewModels;
-using SolveIt.Application.Statics;
-using SolveIt.Common.Security;
+
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService

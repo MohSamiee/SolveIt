@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BestShop.Data.ViewModels;
+namespace SolveIt.Application.ViewModels;
 public class ModelVerification
 {
 	public async Task<OperationResult<bool, ValidationResultEnum>> ModelValidation(object model)

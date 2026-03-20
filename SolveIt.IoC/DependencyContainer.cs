@@ -5,6 +5,7 @@ public static class DependencyContainer
 {
 	public static void RegisterServices(this IServiceCollection services)
 	{
+		services.AddScoped<IUserService, UserService>();
 	}
 
 	public static void RegisterRepositories(this IServiceCollection services)

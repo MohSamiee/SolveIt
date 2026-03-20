@@ -1,2 +1,4 @@
 ﻿global using SolveIt.DataLayer.Repositories.Accounts;
 global using SolveIt.Domain.Interfaces.Accounts;
+global using SolveIt.Application.Services.Implementations.Accounts;
+global using SolveIt.Application.Services.Interfaces.Accounts;

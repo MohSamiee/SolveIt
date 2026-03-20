@@ -5,3 +5,4 @@ global using SolveIt.Common.String;
 global using SolveIt.Domain.Interfaces.Accounts;
 global using SolveIt.Entities.Models.Users;
 global using SolveIt.Common.Resources;
+global using SolveIt.Application.ViewModels;
