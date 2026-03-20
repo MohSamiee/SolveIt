@@ -120,4 +120,10 @@
   <data name="LandingPage" xml:space="preserve">
     <value>صفحه اصلی</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ورود</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>ثبت نام</value>
+  </data>
 </root>

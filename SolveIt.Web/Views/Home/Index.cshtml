@@ -40,7 +40,7 @@
             </nav>
 
             <div class="clientarea-layer">
-                <div class="loggedin-status">
+                <div class="loggedin-status hidden">
                     <i class="icon-profile"></i>
                     <span> حساب کاربری شما  </span>
                     <div class="sublayer">
@@ -62,10 +62,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="signout-status hidden">
+                <div class="signout-status ">
                     <i class="icon-profile"></i>
-                    <a href=""> ورود / </a>
-                    <a href=""> عضویت </a>
+                    <a asp-area=""
+                       asp-controller="Account"
+                       asp-action="Login"> @PropertyDictionary.Login / </a>
+                    <a asp-area=""
+                       asp-controller="Account"
+                       asp-action="Register"> @PropertyDictionary.Register </a>
                 </div>
             </div>
 
