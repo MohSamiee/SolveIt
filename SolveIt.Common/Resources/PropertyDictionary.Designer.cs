@@ -61,6 +61,60 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کلمات عبور  یکسان نیست.
+        /// </summary>
+        public static string ComparePasswordErrorMessage {
+            get {
+                return ResourceManager.GetString("ComparePasswordErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ایمیل.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ایمیل وارد شده معتبر نمی باشد..
+        /// </summary>
+        public static string GnEmailFormatErrorMessage {
+            get {
+                return ResourceManager.GetString("GnEmailFormatErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حداکثر طول {0} برابر {1} کاراکتر است..
+        /// </summary>
+        public static string GnMaxLengthErrorMessage {
+            get {
+                return ResourceManager.GetString("GnMaxLengthErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GnRequiredErrorMessage.
+        /// </summary>
+        public static string GnRequiredErrorMessage {
+            get {
+                return ResourceManager.GetString("GnRequiredErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطایی رخ داده است.
+        /// </summary>
+        public static string GnSomethingWenWrong {
+            get {
+                return ResourceManager.GetString("GnSomethingWenWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to صفحه اصلی.
         /// </summary>
         public static string LandingPage {
@@ -79,11 +133,29 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ثبت نام.
         /// </summary>
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تکرار کلمه عبور.
+        /// </summary>
+        public static string RePassword {
+            get {
+                return ResourceManager.GetString("RePassword", resourceCulture);
             }
         }
     }

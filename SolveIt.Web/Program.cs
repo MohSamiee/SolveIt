@@ -1,3 +1,4 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Services
@@ -6,6 +7,14 @@ builder.Services.AddControllersWithViews();
 #region Register Database
 builder.ConfigDatabase();
 #endregion Register Database
+
+#region Register Repositories
+builder.Services.RegisterRepositories();
+#endregion Register Repositories
+
+#region Register Services
+builder.Services.RegisterServices();
+#endregion Register Services
 
 #endregion Services
 
