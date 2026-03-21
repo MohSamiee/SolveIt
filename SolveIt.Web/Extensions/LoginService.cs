@@ -65,12 +65,29 @@ public class LoginService
 	}
 
 	#endregion Cookie Login
+	public  bool IsUserAuthenticated()
+	{
+		var status = false;
+		if (_httpContextAccessor.HttpContext != null)
+			if(_httpContextAccessor.HttpContext.User.Identity != null)
+				status = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+		return status;
+	}
+
+	public static bool IsUserAuthenticated(ClaimsPrincipal user)
+	{
+		var status = false;
+			if (user.Identity != null)
+				status = user.Identity.IsAuthenticated;
+		return status;
+	}
+
 
 	public UserInfo? GetCurrentUserInfo()
 	{
-		if (_httpContextAccessor.HttpContext == null)
+		if (!IsUserAuthenticated())
 			return null;
-		var user = _httpContextAccessor.HttpContext.User;
+		var user = _httpContextAccessor.HttpContext!.User;
 		var result = GetCurrentUserInfo(user);
 		return result;
 	}

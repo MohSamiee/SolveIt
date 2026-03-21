@@ -5,7 +5,7 @@
 }
 
 <div class="clientarea-layer">
-    @if (User.Identity.IsAuthenticated)
+    @if (LoginService.IsUserAuthenticated(User))
     {
         <div class="loggedin-status ">
             <span>
