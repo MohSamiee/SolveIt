@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SolveIt.Application.Services.Interfaces.Accounts;
-using SolveIt.Application.ViewModels.Accounts;
-using SolveIt.Web.Extensions;
+
 
 namespace SolveIt.Web.Controllers;
 public class AccountController : BaseController
@@ -20,6 +18,7 @@ public class AccountController : BaseController
 
 	#region Login
 	[HttpGet("Login")]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> Login()
 	{
 		return View();
@@ -27,6 +26,7 @@ public class AccountController : BaseController
 
 	[HttpPost("Login")]
 	[ValidateAntiForgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> Login(LoginViewModel vm)
 	{
 		if (!ModelState.IsValid)
@@ -46,6 +46,7 @@ public class AccountController : BaseController
 
 	#region Register
 	[HttpGet("Register")]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> Register()
 	{
 		return View();
@@ -53,6 +54,7 @@ public class AccountController : BaseController
 
 	[HttpPost("Register")]
 	[ValidateAntiForgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> Register(RegisterViewModel vm)
 	{
 		if (!ModelState.IsValid)
