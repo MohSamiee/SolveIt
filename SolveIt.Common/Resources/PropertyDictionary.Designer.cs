@@ -115,6 +115,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ایمیل با موفقیت فعال شد..
+        /// </summary>
+        public static string EmailSuccessfullyActivated {
+            get {
+                return ResourceManager.GetString("EmailSuccessfullyActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فایل تنها با فرمت های زیر قابل قبول است..
         /// </summary>
         public static string FileFormatAllowedAsBelow {

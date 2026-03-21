@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SolveIt.Common.OperationResult;
 
 
 namespace SolveIt.Web.Controllers;
@@ -86,4 +87,22 @@ public class AccountController : BaseController
 		return Redirect("/");
 	}
 	#endregion Logout
+
+	#region Activation
+	[HttpGet("VerifyEmail/{id}")]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
+	public async Task<IActionResult> ActivattionByEmail(string id)
+	{
+		if (string.IsNullOrWhiteSpace(id))
+			return NotFound();
+		var result = await _userService.ActivateEmail(id);
+		
+		this.SetOperationMessage(result);
+		if (!result.IsSuccess && result.Status == StatusResultEnum.NotFound)
+			return NotFound();
+
+		return RedirectToAction("Login");
+
+	}
+	#endregion Activation
 }

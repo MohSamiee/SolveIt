@@ -1,5 +1,5 @@
 ﻿namespace SolveIt.Common.OperationResult;
-public class OperationResult<TEntity> 
+public class OperationResult<TEntity>
 {
 	#region Properties
 	public bool IsSuccess { get; set; }
@@ -47,7 +47,7 @@ public class ModelStateError
 {
 	public string ModelStateField { get; set; }
 	public string ModelStateErrorMessage { get; set; }
-	
+
 	#region Methods
 	public static ModelStateError MakeModelStateError(string field, string message)
 	{
@@ -64,6 +64,7 @@ public enum StatusResultEnum
 {
 	Success = 0,
 	ValidationError = 1,
+	NotFound = 2,
 	AnyOtherError = 99
 
 }

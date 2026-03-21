@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using Microsoft.Win32;
+using SolveIt.Common.Generator;
 using SolveIt.Common.Security;
 
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
 {
+	#region Constructor
 	private readonly IUserRepository _userRepository;
 	public IMapper _mapper { get; }
-	#region Constructor
 	public UserService(
 		IUserRepository userRepository,
 		IMapper mapper
@@ -124,7 +124,7 @@ public class UserService : IUserService
 				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.UserIsNotActive));
 		}
 
-	
+
 		// Update User
 		user.LastLoginTime = DateTime.Now;
 		await _userRepository.UpdateAsync(user, true);
@@ -137,4 +137,44 @@ public class UserService : IUserService
 			);
 	}
 	#endregion Login
+
+	#region Activation
+	public async Task<OperationResult<User>> ActivateEmail(string activationCode)
+	{
+		// Find User
+		var users = await _userRepository.GetByValue(activationCode, nameof(User.EmailActivationCode));
+		if (users == null || users.Count() == 0)
+			return new OperationResult<User>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound,
+				ModelStateError.MakeModelStateError(nameof(User.Email), PropertyDictionary.LoginInputIsNotValid)
+				);
+		var user = users.First();
+
+		// Check if user Is Banned
+		if (user.IsBan)
+			return new OperationResult<User>(
+				false,
+				null,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError(nameof(User.Email), PropertyDictionary.UserIsBan)
+				);
+
+		//Update User
+		user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
+		user.IsActive = true;
+		user.IsEmailConfirmed = true;
+		await _userRepository.UpdateAsync(user, true);
+
+		return new OperationResult<User>(
+			true,
+			user,
+			PropertyDictionary.EmailSuccessfullyActivated,
+			StatusResultEnum.Success
+			);
+	}
+	#endregion Activation
 }

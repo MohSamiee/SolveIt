@@ -135,6 +135,9 @@
   <data name="EmailIsDuplicate" xml:space="preserve">
     <value>ایمیل تکراری است.</value>
   </data>
+  <data name="EmailSuccessfullyActivated" xml:space="preserve">
+    <value>ایمیل با موفقیت فعال شد.</value>
+  </data>
   <data name="FileFormatAllowedAsBelow" xml:space="preserve">
     <value>فایل تنها با فرمت های زیر قابل قبول است.</value>
   </data>
