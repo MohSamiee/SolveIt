@@ -18,5 +18,6 @@ public class LoginViewModel
 
 	[Display(Name = "RememberMe", ResourceType = typeof(PropertyDictionary))]
 	public bool RememberMe { get; set; }
+	public string ReturnUrl { get; set; }
 }
 

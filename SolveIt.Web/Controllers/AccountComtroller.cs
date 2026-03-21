@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace SolveIt.Web.Controllers;
@@ -19,9 +20,11 @@ public class AccountController : BaseController
 	#region Login
 	[HttpGet("Login")]
 	[RedirectHomeIfUserLoggedInActionFiltrer]
-	public async Task<IActionResult> Login()
+	public async Task<IActionResult> Login(string returnUrl = "/")
 	{
-		return View();
+		var login = new LoginViewModel();
+		login.ReturnUrl = returnUrl;
+		return View(login);
 	}
 
 	[HttpPost("Login")]
@@ -40,7 +43,7 @@ public class AccountController : BaseController
 			return View(vm);
 
 		await _loginService.LoginUserByCookie(result.Data!, vm.RememberMe);
-		return Redirect("/");
+		return Redirect(vm.ReturnUrl);
 	}
 	#endregion Login
 

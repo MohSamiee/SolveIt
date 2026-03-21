@@ -67,7 +67,7 @@
                           asp-controller="Account"
                           asp-action="Login"
                           method="post">
-
+                          @Html.HiddenFor(a=>a.ReturnUrl)
                         <div class="inner">
 
                             <h2>
