@@ -26,6 +26,7 @@ public class AccountController : BaseController
 	}
 
 	[HttpPost("Login")]
+	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> Login(LoginViewModel vm)
 	{
 		if (!ModelState.IsValid)
@@ -51,6 +52,7 @@ public class AccountController : BaseController
 	}
 
 	[HttpPost("Register")]
+	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> Register(RegisterViewModel vm)
 	{
 		if (!ModelState.IsValid)
@@ -70,4 +72,13 @@ public class AccountController : BaseController
 		return View(result.Data);
 	}
 	#endregion Register
+
+	#region Logout
+	[HttpGet("Logout")]
+	public async Task<IActionResult> SignOut()
+	{
+		await _loginService.LogoutUserByCookie();
+		return Redirect("/");
+	}
+	#endregion Logout
 }
