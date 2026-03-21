@@ -7,4 +7,10 @@ public class HomeController : BaseController
 	{
 		return View();
 	}
+
+	[HttpGet("NotFound")]
+	public async Task<IActionResult> NotFound()
+	{
+		return View();
+	}
 }

@@ -192,6 +192,9 @@
   <data name="RePassword" xml:space="preserve">
     <value>تکرار کلمه عبور</value>
   </data>
+  <data name="RerurnHome" xml:space="preserve">
+    <value>بازگشت به صفحه اصلی</value>
+  </data>
   <data name="UserIsBan" xml:space="preserve">
     <value>کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید</value>
   </data>

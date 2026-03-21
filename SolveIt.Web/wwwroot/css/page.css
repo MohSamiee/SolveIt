@@ -491,16 +491,18 @@
 }
 
 .notfound {
-    margin-bottom: 35px
+    margin-bottom: 35px;
+    text-align:center;
+    
 }
 .notfound img{
-    width: 450px;
+    width: 600px;
     display: block;
-    margin: 0 auto
+    margin: auto
 }
 .notfound p{
     text-align: center;
-    font-size: 15px
+    font-size: 30px
 }
 
 @media screen and (max-width : 1199px){

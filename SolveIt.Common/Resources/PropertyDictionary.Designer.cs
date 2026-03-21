@@ -286,6 +286,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to بازگشت به صفحه اصلی.
+        /// </summary>
+        public static string RerurnHome {
+            get {
+                return ResourceManager.GetString("RerurnHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید.
         /// </summary>
         public static string UserIsBan {
