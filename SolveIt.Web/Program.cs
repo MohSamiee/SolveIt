@@ -10,7 +10,6 @@ builder.Services.AddControllersWithViews();
 builder.RegisterHtmlEncoder();
 #endregion Register Unicode
 
-
 #region Register Database
 builder.ConfigDatabase();
 #endregion Register Database
@@ -23,10 +22,14 @@ builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 #endregion Register Services
 
+#region Auth
+builder.RegisterCookieAuthorize();
+#endregion
 
 #region Register  Others
 builder.Services.RegisterOthers();
 #endregion Register  Others
+
 #endregion Services
 
 #region Midlewares
@@ -40,6 +43,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
 app.MapControllerRoute(

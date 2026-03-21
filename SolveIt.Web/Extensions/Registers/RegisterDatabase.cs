@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SolveIt.Web.Extensions.Register
+namespace SolveIt.Web.Extensions.Registers
 {
 	public static class RegisterDatabase
 	{

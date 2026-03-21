@@ -1,7 +1,7 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
-namespace SolveIt.Web.Extensions.Register;
+namespace SolveIt.Web.Extensions.Registers;
 
 public static class RegisterEncoder
 {
