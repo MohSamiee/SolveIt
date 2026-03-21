@@ -1,0 +1,47 @@
+﻿@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        swal({
+            title: "@PropertyDictionary.GnAlert",
+            text: "@TempData["SuccessMessage"]",
+            icon: "success",
+            button: "@PropertyDictionary.GnOk"
+        });
+    </script>
+}
+
+@if (TempData["WarningMessage"] != null)
+{
+    <script>
+        swal({
+            title: "@PropertyDictionary.GnAlert",
+            text: "@TempData["WarningMessage"]",
+            icon: "warning",
+            button: "@PropertyDictionary.GnOk"
+        });
+    </script>
+}
+
+@if (TempData["InfoMessage"] != null)
+{
+    <script>
+        swal({
+            title: "@PropertyDictionary.GnAlert",
+            text: "@TempData["InfoMessage"]",
+            icon: "info",
+            button: "@PropertyDictionary.GnOk"
+        });
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        swal({
+            title: "@PropertyDictionary.GnAlert",
+            text: "@TempData["ErrorMessage"]",
+            icon: "error",
+            button: "@PropertyDictionary.GnOk"
+        });
+    </script>
+}

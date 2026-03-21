@@ -30,7 +30,7 @@ public class AccountController : BaseController
 	[HttpPost("Register")]
 	public async Task<IActionResult> Register(RegisterViewModel vm)
 	{
-		if(!ModelState.IsValid)
+		if (!ModelState.IsValid)
 			return View(vm);
 
 		var result = await _userService.RegisterUser(vm);
@@ -42,7 +42,8 @@ public class AccountController : BaseController
 				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
 			}
 		}
-
+		this.SetOperationMessage(result);
+		if (result.IsSuccess) return RedirectToAction("Login", "Account");
 		return View(result.Data);
 	}
 	#endregion Register

@@ -6,6 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 #region Services
 builder.Services.AddControllersWithViews();
 
+#region Register Unicode 
+builder.RegisterHtmlEncoder();
+#endregion Register Unicode
+
+
 #region Register Database
 builder.ConfigDatabase();
 #endregion Register Database

@@ -11,6 +11,7 @@
 @section Styles {
     <link rel="stylesheet" type="text/css" href="css/user.css">
 }
+
 <div class="user-page-style">
 
     <div class="breadcumb-layer">
@@ -74,30 +75,31 @@
                         <div class="inner">
                             <h2> <i class="icon-three-dots"></i> ثبت نام در سایت </h2>
 
-                            <div class="input-layer">
+                            <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-mail-envelope"></i>
                                     @PropertyDictionary.Email
                                 </span>
                                 <input asp-for="Email" type="email">
                             </div>
-
-
-                            <div class="input-layer">
+                            <span asp-validation-for="Email"class="validation-error"></span>
+                            <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-lock-2"></i>
                                     @PropertyDictionary.Password
                                 </span>
                                 <input asp-for="Password" type="password" >
                             </div>
+                                <span asp-validation-for="Password" class="validation-error"></span>
 
-                            <div class="input-layer">
+                            <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-lock-2"></i>
                                     @PropertyDictionary.RePassword
                                 </span>
                                 <input asp-for="RePassword" type="password" >
                             </div>
+                                <span asp-validation-for="RePassword" class="validation-error"></span>
 
                             <div class="captcha-layer">
                                 <!-- کد کپچا در این لایه قرار بدید تا استایل بگیره-->
@@ -114,3 +116,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_JqueryValidation" />
+}

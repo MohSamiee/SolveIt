@@ -6,7 +6,7 @@ using SolveIt.Entities.Models.Users;
 namespace SolveIt.Application.Services.Interfaces.Accounts;
 public interface  IUserService
 {
-	Task<OperationResult<RegisterViewModel, RegisterResult>> RegisterUser(RegisterViewModel register);
+	Task<OperationResult<RegisterViewModel>> RegisterUser(RegisterViewModel register);
 }
 
 #region Enums

@@ -123,14 +123,26 @@
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
   </data>
+  <data name="EmailIsDuplicate" xml:space="preserve">
+    <value>ایمیل تکراری است.</value>
+  </data>
+  <data name="GnAlert" xml:space="preserve">
+    <value>اعلان</value>
+  </data>
   <data name="GnEmailFormatErrorMessage" xml:space="preserve">
     <value>ایمیل وارد شده معتبر نمی باشد.</value>
   </data>
   <data name="GnMaxLengthErrorMessage" xml:space="preserve">
     <value>حداکثر طول {0} برابر {1} کاراکتر است.</value>
   </data>
+  <data name="GnOk" xml:space="preserve">
+    <value>باشه</value>
+  </data>
+  <data name="GnOperationSuccessfulltDone" xml:space="preserve">
+    <value>عملیات با موفقیت انجام شد</value>
+  </data>
   <data name="GnRequiredErrorMessage" xml:space="preserve">
-    <value>GnRequiredErrorMessage</value>
+    <value>لطفا {0} را وارد کنید.</value>
   </data>
   <data name="GnSomethingWenWrong" xml:space="preserve">
     <value>خطایی رخ داده است</value>
@@ -146,6 +158,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>ثبت نام</value>
+  </data>
+  <data name="RegisterSuccessfullyDoneMessage" xml:space="preserve">
+    <value>ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید.</value>
   </data>
   <data name="RePassword" xml:space="preserve">
     <value>تکرار کلمه عبور</value>

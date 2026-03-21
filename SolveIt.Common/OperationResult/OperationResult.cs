@@ -1,12 +1,12 @@
 ﻿namespace SolveIt.Common.OperationResult;
-public class OperationResult<TEntity, TStatus> where TStatus : Enum
+public class OperationResult<TEntity> 
 {
 	#region Properties
 	public bool IsSuccess { get; set; }
 	public TEntity? Data { get; set; }
 	public string? Message { get; set; }
 	public List<ModelStateError>? ModelStateErrors { get; set; }
-	public TStatus Status { get; set; }
+	public StatusResultEnum Status { get; set; }
 	#endregion Properties
 
 	#region Constructor
@@ -14,7 +14,7 @@ public class OperationResult<TEntity, TStatus> where TStatus : Enum
 		bool isSuccess,
 		TEntity? data,
 		string? message,
-		TStatus status,
+		StatusResultEnum status,
 		List<ModelStateError> modelStateErrors) : base()
 	{
 		this.IsSuccess = isSuccess;
@@ -28,7 +28,7 @@ public class OperationResult<TEntity, TStatus> where TStatus : Enum
 		bool isSuccess,
 		TEntity? data,
 		string? message,
-		TStatus status,
+		StatusResultEnum status,
 		ModelStateError? modelStateError = null) : base()
 	{
 		this.IsSuccess = isSuccess;
@@ -58,4 +58,12 @@ public class ModelStateError
 		};
 	}
 	#endregion Methods
+}
+
+public enum StatusResultEnum
+{
+	Success = 0,
+	ValidationError = 1,
+	AnyOtherError = 99
+
 }

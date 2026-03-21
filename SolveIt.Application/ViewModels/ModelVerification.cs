@@ -3,12 +3,17 @@
 namespace SolveIt.Application.ViewModels;
 public class ModelVerification
 {
-	public async Task<OperationResult<bool, ValidationResultEnum>> ModelValidation(object model)
+	public async Task<OperationResult<bool>> ModelValidation(object model)
 	{
 		var validations = new List<ValidationResult>();
 		var errors = new List<ModelStateError>();
 		if (model == null)
-			return new OperationResult<bool, ValidationResultEnum>(false, false, PropertyDictionary.GnSomethingWenWrong, ValidationResultEnum.Failed, ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
 
 		var context = new ValidationContext(model);
 		var res = Validator.TryValidateObject(
@@ -18,7 +23,7 @@ public class ModelVerification
 			validateAllProperties: true
 		);
 		if (res)
-			return new OperationResult<bool, ValidationResultEnum>(true, true, "",ValidationResultEnum.Success);
+			return new OperationResult<bool>(true, true, "",StatusResultEnum.Success);
 
 		foreach (var item in validations)
 		{
@@ -28,12 +33,11 @@ public class ModelVerification
 			}
 		}
 
-		return new OperationResult<bool, ValidationResultEnum>(false, false, PropertyDictionary.GnSomethingWenWrong, ValidationResultEnum.Failed, errors);
+		return new OperationResult<bool>(
+			false,
+			false, 
+			PropertyDictionary.GnSomethingWenWrong, 
+			StatusResultEnum.ValidationError, 
+			errors);
 	}
-}
-
-public enum ValidationResultEnum
-{
-	Success = 0,
-	Failed =1
 }

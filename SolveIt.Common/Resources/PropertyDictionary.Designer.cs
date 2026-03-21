@@ -79,6 +79,24 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ایمیل تکراری است..
+        /// </summary>
+        public static string EmailIsDuplicate {
+            get {
+                return ResourceManager.GetString("EmailIsDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اعلان.
+        /// </summary>
+        public static string GnAlert {
+            get {
+                return ResourceManager.GetString("GnAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ایمیل وارد شده معتبر نمی باشد..
         /// </summary>
         public static string GnEmailFormatErrorMessage {
@@ -97,7 +115,25 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GnRequiredErrorMessage.
+        ///   Looks up a localized string similar to باشه.
+        /// </summary>
+        public static string GnOk {
+            get {
+                return ResourceManager.GetString("GnOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عملیات با موفقیت انجام شد.
+        /// </summary>
+        public static string GnOperationSuccessfulltDone {
+            get {
+                return ResourceManager.GetString("GnOperationSuccessfulltDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا {0} را وارد کنید..
         /// </summary>
         public static string GnRequiredErrorMessage {
             get {
@@ -147,6 +183,15 @@ namespace SolveIt.Common.Resources {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید..
+        /// </summary>
+        public static string RegisterSuccessfullyDoneMessage {
+            get {
+                return ResourceManager.GetString("RegisterSuccessfullyDoneMessage", resourceCulture);
             }
         }
         
