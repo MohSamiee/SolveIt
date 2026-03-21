@@ -23,6 +23,10 @@ builder.Services.RegisterServices();
 builder.RegisterCookieAuthorize();
 #endregion
 
+#region Register Options
+builder.RegisterOptionsInjection();
+#endregion Register Options
+
 #region Register  Others
 builder.Services.RegisterOthers();
 #endregion Register  Others
@@ -44,10 +48,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapStaticAssets();
-app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}")
-	.WithStaticAssets();
+app.RegisterRouting();
+//app.MapControllerRoute(
+//	name: "default",
+//	pattern: "{controller=Home}/{action=Index}/{id?}")
+//	.WithStaticAssets();
 app.Run();
 
 #endregion Midlewares

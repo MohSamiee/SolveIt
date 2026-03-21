@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="ViewModels.Options\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="microsoft.aspnetcore.http" Version="2.3.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.14" />
+	</ItemGroup>
+	
   <ItemGroup>
     <Compile Update="Resources\PropertyDictionary.Designer.cs">
       <DesignTime>True</DesignTime>

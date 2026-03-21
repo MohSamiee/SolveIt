@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Avatar" xml:space="preserve">
+    <value>آواتار</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>تغییر کلمه عبور</value>
   </data>
@@ -132,6 +135,12 @@
   <data name="EmailIsDuplicate" xml:space="preserve">
     <value>ایمیل تکراری است.</value>
   </data>
+  <data name="FileFormatAllowedAsBelow" xml:space="preserve">
+    <value>فایل تنها با فرمت های زیر قابل قبول است.</value>
+  </data>
+  <data name="FileIsEmpty" xml:space="preserve">
+    <value>فایلی انتخاب نشده است</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>فراموشی کلمه عبور</value>
   </data>
@@ -141,8 +150,14 @@
   <data name="GnEmailFormatErrorMessage" xml:space="preserve">
     <value>ایمیل وارد شده معتبر نمی باشد.</value>
   </data>
+  <data name="GnFileSizeError" xml:space="preserve">
+    <value>فایل حداکثر میتواند {0} باشد.</value>
+  </data>
   <data name="GnMaxLengthErrorMessage" xml:space="preserve">
     <value>حداکثر طول {0} برابر {1} کاراکتر است.</value>
+  </data>
+  <data name="GnMinLengthErrorMessage" xml:space="preserve">
+    <value>حداقل طول {0} برابر {1} کاراکتر است.</value>
   </data>
   <data name="GnOk" xml:space="preserve">
     <value>باشه</value>
@@ -176,6 +191,21 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>کلمه عبور</value>
+  </data>
+  <data name="PasswordCantBeEmpty" xml:space="preserve">
+    <value>کلمه عبور خالی است.</value>
+  </data>
+  <data name="PasswordMustContainDigit" xml:space="preserve">
+    <value>کلمه عبور باید شامل عدد باشد</value>
+  </data>
+  <data name="PasswordMustContainLowerCase" xml:space="preserve">
+    <value>کلمه عبور باید شامل حداقل 1 حرف کوچک باشد</value>
+  </data>
+  <data name="PasswordMustContainSpecialChar" xml:space="preserve">
+    <value>کلمه عبور باید شامل کاراکتر های ویژه باشد</value>
+  </data>
+  <data name="PasswordMustContainUpperCase" xml:space="preserve">
+    <value>کلمه عبور باید شامل حداقل 1 حرف بزرگ باشد</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>ثبت نام</value>

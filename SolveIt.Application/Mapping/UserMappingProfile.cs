@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BestShop.Common.Generator;
+using SolveIt.Common.Generator;
 using SolveIt.Application.Statics;
 using SolveIt.Common.Security;
 

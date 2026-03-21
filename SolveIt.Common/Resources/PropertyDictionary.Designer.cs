@@ -61,6 +61,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to آواتار.
+        /// </summary>
+        public static string Avatar {
+            get {
+                return ResourceManager.GetString("Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تغییر کلمه عبور.
         /// </summary>
         public static string ChangePassword {
@@ -106,6 +115,24 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فایل تنها با فرمت های زیر قابل قبول است..
+        /// </summary>
+        public static string FileFormatAllowedAsBelow {
+            get {
+                return ResourceManager.GetString("FileFormatAllowedAsBelow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فایلی انتخاب نشده است.
+        /// </summary>
+        public static string FileIsEmpty {
+            get {
+                return ResourceManager.GetString("FileIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فراموشی کلمه عبور.
         /// </summary>
         public static string ForgotPassword {
@@ -133,11 +160,29 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فایل حداکثر میتواند {0} باشد..
+        /// </summary>
+        public static string GnFileSizeError {
+            get {
+                return ResourceManager.GetString("GnFileSizeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حداکثر طول {0} برابر {1} کاراکتر است..
         /// </summary>
         public static string GnMaxLengthErrorMessage {
             get {
                 return ResourceManager.GetString("GnMaxLengthErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حداقل طول {0} برابر {1} کاراکتر است..
+        /// </summary>
+        public static string GnMinLengthErrorMessage {
+            get {
+                return ResourceManager.GetString("GnMinLengthErrorMessage", resourceCulture);
             }
         }
         
@@ -237,6 +282,51 @@ namespace SolveIt.Common.Resources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور خالی است..
+        /// </summary>
+        public static string PasswordCantBeEmpty {
+            get {
+                return ResourceManager.GetString("PasswordCantBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور باید شامل عدد باشد.
+        /// </summary>
+        public static string PasswordMustContainDigit {
+            get {
+                return ResourceManager.GetString("PasswordMustContainDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور باید شامل حداقل 1 حرف کوچک باشد.
+        /// </summary>
+        public static string PasswordMustContainLowerCase {
+            get {
+                return ResourceManager.GetString("PasswordMustContainLowerCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور باید شامل کاراکتر های ویژه باشد.
+        /// </summary>
+        public static string PasswordMustContainSpecialChar {
+            get {
+                return ResourceManager.GetString("PasswordMustContainSpecialChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور باید شامل حداقل 1 حرف بزرگ باشد.
+        /// </summary>
+        public static string PasswordMustContainUpperCase {
+            get {
+                return ResourceManager.GetString("PasswordMustContainUpperCase", resourceCulture);
             }
         }
         
