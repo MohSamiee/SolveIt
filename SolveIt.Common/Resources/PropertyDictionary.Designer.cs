@@ -61,11 +61,29 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تغییر کلمه عبور.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کلمات عبور  یکسان نیست.
         /// </summary>
         public static string ComparePasswordErrorMessage {
             get {
                 return ResourceManager.GetString("ComparePasswordErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطایی رخ داده است. لطفا با ادمین تماس برقرار کنید.
+        /// </summary>
+        public static string ContactAdmin {
+            get {
+                return ResourceManager.GetString("ContactAdmin", resourceCulture);
             }
         }
         
@@ -84,6 +102,15 @@ namespace SolveIt.Common.Resources {
         public static string EmailIsDuplicate {
             get {
                 return ResourceManager.GetString("EmailIsDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فراموشی کلمه عبور.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
         
@@ -151,6 +178,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور خود را فراموش کرده ام!.
+        /// </summary>
+        public static string IHaveForgotPassword {
+            get {
+                return ResourceManager.GetString("IHaveForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to صفحه اصلی.
         /// </summary>
         public static string LandingPage {
@@ -165,6 +201,33 @@ namespace SolveIt.Common.Resources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to با اطلاعات وارد شده کاربری یافت نشد.
+        /// </summary>
+        public static string LoginInputIsNotValid {
+            get {
+                return ResourceManager.GetString("LoginInputIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورود به حساب کاربری.
+        /// </summary>
+        public static string LoginToAccount {
+            get {
+                return ResourceManager.GetString("LoginToAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خروج.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -187,6 +250,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ثبت نام در سایت.
+        /// </summary>
+        public static string RegisterInSite {
+            get {
+                return ResourceManager.GetString("RegisterInSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید..
         /// </summary>
         public static string RegisterSuccessfullyDoneMessage {
@@ -196,11 +268,38 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مرا بخاطر بسپار.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تکرار کلمه عبور.
         /// </summary>
         public static string RePassword {
             get {
                 return ResourceManager.GetString("RePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید.
+        /// </summary>
+        public static string UserIsBan {
+            get {
+                return ResourceManager.GetString("UserIsBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ایمیل شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد.
+        /// </summary>
+        public static string UserIsNotActive {
+            get {
+                return ResourceManager.GetString("UserIsNotActive", resourceCulture);
             }
         }
     }

@@ -20,6 +20,6 @@ public static class ControllerMessageAllertExtension
 			controller.TempData[BaseController.ErrorMessage] = null;
 
 		else if (result.Status == StatusResultEnum.AnyOtherError && result.ModelStateErrors != null)
-			controller.TempData[BaseController.ErrorMessage] = string.Join(Environment.NewLine, result.ModelStateErrors);
+			controller.TempData[BaseController.ErrorMessage] = string.Join(Environment.NewLine, result.ModelStateErrors.Select(a=>a.ModelStateErrorMessage).ToList());
 	}
 }

@@ -117,14 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغییر کلمه عبور</value>
+  </data>
   <data name="ComparePasswordErrorMessage" xml:space="preserve">
     <value>کلمات عبور  یکسان نیست</value>
+  </data>
+  <data name="ContactAdmin" xml:space="preserve">
+    <value>خطایی رخ داده است. لطفا با ادمین تماس برقرار کنید</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
   </data>
   <data name="EmailIsDuplicate" xml:space="preserve">
     <value>ایمیل تکراری است.</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>فراموشی کلمه عبور</value>
   </data>
   <data name="GnAlert" xml:space="preserve">
     <value>اعلان</value>
@@ -147,11 +156,23 @@
   <data name="GnSomethingWenWrong" xml:space="preserve">
     <value>خطایی رخ داده است</value>
   </data>
+  <data name="IHaveForgotPassword" xml:space="preserve">
+    <value>کلمه عبور خود را فراموش کرده ام!</value>
+  </data>
   <data name="LandingPage" xml:space="preserve">
     <value>صفحه اصلی</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>ورود</value>
+  </data>
+  <data name="LoginInputIsNotValid" xml:space="preserve">
+    <value>با اطلاعات وارد شده کاربری یافت نشد</value>
+  </data>
+  <data name="LoginToAccount" xml:space="preserve">
+    <value>ورود به حساب کاربری</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>خروج</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>کلمه عبور</value>
@@ -159,10 +180,22 @@
   <data name="Register" xml:space="preserve">
     <value>ثبت نام</value>
   </data>
+  <data name="RegisterInSite" xml:space="preserve">
+    <value>ثبت نام در سایت</value>
+  </data>
   <data name="RegisterSuccessfullyDoneMessage" xml:space="preserve">
     <value>ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید.</value>
   </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>مرا بخاطر بسپار</value>
+  </data>
   <data name="RePassword" xml:space="preserve">
     <value>تکرار کلمه عبور</value>
+  </data>
+  <data name="UserIsBan" xml:space="preserve">
+    <value>کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید</value>
+  </data>
+  <data name="UserIsNotActive" xml:space="preserve">
+    <value>ایمیل شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد</value>
   </data>
 </root>

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using SolveIt.Application.ViewModels.Accounts
+@model LoginViewModel
+@{
     ViewData["Title"] = PropertyDictionary.Login;
 }
 
@@ -8,7 +10,6 @@
 @section Header {
     <partial name="_Header" />
 }
-
 <div class="user-page-style">
     <div class="breadcumb-layer">
         <div class="container">
@@ -62,49 +63,71 @@
 
                 <div class="col-md-5 col-sm-12 col-xs-12 pull-right">
 
-                    <form action="" method="" class="shadow-style">
+                    <form asp-area=""
+                          asp-controller="Account"
+                          asp-action="Login"
+                          method="post">
 
                         <div class="inner">
 
-                            <h2> <i class="icon-three-dots"></i> ورود به حساب کاربری </h2>
+                            <h2>
+                                <i class="icon-three-dots"></i>
+                                @PropertyDictionary.LoginToAccount
+                            </h2>
 
-                            <div class="input-layer">
-                                <span><i class="icon-mail-envelope"></i> پست الکترونیک </span>
-                                <input type="email" name="">
-                                <label class="error"> پست الکترونیکی را وارد نمایید </label>
+                            <div class="input-layer mt-50">
+                                <span>
+                                    <i class="icon-mail-envelope"></i>
+                                    @Html.DisplayNameFor(a => a.Email)
+                                </span>
+                                <input asp-for="Email" type="email">
                             </div>
+                            <span asp-validation-for="Email" class="validation-error"></span>
 
-                            <div class="input-layer">
-                                <span><i class="icon-lock"></i> رمز عبور </span>
-                                <input type="password" name="">
-                                <label class="error"> رمز عبور را وارد نمایید </label>
+                            <div class="input-layer mt-50">
+                                <span>
+                                    <i class="icon-lock"></i>
+                                    @Html.DisplayNameFor(a => a.Password)
+                                </span>
+                                <input asp-for="Password" type="password">
                             </div>
+                            <span asp-validation-for="Password" class="validation-error"></span>
+
 
                             <div class="captcha-layer">
-                                <!-- کد کپچا در این لایه قرار بدید تا استایل بگیره-->
+                                @* Captcha Code should apear here *@
                             </div>
 
-                            <div class="checkbox">
-                                <input type="checkbox" name="" id="remember-me">
-                                <label for="remember-me"> مرا بخاطر بسپار </label>
+                            <div class="checkbox mt-50">
+                                <input asp-for="RememberMe" type="checkbox" id="remember-me">
+                                <label for="remember-me">
+                                    @Html.DisplayNameFor(a => a.RememberMe)
+                                </label>
                             </div>
 
                             <div class="link">
-                                <a href=""> رمز عبور خود را فراموش کرده ام !</a>
+                                <a asp-area=""
+                                   asp-controller="Account"
+                                   asp-action="ForgotPassword">
+                                    @PropertyDictionary.IHaveForgotPassword
+                                </a>
                             </div>
 
-                            <button> ورود به حساب کاربری </button>
+                            <button class="btn btn-primary"
+                                    type="submit">
+                                @PropertyDictionary.LoginToAccount
+                            </button>
 
                         </div>
 
                     </form>
 
-                    <div class="login-with-social shadow-style">
+                    @* <div class="login-with-social shadow-style">
                         <span>ورود با سایر حساب های کاربری </span>
                         <a href="" class="shadow-style"><i class="icon-twitter"></i></a>
                         <a href="" class="shadow-style"><i class="icon-github"></i></a>
                         <a href="" class="shadow-style"><i class="icon-google-plus"></i></a>
-                    </div>
+                    </div> *@
 
                 </div>
 
@@ -119,3 +142,6 @@
 
 
 
+@section Scripts {
+    <partial name="_JqueryValidation" />
+}

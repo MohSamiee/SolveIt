@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SolveIt.Application.ViewModels.Accounts;
-public class RegisterViewModel
+public class LoginViewModel
 {
 	[Display(Name = "Email", ResourceType = typeof(PropertyDictionary))]
 	[MaxLength(100, ErrorMessageResourceName = "GnMaxLengthErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
@@ -11,16 +11,12 @@ public class RegisterViewModel
 
 
 	[Display(Name = "Password", ResourceType = typeof(PropertyDictionary))]
-	[MaxLength(50, ErrorMessageResourceName = "GnMaxLengthErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[DataType(DataType.Password)]
 	public string Password { get; set; }
 
 
-	[Display(Name = "RePassword", ResourceType = typeof(PropertyDictionary))]
-	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
-	[DataType(DataType.Password)]
-	[Compare(nameof(Password), ErrorMessageResourceName = "ComparePasswordErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
-	public string RePassword { get; set; }
+	[Display(Name = "RememberMe", ResourceType = typeof(PropertyDictionary))]
+	public bool RememberMe { get; set; }
 }
 

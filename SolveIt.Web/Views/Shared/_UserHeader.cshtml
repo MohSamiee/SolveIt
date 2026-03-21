@@ -1,0 +1,92 @@
+﻿@using SolveIt.Web.Extensions
+@{
+    var user = User;
+    UserInfo userInfo = LoginService.GetCurrentUserInfo(User);
+}
+
+<div class="clientarea-layer">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="loggedin-status ">
+            <span>
+                <i class="icon-profile"></i>
+                <span>
+                    حساب کاربری شما
+                </span>
+            </span>
+            <div class="sublayer">
+                <div class="avatar">
+                    <a href="">
+                        <img src="content/user-avatar/@userInfo.AvatarPath">
+                    </a>
+                    <div>
+                        <span class="fullname">
+                            @userInfo.Name
+                        </span>
+                        <span class="detail">
+                            123 پرسش | 1236 پاسخ
+                        </span>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <a href="">
+                            مشاهده حساب کاربری
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            تنظیمات حساب کاربری
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            ویرایش حساب کاربری
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area="UserPanel"
+                           asp-controller="Profile"
+                           asp-action="ChangePassword">
+                            @PropertyDictionary.ChangePassword
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            پرسش های من
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            پاسخ های من
+
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-area=""
+                           asp-controller="Account"
+                           asp-action="Logout">
+                            @PropertyDictionary.Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="signout-status ">
+            <i class="icon-profile"></i>
+            <a asp-area=""
+               asp-controller="Account"
+               asp-action="Login"> @PropertyDictionary.Login / </a>
+            <a asp-area=""
+               asp-controller="Account"
+               asp-action="Register"> @PropertyDictionary.Register </a>
+        </div>
+    }
+
+</div>

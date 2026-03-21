@@ -12,8 +12,8 @@ using SolveIt.DataLayer.Context;
 namespace SolveIt.DataLayer.Migrations
 {
     [DbContext(typeof(SolveItDbContext))]
-    [Migration("20260320021036__mig_Users_Table")]
-    partial class _mig_Users_Table
+    [Migration("20260321140405__mig_ReInit")]
+    partial class _mig_ReInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,9 @@ namespace SolveIt.DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<bool>("IsBan")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

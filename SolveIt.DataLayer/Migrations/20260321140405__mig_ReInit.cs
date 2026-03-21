@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SolveIt.DataLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class _mig_Users_Table : Migration
+    public partial class _mig_ReInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,7 @@ namespace SolveIt.DataLayer.Migrations
                     AvatarAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     LastLoginTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsBan = table.Column<bool>(type: "bit", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),

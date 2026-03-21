@@ -19,10 +19,12 @@ public class User : BaseEntity
 	public bool IsMobileConfirmed { get; set; }
 	public DateTime? ExpireMobileActivationCode { get; set; }
 
-	public string? AvatarAddress { get; set; }
+	public string AvatarAddress { get; set; }
 
 	public int AccessFailedCount { get; set; }
 	public DateTime? LastLoginTime { get; set; }
+	
+	public bool IsBan { get; set; }
 	public bool IsAdmin { get; set; }
 	#endregion Properties
 

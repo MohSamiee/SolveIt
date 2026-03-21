@@ -73,41 +73,44 @@
                           method="post"
                           class="shadow-style">
                         <div class="inner">
-                            <h2> <i class="icon-three-dots"></i> ثبت نام در سایت </h2>
+                            <h2>
+                                <i class="icon-three-dots"></i>
+                                @PropertyDictionary.RegisterInSite
+                            </h2>
 
                             <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-mail-envelope"></i>
-                                    @PropertyDictionary.Email
+                                    @Html.DisplayNameFor(a => a.Email)
                                 </span>
                                 <input asp-for="Email" type="email">
                             </div>
-                            <span asp-validation-for="Email"class="validation-error"></span>
+                            <span asp-validation-for="Email" class="validation-error"></span>
                             <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-lock-2"></i>
-                                    @PropertyDictionary.Password
+                                    @Html.DisplayNameFor(a => a.Password)
                                 </span>
-                                <input asp-for="Password" type="password" >
+                                <input asp-for="Password" type="password">
                             </div>
-                                <span asp-validation-for="Password" class="validation-error"></span>
+                            <span asp-validation-for="Password" class="validation-error"></span>
 
                             <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-lock-2"></i>
-                                    @PropertyDictionary.RePassword
+                                    @Html.DisplayNameFor(a => a.RePassword)
                                 </span>
-                                <input asp-for="RePassword" type="password" >
+                                <input asp-for="RePassword" type="password">
                             </div>
-                                <span asp-validation-for="RePassword" class="validation-error"></span>
+                            <span asp-validation-for="RePassword" class="validation-error"></span>
 
                             <div class="captcha-layer">
-                                <!-- کد کپچا در این لایه قرار بدید تا استایل بگیره-->
+                                @* Captcha Code should apear here *@
                             </div>
 
                             <button class="btn btn-primary"
                                     type="submit">
-                                @PropertyDictionary.Register
+                                @PropertyDictionary.RegisterInSite
                             </button>
                         </div>
                     </form>
