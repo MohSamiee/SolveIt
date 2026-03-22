@@ -103,14 +103,20 @@ public class UserService : IUserService
 				validation.ModelStateErrors);
 
 		// Find User
-		var users = await _userRepository.GetByValue(login.Email, nameof(login.Email));
+		var isMobile = login.EmailOrMobile.IsIranMobileNumber();
+		var users = new List<User>();
+		if (isMobile)
+			users = await _userRepository.GetByValue(login.EmailOrMobile, nameof(User.Mobile));
+		else
+			users = await _userRepository.GetByValue(login.EmailOrMobile.StringNormalize(), nameof(User.Email));
+
 		if (users == null)
 			return new OperationResult<User>(
 				false,
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
-				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.LoginInputIsNotValid));
+				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.LoginInputIsNotValid));
 
 		if (users.Count() > 1)
 			return new OperationResult<User>(
@@ -118,7 +124,7 @@ public class UserService : IUserService
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
-				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.ContactAdmin));
+				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.ContactAdmin));
 
 		var user = users.First();
 
@@ -132,7 +138,7 @@ public class UserService : IUserService
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
-				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.LoginInputIsNotValid));
+				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.LoginInputIsNotValid));
 		}
 
 		// Check if is Banned
@@ -142,7 +148,7 @@ public class UserService : IUserService
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.AnyOtherError,
-				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.UserIsBan));
+				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.UserIsBan));
 
 		// Check if is Active
 		if (!user.IsActive || !user.IsEmailConfirmed)
@@ -153,7 +159,7 @@ public class UserService : IUserService
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.AnyOtherError,
-				ModelStateError.MakeModelStateError(nameof(login.Email), PropertyDictionary.UserIsNotActive));
+				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.UserIsNotActive));
 		}
 
 
@@ -272,7 +278,7 @@ public class UserService : IUserService
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.Retry,
 				ModelStateError.MakeModelStateError(
-					nameof(user.Mobile), 
+					nameof(user.Mobile),
 					PropertyDictionary.MobileActivationCodeHasBeenExpired)
 				);
 		}
@@ -292,8 +298,8 @@ public class UserService : IUserService
 
 	public async Task<OperationResult<User>> ReSendMobileActivationCode(string mobile)
 	{
-		var users = await _userRepository.GetByValue(mobile,nameof(User.Mobile));
-		if(users==null || ! users.Any())
+		var users = await _userRepository.GetByValue(mobile, nameof(User.Mobile));
+		if (users == null || !users.Any())
 			return new OperationResult<User>(
 				false,
 				null!,

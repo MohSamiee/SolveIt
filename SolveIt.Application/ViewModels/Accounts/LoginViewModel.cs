@@ -3,11 +3,11 @@
 namespace SolveIt.Application.ViewModels.Accounts;
 public class LoginViewModel
 {
-	[Display(Name = "Email", ResourceType = typeof(PropertyDictionary))]
+
+	[Display(Name = "EmailOrMobile", ResourceType = typeof(PropertyDictionary))]
 	[MaxLength(100, ErrorMessageResourceName = "GnMaxLengthErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
-	[DataType(DataType.EmailAddress, ErrorMessageResourceName = "GnEmailFormatErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
-	public string Email { get; set; }
+	public string EmailOrMobile { get; set; }
 
 
 	[Display(Name = "Password", ResourceType = typeof(PropertyDictionary))]
