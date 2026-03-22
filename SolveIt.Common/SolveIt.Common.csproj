@@ -13,6 +13,8 @@
 	<ItemGroup>
 		<PackageReference Include="microsoft.aspnetcore.http" Version="2.3.0" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.14" />
+		<PackageReference Include="IPE.SmsIr" Version="1.2.7" />
+
 	</ItemGroup>
 	
   <ItemGroup>

@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using SolveIt.Common.Generator;
 using SolveIt.Common.Security;
+using SolveIt.Common.Senders.Sms;
+using SolveIt.Common.ViewModels.Options;
 
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
@@ -8,14 +11,19 @@ public class UserService : IUserService
 {
 	#region Constructor
 	private readonly IUserRepository _userRepository;
+	private readonly ISmsService _smsService;
+	private readonly SmsSetting _smsSetting;
 	public IMapper _mapper { get; }
 	public UserService(
 		IUserRepository userRepository,
-		IMapper mapper
-		)
+		IOptions<SmsSetting> smsSetting,
+		IMapper mapper,
+		ISmsService smsService)
 	{
 		_userRepository = userRepository;
+		_smsSetting = smsSetting.Value;
 		_mapper = mapper;
+		_smsService = smsService;
 	}
 
 	#endregion Constructor
@@ -162,7 +170,6 @@ public class UserService : IUserService
 				StatusResultEnum.AnyOtherError,
 				ModelStateError.MakeModelStateError(nameof(User.Email), PropertyDictionary.UserIsBan)
 				);
-
 		//Update User
 		user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
 		user.IsActive = true;

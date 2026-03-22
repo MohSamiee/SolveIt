@@ -13,10 +13,9 @@ public static class RegisterOptions
 			FileTypeEnum.Avatar.ToString(),
 			builder.Configuration.GetSection("AvatarSetting"));
 
-		builder.Services.Configure<FileSetting>(
-			FileTypeEnum.ProductImage.ToString(),
-			builder.Configuration.GetSection("ProductImageSetting"));
-
 		builder.Services.Configure<PagingOptions>(builder.Configuration.GetSection("PagingOptions"));
+		
+		builder.Services.Configure<SmsSetting>(builder.Configuration.GetSection("SmsIrSetting"));
+
 	}
 }

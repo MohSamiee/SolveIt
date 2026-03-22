@@ -6,3 +6,4 @@ global using SolveIt.Web.Extensions;
 global using SolveIt.Web.ActionFilters;
 global using SolveIt.Application.Services.Interfaces.Accounts;
 global using SolveIt.Application.ViewModels.Accounts;
+global using SolveIt.Common.Senders.Sms;
