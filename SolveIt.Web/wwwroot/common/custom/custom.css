@@ -20,3 +20,20 @@
 .swal-text {
     text-align: center;
 }
+
+
+
+
+.otp-container {
+    display: block;
+    gap: 10px;
+    direction:ltr;
+    text-align:center;
+}
+
+.otp-input {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    text-align: center;
+}

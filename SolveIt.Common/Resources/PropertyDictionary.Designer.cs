@@ -61,6 +61,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to احراز هویت.
+        /// </summary>
+        public static string Authorize {
+            get {
+                return ResourceManager.GetString("Authorize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to آواتار.
         /// </summary>
         public static string Avatar {
@@ -106,11 +115,29 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد فعال سازی شده منقضی شده است. لینک جدید به ایمیل شما ارسال شد.مجددا از طریق آن لینک اقدام به فعال سازی کنید..
+        /// </summary>
+        public static string EmailActivationCodeHasBeenExpired {
+            get {
+                return ResourceManager.GetString("EmailActivationCodeHasBeenExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ایمیل تکراری است..
         /// </summary>
         public static string EmailIsDuplicate {
             get {
                 return ResourceManager.GetString("EmailIsDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ایمیل و یا شماره موبایل.
+        /// </summary>
+        public static string EmailOrMobile {
+            get {
+                return ResourceManager.GetString("EmailOrMobile", resourceCulture);
             }
         }
         
@@ -232,11 +259,29 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ثبت.
+        /// </summary>
+        public static string GnSubmit {
+            get {
+                return ResourceManager.GetString("GnSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کلمه عبور خود را فراموش کرده ام!.
         /// </summary>
         public static string IHaveForgotPassword {
             get {
                 return ResourceManager.GetString("IHaveForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تنها فرمت ایمیل و موبایل قابل قبول است..
+        /// </summary>
+        public static string InputEmailOrMobileFormatIsWrong {
+            get {
+                return ResourceManager.GetString("InputEmailOrMobileFormatIsWrong", resourceCulture);
             }
         }
         
@@ -282,6 +327,51 @@ namespace SolveIt.Common.Resources {
         public static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل.
+        /// </summary>
+        public static string Mobile {
+            get {
+                return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد فعال سازی شده منقضی شده است. کد جدید به موبایل شما ارسال شد.مجددا از طریق آن لینک اقدام به فعال سازی کنید..
+        /// </summary>
+        public static string MobileActivationCodeHasBeenExpired {
+            get {
+                return ResourceManager.GetString("MobileActivationCodeHasBeenExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فرمت موبایل صحیح نیست..
+        /// </summary>
+        public static string MobileFormatIsNotCorrect {
+            get {
+                return ResourceManager.GetString("MobileFormatIsNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل وارده شده تکراری است..
+        /// </summary>
+        public static string MobileIsDuplicate {
+            get {
+                return ResourceManager.GetString("MobileIsDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to موبایل با موفقیت فعال شد.
+        /// </summary>
+        public static string MobileSuccessfullyActivated {
+            get {
+                return ResourceManager.GetString("MobileSuccessfullyActivated", resourceCulture);
             }
         }
         
@@ -360,9 +450,18 @@ namespace SolveIt.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید..
         /// </summary>
-        public static string RegisterSuccessfullyDoneMessage {
+        public static string RegisterSuccessfullyDoneMessageForEmail {
             get {
-                return ResourceManager.GetString("RegisterSuccessfullyDoneMessage", resourceCulture);
+                return ResourceManager.GetString("RegisterSuccessfullyDoneMessageForEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ثبت نام با موفقت انجام شد.  جهت فعال سازی کد ارسال شده به مویایلتان را وارد کنید.
+        /// </summary>
+        public static string RegisterSuccessfullyDoneMessageForMobile {
+            get {
+                return ResourceManager.GetString("RegisterSuccessfullyDoneMessageForMobile", resourceCulture);
             }
         }
         
@@ -408,6 +507,15 @@ namespace SolveIt.Common.Resources {
         public static string UserIsNotActive {
             get {
                 return ResourceManager.GetString("UserIsNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد احراز هویت.
+        /// </summary>
+        public static string VerificationCode {
+            get {
+                return ResourceManager.GetString("VerificationCode", resourceCulture);
             }
         }
     }

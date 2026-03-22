@@ -65,6 +65,7 @@ public enum StatusResultEnum
 	Success = 0,
 	ValidationError = 1,
 	NotFound = 2,
+	Retry = 3,
 	AnyOtherError = 99
 
 }

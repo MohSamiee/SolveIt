@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Authorize" xml:space="preserve">
+    <value>احراز هویت</value>
+  </data>
   <data name="Avatar" xml:space="preserve">
     <value>آواتار</value>
   </data>
@@ -132,8 +135,14 @@
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
   </data>
+  <data name="EmailActivationCodeHasBeenExpired" xml:space="preserve">
+    <value>کد فعال سازی شده منقضی شده است. لینک جدید به ایمیل شما ارسال شد.مجددا از طریق آن لینک اقدام به فعال سازی کنید.</value>
+  </data>
   <data name="EmailIsDuplicate" xml:space="preserve">
     <value>ایمیل تکراری است.</value>
+  </data>
+  <data name="EmailOrMobile" xml:space="preserve">
+    <value>ایمیل و یا شماره موبایل</value>
   </data>
   <data name="EmailSuccessfullyActivated" xml:space="preserve">
     <value>ایمیل با موفقیت فعال شد.</value>
@@ -174,8 +183,14 @@
   <data name="GnSomethingWenWrong" xml:space="preserve">
     <value>خطایی رخ داده است</value>
   </data>
+  <data name="GnSubmit" xml:space="preserve">
+    <value>ثبت</value>
+  </data>
   <data name="IHaveForgotPassword" xml:space="preserve">
     <value>کلمه عبور خود را فراموش کرده ام!</value>
+  </data>
+  <data name="InputEmailOrMobileFormatIsWrong" xml:space="preserve">
+    <value>تنها فرمت ایمیل و موبایل قابل قبول است.</value>
   </data>
   <data name="LandingPage" xml:space="preserve">
     <value>صفحه اصلی</value>
@@ -191,6 +206,21 @@
   </data>
   <data name="Logout" xml:space="preserve">
     <value>خروج</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>شماره موبایل</value>
+  </data>
+  <data name="MobileActivationCodeHasBeenExpired" xml:space="preserve">
+    <value>کد فعال سازی شده منقضی شده است. کد جدید به موبایل شما ارسال شد.مجددا از طریق آن لینک اقدام به فعال سازی کنید.</value>
+  </data>
+  <data name="MobileFormatIsNotCorrect" xml:space="preserve">
+    <value>فرمت موبایل صحیح نیست.</value>
+  </data>
+  <data name="MobileIsDuplicate" xml:space="preserve">
+    <value>شماره موبایل وارده شده تکراری است.</value>
+  </data>
+  <data name="MobileSuccessfullyActivated" xml:space="preserve">
+    <value>موبایل با موفقیت فعال شد</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>کلمه عبور</value>
@@ -216,8 +246,11 @@
   <data name="RegisterInSite" xml:space="preserve">
     <value>ثبت نام در سایت</value>
   </data>
-  <data name="RegisterSuccessfullyDoneMessage" xml:space="preserve">
+  <data name="RegisterSuccessfullyDoneMessageForEmail" xml:space="preserve">
     <value>ثبت نام با موفقت انجام شد.  جهت فعال سازی اکانت ایمیل خود را چک کنید.</value>
+  </data>
+  <data name="RegisterSuccessfullyDoneMessageForMobile" xml:space="preserve">
+    <value>ثبت نام با موفقت انجام شد.  جهت فعال سازی کد ارسال شده به مویایلتان را وارد کنید</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>مرا بخاطر بسپار</value>
@@ -233,5 +266,8 @@
   </data>
   <data name="UserIsNotActive" xml:space="preserve">
     <value>ایمیل شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد</value>
+  </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>کد احراز هویت</value>
   </data>
 </root>

@@ -9,7 +9,7 @@
 }
 
 @section Styles {
-    <link rel="stylesheet" type="text/css" href="css/user.css">
+    <link rel="stylesheet" type="text/css" href="/css/user.css">
 }
 
 <div class="user-page-style">
@@ -81,11 +81,11 @@
                             <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-mail-envelope"></i>
-                                    @Html.DisplayNameFor(a => a.Email)
+                                    @Html.DisplayNameFor(a => a.EmailOrMobile)
                                 </span>
-                                <input asp-for="Email" type="email">
+                                <input asp-for="EmailOrMobile" type="text">
                             </div>
-                            <span asp-validation-for="Email" class="validation-error"></span>
+                            <span asp-validation-for="EmailOrMobile" class="validation-error"></span>
                             <div class="input-layer mt-50">
                                 <span>
                                     <i class="icon-lock-2"></i>

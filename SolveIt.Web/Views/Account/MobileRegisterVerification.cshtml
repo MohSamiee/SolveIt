@@ -1,0 +1,105 @@
+﻿@using SolveIt.Application.ViewModels.Accounts
+
+@model RegisterMobileVerficationViewModel
+@{
+    ViewData["Title"] = PropertyDictionary.Register;
+}
+@section Header {
+    <partial name="_Header" />
+}
+
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="/css/user.css">
+}
+
+<div class="user-page-style">
+
+    <div class="breadcumb-layer">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li itemscope=""
+                    itemprop="itemListElement">
+                    <a href="/"
+                       itemprop="item">
+                        <span itemprop="name">
+                            @PropertyDictionary.LandingPage
+                        </span>
+                    </a>
+                </li>
+                <li itemscope=""
+                    itemprop="itemListElement">
+                    <a asp-area=""
+                       asp-controller="Account"
+                       asp-action="Register"
+                       itemprop="item">
+                        <span itemprop="name">
+                            @PropertyDictionary.Register
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="user-page">
+
+        <div class="container">
+
+            <div class="row" style="text-align:center;">
+                <div class="col-md-5 col-md-offset-3 col-sm-12 col-xs-12">
+                    <form asp-area=""
+                          asp-controller="Account"
+                          asp-action="MobileRegisterVerification"
+                          method="post"
+                          class="shadow-style">
+                        <div class="inner" style="text-align:center;">
+                            <h2 style="text-align:right;">
+                                <i class="icon-three-dots"></i>
+                                @PropertyDictionary.Authorize
+                            </h2>
+                            <p>
+                                کد احراز هویت به شماره @Model.Mobile ارسال شده است.
+                            </p>
+                            @Html.HiddenFor(a => a.Mobile)
+                            @* <input type="hidden" value="@Model.ExpireDateTime.ToString("yyyy-MM-ddTHH:mm:ss")" name="ExpireDateTime" /> *@
+                            <input type="hidden" asp-for="ExpireDateTime" />
+
+                            <input type="hidden" asp-for="VerificationCode" />
+
+                            <div class="otp-container">
+                                @for (int i = 0; i < Model.CodeLength; i++)
+                                {
+                                    <input id="@i" class="otp-input" maxlength="1">
+                                }
+
+                            </div>
+
+                            @* <div class="input-layer mt-50">
+                                <span>
+                                    <i class="icon-mail-envelope"></i>
+                                    @Html.DisplayNameFor(a => a.VerificationCode)
+                                </span>
+                                <input asp-for="VerificationCode" type="text">
+                            </div>
+                            <span asp-validation-for="VerificationCode" class="validation-error"></span> *@
+
+                            <div class="timer-area">
+                                <span id="timer"></span>
+
+                                <a id="resendBtn" style="display:none">
+                                    ارسال مجدد کد
+                                </a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">@PropertyDictionary.GnSubmit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_JqueryValidation" />
+    <script src="/common/custom/mobile-verification-code.js"></script>
+}
