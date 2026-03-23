@@ -502,7 +502,7 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ایمیل شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد.
+        ///   Looks up a localized string similar to اکانت شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد.
         /// </summary>
         public static string UserIsNotActive {
             get {

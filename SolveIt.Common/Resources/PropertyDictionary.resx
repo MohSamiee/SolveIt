@@ -265,7 +265,7 @@
     <value>کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید</value>
   </data>
   <data name="UserIsNotActive" xml:space="preserve">
-    <value>ایمیل شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد</value>
+    <value>اکانت شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد</value>
   </data>
   <data name="VerificationCode" xml:space="preserve">
     <value>کد احراز هویت</value>

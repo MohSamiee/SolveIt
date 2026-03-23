@@ -104,6 +104,8 @@ public class UserService : IUserService
 
 		// Find User
 		var isMobile = login.EmailOrMobile.IsIranMobileNumber();
+		var isEmail = login.EmailOrMobile.IsEmailAddress();
+
 		var users = new List<User>();
 		if (isMobile)
 			users = await _userRepository.GetByValue(login.EmailOrMobile, nameof(User.Mobile));
@@ -151,7 +153,7 @@ public class UserService : IUserService
 				ModelStateError.MakeModelStateError(nameof(login.EmailOrMobile), PropertyDictionary.UserIsBan));
 
 		// Check if is Active
-		if (!user.IsActive || !user.IsEmailConfirmed)
+		if (!user.IsActive || (isEmail && !user.IsEmailConfirmed) || (isMobile && !user.IsMobileConfirmed))
 		{
 			// TODO: Send Activation Email Again
 			return new OperationResult<User>(
