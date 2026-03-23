@@ -76,6 +76,8 @@ public class UserService : IUserService
 		// Add User to database
 		var user = _mapper.Map<User>(register);
 		//TODO: Send Activation Message
+		//if (isMobile)
+			//await _smsService.SendNowToOnePersonSms(_smsSetting, user.MobileActivationCode, user.Mobile);
 		await _userRepository.AddAsync(user, true);
 		return new OperationResult<User>(
 			true,
@@ -155,6 +157,7 @@ public class UserService : IUserService
 		// Check if is Active
 		if (!user.IsActive || (isEmail && !user.IsEmailConfirmed) || (isMobile && !user.IsMobileConfirmed))
 		{
+			//await _smsService.SendNowToOnePersonSms(_smsSetting, user.MobileActivationCode, user.Mobile);
 			// TODO: Send Activation Email Again
 			return new OperationResult<User>(
 				false,
@@ -167,6 +170,7 @@ public class UserService : IUserService
 
 		// Update User
 		user.LastLoginTime = DateTime.Now;
+		user.AccessFailedCount = 0;
 		await _userRepository.UpdateAsync(user, true);
 
 		return new OperationResult<User>(
