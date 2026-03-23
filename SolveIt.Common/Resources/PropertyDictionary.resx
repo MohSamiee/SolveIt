@@ -189,6 +189,9 @@
   <data name="IHaveForgotPassword" xml:space="preserve">
     <value>کلمه عبور خود را فراموش کرده ام!</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>کلمه عبور صحیح نیست.</value>
+  </data>
   <data name="InputEmailOrMobileFormatIsWrong" xml:space="preserve">
     <value>تنها فرمت ایمیل و موبایل قابل قبول است.</value>
   </data>
@@ -269,6 +272,9 @@
   </data>
   <data name="RerurnHome" xml:space="preserve">
     <value>بازگشت به صفحه اصلی</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>بازیابی کلمه عبور</value>
   </data>
   <data name="ResetPasswordLinkSentByEmail" xml:space="preserve">
     <value>ایمیلی حاوی لینک ریست پسورد برای شما ارسال شد.</value>

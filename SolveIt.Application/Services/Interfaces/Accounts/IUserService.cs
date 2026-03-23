@@ -8,5 +8,7 @@ public interface IUserService
 	Task<OperationResult<User>> ReSendMobileActivationCode(string mobile);
 	Task<OperationResult<ForgotPasswordResponseViewModel>> ForgotPassword(ForgotPasswordViewModel forgot);
 	Task<OperationResult<MobileForgotPasswordResponseViewModel>> ValidateForgotPasswordMobile(MobileForgotPasswordResponseViewModel validation);
-	Task<OperationResult<User>> ValidateForgotPasswordEmail(String emailCode);
+	Task<OperationResult<EmailForgotPasswordResponseViewModel>> ValidateForgotPasswordEmail(string emailCode);
+	Task<OperationResult<ResetPasswordViewModel>> ResetPasswordGetData(string emailOrMobile, bool isForgotPassword);
+	Task<OperationResult<bool>> ResetPassword(ResetPasswordViewModel reset);
 }

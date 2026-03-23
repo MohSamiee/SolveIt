@@ -10,7 +10,6 @@ public class ResetPasswordViewModel
 
 
 	[Display(Name = "OldPassword", ResourceType = typeof(PropertyDictionary))]
-	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[DataType(DataType.Password)]
 	public string? OldPassword { get; set; }
 
@@ -25,8 +24,7 @@ public class ResetPasswordViewModel
 	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[DataType(DataType.Password)]
 	[Compare(nameof(NewPassword), ErrorMessageResourceName = "ComparePasswordErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
-
-	public string ReBewPassword{ get; set; }
+	public string ReNewPassword { get; set; }
 
 
 	public bool IsForgotPassword { get; set; }

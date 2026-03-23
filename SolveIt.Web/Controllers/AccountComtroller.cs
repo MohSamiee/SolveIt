@@ -260,7 +260,8 @@ public class AccountController : BaseController
 		}
 		return RedirectToAction("ResetPassword", "Account", new
 		{
-			emailOrMobile = result.Data!.Mobile
+			emailOrMobile = result.Data!.Mobile,
+			isForgotPassword = true
 		});
 	}
 
@@ -289,7 +290,8 @@ public class AccountController : BaseController
 
 		return RedirectToAction("ResetPassword", "Account", new
 		{
-			emailOrMobile = result.Data!.Email
+			emailOrMobile = result.Data!.Email,
+			isForgotPassword = true
 		});
 	}
 
@@ -307,6 +309,46 @@ public class AccountController : BaseController
 		return RedirectToAction("MobileForgotPasswordVerification", "Account");
 	}
 
+	[HttpGet("reset-password")]
+	public async Task<IActionResult> ResetPassword(string emailOrMobile, bool isForgotPassword)
+	{
+		var result = await _userService.ResetPasswordGetData(emailOrMobile, isForgotPassword);
 
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+		this.SetOperationMessage(result);
+		if (!result.IsSuccess)
+			return NotFound();
+
+		return View(result.Data);
+	}
+
+
+	[HttpPost("reset-password")]
+	public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
+	{
+		if (!ModelState.IsValid)
+			return View(vm);
+		var result = await _userService.ResetPassword(vm);
+
+		this.SetOperationMessage(result);
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+		if (!result.IsSuccess)
+			return View(vm);
+
+		return Redirect("/");
+
+	}
 	#endregion Forgot Password
 }

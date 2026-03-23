@@ -277,6 +277,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور صحیح نیست..
+        /// </summary>
+        public static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تنها فرمت ایمیل و موبایل قابل قبول است..
         /// </summary>
         public static string InputEmailOrMobileFormatIsWrong {
@@ -516,6 +525,15 @@ namespace SolveIt.Common.Resources {
         public static string RerurnHome {
             get {
                 return ResourceManager.GetString("RerurnHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بازیابی کلمه عبور.
+        /// </summary>
+        public static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
         

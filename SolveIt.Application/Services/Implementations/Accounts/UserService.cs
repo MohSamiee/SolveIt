@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using SolveIt.Entities.Models.Users;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -427,7 +427,7 @@ public class UserService : IUserService
 
 	public async Task<OperationResult<MobileForgotPasswordResponseViewModel>> ValidateForgotPasswordMobile(MobileForgotPasswordResponseViewModel validation)
 	{
-		
+
 		var modelValidation = await new ModelVerification().ModelValidation(validation);
 		if (!modelValidation.IsSuccess && modelValidation.ModelStateErrors != null && modelValidation.ModelStateErrors.Any())
 			return new OperationResult<MobileForgotPasswordResponseViewModel>(
@@ -489,34 +489,31 @@ public class UserService : IUserService
 			);
 	}
 
-	public async Task<OperationResult<User>> ValidateForgotPasswordEmail(string emailCode)
+	public async Task<OperationResult<EmailForgotPasswordResponseViewModel>> ValidateForgotPasswordEmail(string emailCode)
 	{
 		if (string.IsNullOrWhiteSpace(emailCode))
-			return new OperationResult<User>(
+			return new OperationResult<EmailForgotPasswordResponseViewModel>(
 				false,
-				null!,
+				null,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.NotFound
 				);
 
 		var users = await _userRepository.GetByValue(emailCode, nameof(User.EmailActivationCode));
 		if (users == null || !users.Any())
-			return new OperationResult<User>(
+			return new OperationResult<EmailForgotPasswordResponseViewModel>(
 				false,
-				null!,
+				null,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.NotFound
 				);
 
 		var user = users.First();
 
-		if (user.EmailActivationCode != emailCode)
-			return new OperationResult<User>(
-				false,
-				user,
-				PropertyDictionary.GnSomethingWenWrong,
-				StatusResultEnum.NotFound
-				);
+		var result = new EmailForgotPasswordResponseViewModel()
+		{
+			Email = user.Email!
+		};
 
 		if (user.ExpireEmailActivationCode < DateTime.Now)
 		{
@@ -524,9 +521,9 @@ public class UserService : IUserService
 			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireEmailCodeInMinutes);
 			await _userRepository.UpdateAsync(user, true);
 
-			return new OperationResult<User>(
+			return new OperationResult<EmailForgotPasswordResponseViewModel>(
 				false,
-				user,
+				result,
 				PropertyDictionary.EmailActivationCodeHasBeenExpired,
 				StatusResultEnum.Retry
 				);
@@ -536,9 +533,111 @@ public class UserService : IUserService
 		user.IsActive = true;
 		user.IsEmailConfirmed = true;
 		await _userRepository.UpdateAsync(user, true);
-		return new OperationResult<User>(
+		return new OperationResult<EmailForgotPasswordResponseViewModel>(
 			true,
-			user,
+			result,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
+	}
+	public async Task<OperationResult<ResetPasswordViewModel>> ResetPasswordGetData(string emailOrMobile, bool isForgotPassword)
+	{
+		if (string.IsNullOrWhiteSpace(emailOrMobile))
+			return new OperationResult<ResetPasswordViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError
+				);
+
+		var isMobile = emailOrMobile.IsIranMobileNumber();
+		var isEmail = emailOrMobile.IsEmailAddress();
+		var users = new List<User>();
+
+		users = isMobile ? await _userRepository.GetByValue(emailOrMobile, nameof(User.Mobile)) :
+			(isEmail ? await _userRepository.GetByValue(emailOrMobile.Trim().StringNormalize(), nameof(User.Email)) : new());
+
+		if (users == null || !users.Any())
+			return new OperationResult<ResetPasswordViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError
+				);
+
+		var user = users.First();
+
+		var result = new ResetPasswordViewModel()
+		{
+			EmailOrMobile = emailOrMobile,
+			IsForgotPassword = isForgotPassword,
+		};
+		return new OperationResult<ResetPasswordViewModel>(
+
+			true,
+			result,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
+	}
+	public async Task<OperationResult<bool>> ResetPassword(ResetPasswordViewModel reset)
+	{
+
+		var validation = await new ModelVerification().ModelValidation(reset);
+		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				validation.ModelStateErrors);
+
+		var isMobile = reset.EmailOrMobile.IsIranMobileNumber();
+		var isEmail = reset.EmailOrMobile.IsEmailAddress();
+
+		var users = isMobile ? await _userRepository.GetByValue(reset.EmailOrMobile, nameof(User.Mobile)) :
+			(isEmail ? await _userRepository.GetByValue(reset.EmailOrMobile.Trim().StringNormalize(), nameof(User.Email)) : new());
+
+		if (users == null || !users.Any())
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError
+				);
+		var user = users.First();
+
+		if (!reset.IsForgotPassword)
+		{
+			if (string.IsNullOrWhiteSpace(reset.OldPassword))
+			{
+				return new OperationResult<bool>(
+					false,
+					false,
+					PropertyDictionary.GnSomethingWenWrong,
+					StatusResultEnum.ValidationError,
+					ModelStateError.MakeModelStateError(
+						nameof(reset.OldPassword),
+						string.Format(PropertyDictionary.GnRequiredErrorMessage, PropertyDictionary.OldPassword)
+						)
+					);
+			}
+			if (!PasswordHasher.Verify(reset.OldPassword, user.HashedPassword))
+				return new OperationResult<bool>(
+					false,
+					false,
+					PropertyDictionary.GnSomethingWenWrong,
+					StatusResultEnum.ValidationError,
+					ModelStateError.MakeModelStateError(
+						nameof(reset.OldPassword),
+						PropertyDictionary.IncorrectPassword)
+					);
+		}
+		user.HashedPassword = reset.NewPassword.Hash();
+		await _userRepository.UpdateAsync(user,true);
+		return new OperationResult<bool>(
+			true,
+			true,
 			PropertyDictionary.GnOperationSuccessfulltDone,
 			StatusResultEnum.Success
 			);
