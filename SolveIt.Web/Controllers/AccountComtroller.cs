@@ -87,6 +87,14 @@ public class AccountController : BaseController
 
 		var result = await _userService.ValidateLogin(vm);
 
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+
 		this.SetOperationMessage(result);
 
 		if (!result.IsSuccess)
