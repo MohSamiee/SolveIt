@@ -204,17 +204,11 @@ public class AccountController : BaseController
 		this.SetOperationMessage(result);
 		if (result.IsSuccess)
 		{
-			if (!string.IsNullOrWhiteSpace(result.Data!.Email))
+			if(result.Data!.ResponseType==ForgotPasswordResponseEnum.Email)
 				return RedirectToAction("Login", "Account");
-			if (!string.IsNullOrWhiteSpace(result.Data!.Mobile))
+			if (result.Data!.ResponseType == ForgotPasswordResponseEnum.Mobile)
 			{
-				var model = new ForgotPasswordMobileVerficationViewModel
-				{
-					Mobile = result.Data.Mobile,
-					ExpireDateTime = result.Data.ExpireMobileVerificationCode!.Value,
-					CodeLength = result.Data.MobileVerificationCode!.Length
-				};
-				TempData["model"] = JsonSerializer.Serialize(model);
+				TempData["model"] = JsonSerializer.Serialize(result.Data!.MobileData);
 
 				return RedirectToAction("MobileForgotPasswordVerification", "Account");
 
@@ -229,7 +223,7 @@ public class AccountController : BaseController
 	{
 		try
 		{
-			var vm = JsonSerializer.Deserialize<ForgotPasswordMobileVerficationViewModel>(TempData["model"].ToString());
+			var vm = JsonSerializer.Deserialize<MobileForgotPasswordResponseViewModel>(TempData["model"].ToString());
 			return View(vm);
 		}
 		catch (Exception ex)
@@ -240,7 +234,7 @@ public class AccountController : BaseController
 	}
 
 	[HttpPost("Forgot-Password-mobile")]
-	public async Task<IActionResult> MobileForgotPasswordVerification(ForgotPasswordMobileVerficationViewModel vm)
+	public async Task<IActionResult> MobileForgotPasswordVerification(MobileForgotPasswordResponseViewModel vm)
 	{
 		var result = await _userService.ValidateForgotPasswordMobile(vm);
 		this.SetOperationMessage(result);
@@ -258,13 +252,8 @@ public class AccountController : BaseController
 				return View(vm);
 			else
 			{
-				var model = new ForgotPasswordMobileVerficationViewModel()
-				{
-					Mobile = vm.Mobile,
-					ExpireDateTime = result.Data!.ExpireMobileActivationCode!.Value,
-					CodeLength = result.Data!.EmailActivationCode!.Length
-				};
-				TempData["model"] = JsonSerializer.Serialize(model);
+		
+				TempData["model"] = JsonSerializer.Serialize(result.Data);
 
 				return RedirectToAction("MobileForgotPasswordVerification", "Account");
 			}

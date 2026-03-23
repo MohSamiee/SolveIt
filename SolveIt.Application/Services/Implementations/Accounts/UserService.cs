@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -331,25 +332,28 @@ public class UserService : IUserService
 	#endregion Activation
 
 	#region Forgot Password
-	public async Task<OperationResult<ForgotPasswordViewModel>> ForgotPassword(ForgotPasswordViewModel forgot)
+	public async Task<OperationResult<ForgotPasswordResponseViewModel>> ForgotPassword(ForgotPasswordViewModel forgot)
 	{
-		var validation = await new ModelVerification().ModelValidation(forgot);
-		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
-			return new OperationResult<ForgotPasswordViewModel>(
-				false,
-				forgot,
-				PropertyDictionary.GnSomethingWenWrong,
-				StatusResultEnum.ValidationError,
-				validation.ModelStateErrors);
+		ForgotPasswordResponseViewModel result = new();
 
 		var isMobile = forgot.EmailOrMobile.IsIranMobileNumber();
 		var isEmail = forgot.EmailOrMobile.IsEmailAddress();
 
+		var validation = await new ModelVerification().ModelValidation(result);
+		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
+			return new OperationResult<ForgotPasswordResponseViewModel>(
+				false,
+				result,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				validation.ModelStateErrors);
+
+
 		if (!isMobile && !isEmail)
-			return new OperationResult<ForgotPasswordViewModel>
+			return new OperationResult<ForgotPasswordResponseViewModel>
 			(
 				false,
-				forgot,
+				result,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
 				ModelStateError.MakeModelStateError(
@@ -358,18 +362,27 @@ public class UserService : IUserService
 					)
 			);
 
-
-		forgot.Mobile = isMobile ? forgot.EmailOrMobile : null;
-		forgot.Email = isEmail ? forgot.EmailOrMobile : null;
-
 		var users = new List<User>();
-		users = isMobile ? await _userRepository.GetByValue(forgot.EmailOrMobile, nameof(User.Mobile)) : users;
-		users = isEmail ? await _userRepository.GetByValue(forgot.EmailOrMobile.Trim().StringNormalize(), nameof(User.NormalizedEmail)) : users;
+
+		if (isMobile)
+		{
+			result.ResponseType = ForgotPasswordResponseEnum.Mobile;
+			result.MobileData!.Mobile = forgot.EmailOrMobile;
+			users = await _userRepository.GetByValue(forgot.EmailOrMobile, nameof(User.Mobile));
+		}
+
+		else if (isEmail)
+		{
+			result.ResponseType = ForgotPasswordResponseEnum.Email;
+			result.EmailData!.Email = forgot.EmailOrMobile;
+			users = await _userRepository.GetByValue(forgot.EmailOrMobile.Trim().StringNormalize(), nameof(User.NormalizedEmail));
+		}
+
 
 		if (users == null || !users.Any())
-			return new OperationResult<ForgotPasswordViewModel>(
+			return new OperationResult<ForgotPasswordResponseViewModel>(
 				false,
-				forgot,
+				result,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.NotFound,
 				ModelStateError.MakeModelStateError(
@@ -380,9 +393,9 @@ public class UserService : IUserService
 
 		var user = users.First();
 		if (user.IsBan)
-			return new OperationResult<ForgotPasswordViewModel>(
+			return new OperationResult<ForgotPasswordResponseViewModel>(
 				false,
-				forgot,
+				result,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.AnyOtherError,
 				ModelStateError.MakeModelStateError(
@@ -396,8 +409,8 @@ public class UserService : IUserService
 			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
 			user.ExpireMobileActivationCode = DateTime.Now.AddSeconds(30);
 
-			forgot.ExpireMobileVerificationCode = user.ExpireMobileActivationCode;
-			forgot.MobileVerificationCode = user.MobileActivationCode;
+			result.MobileData!.ExpireDateTime = user.ExpireMobileActivationCode.Value;
+			result.MobileData!.CodeLength = user.MobileActivationCode!.Length;
 		}
 		if (isEmail)
 		{
@@ -405,22 +418,23 @@ public class UserService : IUserService
 			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
 		}
 		await _userRepository.UpdateAsync(user, true);
-		return new OperationResult<ForgotPasswordViewModel>(
+		return new OperationResult<ForgotPasswordResponseViewModel>(
 			true,
-			forgot,
+			result,
 			isMobile ? PropertyDictionary.ResetPasswordVerificationCodeSentByMobile :
 			(isEmail ? PropertyDictionary.ResetPasswordLinkSentByEmail : ""),
 			StatusResultEnum.Success
 			);
 	}
 
-	public async Task<OperationResult<User>> ValidateForgotPasswordMobile(ForgotPasswordMobileVerficationViewModel validation)
+	public async Task<OperationResult<MobileForgotPasswordResponseViewModel>> ValidateForgotPasswordMobile(MobileForgotPasswordResponseViewModel validation)
 	{
+		
 		var modelValidation = await new ModelVerification().ModelValidation(validation);
 		if (!modelValidation.IsSuccess && modelValidation.ModelStateErrors != null && modelValidation.ModelStateErrors.Any())
-			return new OperationResult<User>(
+			return new OperationResult<MobileForgotPasswordResponseViewModel>(
 				false,
-				null,
+				validation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
 				modelValidation.ModelStateErrors);
@@ -428,9 +442,9 @@ public class UserService : IUserService
 		var users = await _userRepository.GetByValue(validation.Mobile, nameof(User.Mobile));
 
 		if (users == null || !users.Any())
-			return new OperationResult<User>(
+			return new OperationResult<MobileForgotPasswordResponseViewModel>(
 				false,
-				null,
+				validation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError,
 				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
@@ -438,9 +452,9 @@ public class UserService : IUserService
 		var user = users.First();
 
 		if (user.MobileActivationCode != validation.VerificationCode)
-			return new OperationResult<User>(
+			return new OperationResult<MobileForgotPasswordResponseViewModel>(
 				false,
-				user,
+				validation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.Retry);
 
@@ -448,12 +462,14 @@ public class UserService : IUserService
 		{
 			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
 			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(3);
+			validation.CodeLength = user.MobileActivationCode.Length;
+			validation.ExpireDateTime = user.ExpireEmailActivationCode.Value;
 			await _userRepository.UpdateAsync(user, true);
 			//TODO: Send Activation Code Again
 
-			return new OperationResult<User>(
+			return new OperationResult<MobileForgotPasswordResponseViewModel>(
 				false,
-				user,
+				validation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.Retry,
 				ModelStateError.MakeModelStateError(
@@ -467,9 +483,9 @@ public class UserService : IUserService
 		user.IsMobileConfirmed = true;
 		await _userRepository.UpdateAsync(user, true);
 
-		return new OperationResult<User>(
+		return new OperationResult<MobileForgotPasswordResponseViewModel>(
 			true,
-			user,
+			validation,
 			PropertyDictionary.MobileSuccessfullyActivated,
 			StatusResultEnum.Success
 			);
@@ -517,7 +533,7 @@ public class UserService : IUserService
 				StatusResultEnum.Retry
 				);
 		}
-		
+
 		user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
 		user.IsActive = true;
 		user.IsEmailConfirmed = true;

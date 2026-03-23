@@ -23,10 +23,11 @@ public class ForgotPasswordViewModel
 
 public class ForgotPasswordResponseViewModel
 {
-	public EmailForgotPasswordResponseViewModel EmailData { get; set; }
-	public MobileForgotPasswordResponseViewModel MobileData { get; set; }
+	public EmailForgotPasswordResponseViewModel? EmailData { get; set; } = new();
+	public MobileForgotPasswordResponseViewModel? MobileData { get; set; } = new();
 	public ForgotPasswordResponseEnum ResponseType { get; set; }
 }
+
 public class EmailForgotPasswordResponseViewModel
 {
 	public string Email { get; set; }
@@ -37,7 +38,9 @@ public class MobileForgotPasswordResponseViewModel
 	public string Mobile { get; set; }
 	public int CodeLength { get; set; }
 	public DateTime ExpireDateTime { get; set; }
+	public string? VerificationCode { get; set; }
 }
+
 public enum ForgotPasswordResponseEnum
 {
 	Mobile,

@@ -6,7 +6,7 @@ public interface IUserService
 	Task<OperationResult<User>> ActivateEmail(string activationCode);
 	Task<OperationResult<RegisterMobileVerficationViewModel>> ActivateMobile(RegisterMobileVerficationViewModel activation);
 	Task<OperationResult<User>> ReSendMobileActivationCode(string mobile);
-	Task<OperationResult<ForgotPasswordViewModel>> ForgotPassword(ForgotPasswordViewModel forgot);
-	Task<OperationResult<User>> ValidateForgotPasswordMobile(ForgotPasswordMobileVerficationViewModel validation);
+	Task<OperationResult<ForgotPasswordResponseViewModel>> ForgotPassword(ForgotPasswordViewModel forgot);
+	Task<OperationResult<MobileForgotPasswordResponseViewModel>> ValidateForgotPasswordMobile(MobileForgotPasswordResponseViewModel validation);
 	Task<OperationResult<User>> ValidateForgotPasswordEmail(String emailCode);
 }
