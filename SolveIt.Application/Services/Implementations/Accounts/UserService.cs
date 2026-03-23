@@ -7,19 +7,17 @@ public class UserService : IUserService
 {
 	#region Constructor
 	private readonly IUserRepository _userRepository;
-	private readonly ISmsService _smsService;
-	private readonly SmsSetting _smsSetting;
+	private readonly SiteSetting _siteSettings;
 	public IMapper _mapper { get; }
 	public UserService(
 		IUserRepository userRepository,
-		IOptions<SmsSetting> smsSetting,
 		IMapper mapper,
-		ISmsService smsService)
+		IOptions<SiteSetting> siteSettings
+		)
 	{
 		_userRepository = userRepository;
-		_smsSetting = smsSetting.Value;
 		_mapper = mapper;
-		_smsService = smsService;
+		_siteSettings = siteSettings.Value;
 	}
 
 	#endregion Constructor
@@ -212,7 +210,7 @@ public class UserService : IUserService
 		if (user.ExpireEmailActivationCode < DateTime.Now)
 		{
 			user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
-			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
+			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireEmailCodeInMinutes);
 			await _userRepository.UpdateAsync(user, true);
 			//TODO: Send Activation Code Again
 
@@ -275,7 +273,7 @@ public class UserService : IUserService
 		if (user.ExpireEmailActivationCode < DateTime.Now)
 		{
 			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
-			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(3);
+			user.ExpireMobileActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireSmsCodeInMinutes);
 			await _userRepository.UpdateAsync(user, true);
 			//TODO: Send Activation Code Again
 
@@ -317,7 +315,7 @@ public class UserService : IUserService
 		var user = users.First();
 		//Update User
 		user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
-		user.ExpireMobileActivationCode = DateTime.Now.AddSeconds(30);
+		user.ExpireMobileActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireSmsCodeInMinutes);
 		await _userRepository.UpdateAsync(user, true);
 		//TODO: Send Activation Message
 
@@ -407,7 +405,7 @@ public class UserService : IUserService
 		if (isMobile)
 		{
 			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
-			user.ExpireMobileActivationCode = DateTime.Now.AddSeconds(30);
+			user.ExpireMobileActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireSmsCodeInMinutes);
 
 			result.MobileData!.ExpireDateTime = user.ExpireMobileActivationCode.Value;
 			result.MobileData!.CodeLength = user.MobileActivationCode!.Length;
@@ -415,7 +413,7 @@ public class UserService : IUserService
 		if (isEmail)
 		{
 			user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
-			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
+			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireEmailCodeInMinutes);
 		}
 		await _userRepository.UpdateAsync(user, true);
 		return new OperationResult<ForgotPasswordResponseViewModel>(
@@ -461,7 +459,7 @@ public class UserService : IUserService
 		if (user.ExpireEmailActivationCode < DateTime.Now)
 		{
 			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
-			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(3);
+			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireSmsCodeInMinutes);
 			validation.CodeLength = user.MobileActivationCode.Length;
 			validation.ExpireDateTime = user.ExpireEmailActivationCode.Value;
 			await _userRepository.UpdateAsync(user, true);
@@ -523,7 +521,7 @@ public class UserService : IUserService
 		if (user.ExpireEmailActivationCode < DateTime.Now)
 		{
 			user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
-			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
+			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(_siteSettings.ExpireEmailCodeInMinutes);
 			await _userRepository.UpdateAsync(user, true);
 
 			return new OperationResult<User>(

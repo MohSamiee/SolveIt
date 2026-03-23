@@ -16,6 +16,7 @@ public static class RegisterOptions
 		builder.Services.Configure<PagingOptions>(builder.Configuration.GetSection("PagingOptions"));
 		
 		builder.Services.Configure<SmsSetting>(builder.Configuration.GetSection("SmsIrSetting"));
-
+		
+		builder.Services.Configure<SiteSetting>(builder.Configuration.GetSection("SiteSetting"));
 	}
 }
