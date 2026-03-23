@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Elfie.Model;
+using Microsoft.IdentityModel.Tokens.Experimental;
 using SolveIt.Common.OperationResult;
 using System.Text.Json;
 
@@ -176,4 +178,146 @@ public class AccountController : BaseController
 		return RedirectToAction("MobileRegisterVerification", "Account");
 	}
 	#endregion Activation
+
+	#region Forgot Password
+	[HttpGet("Forgot-Password")]
+	public async Task<IActionResult> ForgotPassword()
+	{
+		return View();
+	}
+
+
+	[HttpPost("Forgot-Password")]
+	public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel vm)
+	{
+		if (!ModelState.IsValid)
+			return View(vm);
+
+		var result = await _userService.ForgotPassword(vm);
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+		this.SetOperationMessage(result);
+		if (result.IsSuccess)
+		{
+			if (!string.IsNullOrWhiteSpace(result.Data!.Email))
+				return RedirectToAction("Login", "Account");
+			if (!string.IsNullOrWhiteSpace(result.Data!.Mobile))
+			{
+				var model = new ForgotPasswordMobileVerficationViewModel
+				{
+					Mobile = result.Data.Mobile,
+					ExpireDateTime = result.Data.ExpireMobileVerificationCode!.Value,
+					CodeLength = result.Data.MobileVerificationCode!.Length
+				};
+				TempData["model"] = JsonSerializer.Serialize(model);
+
+				return RedirectToAction("MobileForgotPasswordVerification", "Account");
+
+			}
+		}
+		return View(result.Data);
+	}
+
+
+	[HttpGet("Forgot-Password-mobile")]
+	public async Task<IActionResult> MobileForgotPasswordVerification()
+	{
+		try
+		{
+			var vm = JsonSerializer.Deserialize<ForgotPasswordMobileVerficationViewModel>(TempData["model"].ToString());
+			return View(vm);
+		}
+		catch (Exception ex)
+		{
+
+			return View();
+		}
+	}
+
+	[HttpPost("Forgot-Password-mobile")]
+	public async Task<IActionResult> MobileForgotPasswordVerification(ForgotPasswordMobileVerficationViewModel vm)
+	{
+		var result = await _userService.ValidateForgotPasswordMobile(vm);
+		this.SetOperationMessage(result);
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+
+		if (!result.IsSuccess)
+		{
+			if (result.Status != StatusResultEnum.Retry)
+				return View(vm);
+			else
+			{
+				var model = new ForgotPasswordMobileVerficationViewModel()
+				{
+					Mobile = vm.Mobile,
+					ExpireDateTime = result.Data!.ExpireMobileActivationCode!.Value,
+					CodeLength = result.Data!.EmailActivationCode!.Length
+				};
+				TempData["model"] = JsonSerializer.Serialize(model);
+
+				return RedirectToAction("MobileForgotPasswordVerification", "Account");
+			}
+		}
+		return RedirectToAction("ResetPassword", "Account", new
+		{
+			emailOrMobile = result.Data!.Mobile
+		});
+	}
+
+
+	[HttpGet("Forgot-Password-Email/{id}")]
+	public async Task<IActionResult> EmailForgotPasswordVerification(string id)
+	{
+		var result = await _userService.ValidateForgotPasswordEmail(id);
+
+		this.SetOperationMessage(result);
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
+
+		if (!result.IsSuccess)
+		{
+			if (result.Status != StatusResultEnum.Retry)
+				return NotFound();
+			else
+				return RedirectToAction("Login", "Account");
+		}
+
+		return RedirectToAction("ResetPassword", "Account", new
+		{
+			emailOrMobile = result.Data!.Email
+		});
+	}
+
+	public async Task<IActionResult> ReSendMobileVerificationCode(string mobile)
+	{
+		var result = await _userService.ReSendMobileActivationCode(mobile);
+		var model = new ForgotPasswordMobileVerficationViewModel
+		{
+			Mobile = result.Data.Mobile,
+			ExpireDateTime = result.Data.ExpireMobileActivationCode!.Value,
+			CodeLength = result.Data.MobileActivationCode!.Length
+		};
+		TempData["model"] = JsonSerializer.Serialize(model);
+
+		return RedirectToAction("MobileForgotPasswordVerification", "Account");
+	}
+
+
+	#endregion Forgot Password
 }

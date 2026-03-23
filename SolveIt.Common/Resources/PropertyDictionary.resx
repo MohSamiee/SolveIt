@@ -222,6 +222,12 @@
   <data name="MobileSuccessfullyActivated" xml:space="preserve">
     <value>موبایل با موفقیت فعال شد</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>کلمه عبور جدید</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>کلمه عبور فعلی</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>کلمه عبور</value>
   </data>
@@ -255,11 +261,20 @@
   <data name="RememberMe" xml:space="preserve">
     <value>مرا بخاطر بسپار</value>
   </data>
+  <data name="ReNewPassword" xml:space="preserve">
+    <value>تکرار کلمه عبور جدید</value>
+  </data>
   <data name="RePassword" xml:space="preserve">
     <value>تکرار کلمه عبور</value>
   </data>
   <data name="RerurnHome" xml:space="preserve">
     <value>بازگشت به صفحه اصلی</value>
+  </data>
+  <data name="ResetPasswordLinkSentByEmail" xml:space="preserve">
+    <value>ایمیلی حاوی لینک ریست پسورد برای شما ارسال شد.</value>
+  </data>
+  <data name="ResetPasswordVerificationCodeSentByMobile" xml:space="preserve">
+    <value>جهت تکمیل ریست کردن کلمه عبور کدی که برای موبایلتان ارسال شد.</value>
   </data>
   <data name="UserIsBan" xml:space="preserve">
     <value>کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید</value>

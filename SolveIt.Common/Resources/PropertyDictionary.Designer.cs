@@ -376,6 +376,24 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور جدید.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کلمه عبور فعلی.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کلمه عبور.
         /// </summary>
         public static string Password {
@@ -475,6 +493,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تکرار کلمه عبور جدید.
+        /// </summary>
+        public static string ReNewPassword {
+            get {
+                return ResourceManager.GetString("ReNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تکرار کلمه عبور.
         /// </summary>
         public static string RePassword {
@@ -489,6 +516,24 @@ namespace SolveIt.Common.Resources {
         public static string RerurnHome {
             get {
                 return ResourceManager.GetString("RerurnHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ایمیلی حاوی لینک ریست پسورد برای شما ارسال شد..
+        /// </summary>
+        public static string ResetPasswordLinkSentByEmail {
+            get {
+                return ResourceManager.GetString("ResetPasswordLinkSentByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to جهت تکمیل ریست کردن کلمه عبور کدی که برای موبایلتان ارسال شد..
+        /// </summary>
+        public static string ResetPasswordVerificationCodeSentByMobile {
+            get {
+                return ResourceManager.GetString("ResetPasswordVerificationCodeSentByMobile", resourceCulture);
             }
         }
         

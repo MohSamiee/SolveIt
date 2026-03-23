@@ -77,7 +77,7 @@ public class UserService : IUserService
 		var user = _mapper.Map<User>(register);
 		//TODO: Send Activation Message
 		//if (isMobile)
-			//await _smsService.SendNowToOnePersonSms(_smsSetting, user.MobileActivationCode, user.Mobile);
+		//await _smsService.SendNowToOnePersonSms(_smsSetting, user.MobileActivationCode, user.Mobile);
 		await _userRepository.AddAsync(user, true);
 		return new OperationResult<User>(
 			true,
@@ -237,12 +237,12 @@ public class UserService : IUserService
 			);
 	}
 
-	public async Task<OperationResult<User>> ActivateMobile(RegisterMobileVerficationViewModel activation)
+	public async Task<OperationResult<RegisterMobileVerficationViewModel>> ActivateMobile(RegisterMobileVerficationViewModel activation)
 	{
 		// Find User
 		var users = await _userRepository.GetByValue(activation.Mobile, nameof(User.Mobile));
 		if (users == null || users.Count() == 0)
-			return new OperationResult<User>(
+			return new OperationResult<RegisterMobileVerficationViewModel>(
 				false,
 				null!,
 				PropertyDictionary.GnSomethingWenWrong,
@@ -250,21 +250,21 @@ public class UserService : IUserService
 				ModelStateError.MakeModelStateError(nameof(User.Email), PropertyDictionary.LoginInputIsNotValid)
 				);
 		var user = users.First();
-
+		activation.VerificationCode = user.MobileActivationCode!;
 		// Check Activation Code
 		if (user.MobileActivationCode != activation.VerificationCode)
-			return new OperationResult<User>(
+			return new OperationResult<RegisterMobileVerficationViewModel>(
 				false,
-				null!,
+				activation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.ValidationError
 				);
 
 		// Check if user Is Banned
 		if (user.IsBan)
-			return new OperationResult<User>(
+			return new OperationResult<RegisterMobileVerficationViewModel>(
 				false,
-				null,
+				activation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.AnyOtherError,
 				ModelStateError.MakeModelStateError(nameof(User.Email), PropertyDictionary.UserIsBan)
@@ -278,9 +278,9 @@ public class UserService : IUserService
 			await _userRepository.UpdateAsync(user, true);
 			//TODO: Send Activation Code Again
 
-			return new OperationResult<User>(
+			return new OperationResult<RegisterMobileVerficationViewModel>(
 				false,
-				null!,
+				activation,
 				PropertyDictionary.GnSomethingWenWrong,
 				StatusResultEnum.Retry,
 				ModelStateError.MakeModelStateError(
@@ -294,9 +294,9 @@ public class UserService : IUserService
 		user.IsMobileConfirmed = true;
 		await _userRepository.UpdateAsync(user, true);
 
-		return new OperationResult<User>(
+		return new OperationResult<RegisterMobileVerficationViewModel>(
 			true,
-			user,
+			activation,
 			PropertyDictionary.MobileSuccessfullyActivated,
 			StatusResultEnum.Success
 			);
@@ -329,4 +329,206 @@ public class UserService : IUserService
 	}
 
 	#endregion Activation
+
+	#region Forgot Password
+	public async Task<OperationResult<ForgotPasswordViewModel>> ForgotPassword(ForgotPasswordViewModel forgot)
+	{
+		var validation = await new ModelVerification().ModelValidation(forgot);
+		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
+			return new OperationResult<ForgotPasswordViewModel>(
+				false,
+				forgot,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				validation.ModelStateErrors);
+
+		var isMobile = forgot.EmailOrMobile.IsIranMobileNumber();
+		var isEmail = forgot.EmailOrMobile.IsEmailAddress();
+
+		if (!isMobile && !isEmail)
+			return new OperationResult<ForgotPasswordViewModel>
+			(
+				false,
+				forgot,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError(
+					nameof(forgot.EmailOrMobile),
+					PropertyDictionary.InputEmailOrMobileFormatIsWrong
+					)
+			);
+
+
+		forgot.Mobile = isMobile ? forgot.EmailOrMobile : null;
+		forgot.Email = isEmail ? forgot.EmailOrMobile : null;
+
+		var users = new List<User>();
+		users = isMobile ? await _userRepository.GetByValue(forgot.EmailOrMobile, nameof(User.Mobile)) : users;
+		users = isEmail ? await _userRepository.GetByValue(forgot.EmailOrMobile.Trim().StringNormalize(), nameof(User.NormalizedEmail)) : users;
+
+		if (users == null || !users.Any())
+			return new OperationResult<ForgotPasswordViewModel>(
+				false,
+				forgot,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound,
+				ModelStateError.MakeModelStateError(
+					nameof(forgot.EmailOrMobile),
+					PropertyDictionary.LoginInputIsNotValid
+					)
+				);
+
+		var user = users.First();
+		if (user.IsBan)
+			return new OperationResult<ForgotPasswordViewModel>(
+				false,
+				forgot,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError(
+					nameof(forgot.EmailOrMobile),
+					PropertyDictionary.UserIsBan
+					)
+				);
+
+		if (isMobile)
+		{
+			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
+			user.ExpireMobileActivationCode = DateTime.Now.AddSeconds(30);
+
+			forgot.ExpireMobileVerificationCode = user.ExpireMobileActivationCode;
+			forgot.MobileVerificationCode = user.MobileActivationCode;
+		}
+		if (isEmail)
+		{
+			user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
+			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
+		}
+		await _userRepository.UpdateAsync(user, true);
+		return new OperationResult<ForgotPasswordViewModel>(
+			true,
+			forgot,
+			isMobile ? PropertyDictionary.ResetPasswordVerificationCodeSentByMobile :
+			(isEmail ? PropertyDictionary.ResetPasswordLinkSentByEmail : ""),
+			StatusResultEnum.Success
+			);
+	}
+
+	public async Task<OperationResult<User>> ValidateForgotPasswordMobile(ForgotPasswordMobileVerficationViewModel validation)
+	{
+		var modelValidation = await new ModelVerification().ModelValidation(validation);
+		if (!modelValidation.IsSuccess && modelValidation.ModelStateErrors != null && modelValidation.ModelStateErrors.Any())
+			return new OperationResult<User>(
+				false,
+				null,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				modelValidation.ModelStateErrors);
+
+		var users = await _userRepository.GetByValue(validation.Mobile, nameof(User.Mobile));
+
+		if (users == null || !users.Any())
+			return new OperationResult<User>(
+				false,
+				null,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+
+		var user = users.First();
+
+		if (user.MobileActivationCode != validation.VerificationCode)
+			return new OperationResult<User>(
+				false,
+				user,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.Retry);
+
+		if (user.ExpireEmailActivationCode < DateTime.Now)
+		{
+			user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
+			user.ExpireEmailActivationCode = DateTime.Now.AddMinutes(3);
+			await _userRepository.UpdateAsync(user, true);
+			//TODO: Send Activation Code Again
+
+			return new OperationResult<User>(
+				false,
+				user,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.Retry,
+				ModelStateError.MakeModelStateError(
+					nameof(user.Mobile),
+					PropertyDictionary.MobileActivationCodeHasBeenExpired)
+				);
+		}
+		//Update User
+		user.MobileActivationCode = CodeGenerator.GenerateMobileCode();
+		user.IsActive = true;
+		user.IsMobileConfirmed = true;
+		await _userRepository.UpdateAsync(user, true);
+
+		return new OperationResult<User>(
+			true,
+			user,
+			PropertyDictionary.MobileSuccessfullyActivated,
+			StatusResultEnum.Success
+			);
+	}
+
+	public async Task<OperationResult<User>> ValidateForgotPasswordEmail(string emailCode)
+	{
+		if (string.IsNullOrWhiteSpace(emailCode))
+			return new OperationResult<User>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound
+				);
+
+		var users = await _userRepository.GetByValue(emailCode, nameof(User.EmailActivationCode));
+		if (users == null || !users.Any())
+			return new OperationResult<User>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound
+				);
+
+		var user = users.First();
+
+		if (user.EmailActivationCode != emailCode)
+			return new OperationResult<User>(
+				false,
+				user,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound
+				);
+
+		if (user.ExpireEmailActivationCode < DateTime.Now)
+		{
+			user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
+			user.ExpireEmailActivationCode = DateTime.Now.AddHours(2);
+			await _userRepository.UpdateAsync(user, true);
+
+			return new OperationResult<User>(
+				false,
+				user,
+				PropertyDictionary.EmailActivationCodeHasBeenExpired,
+				StatusResultEnum.Retry
+				);
+		}
+		
+		user.EmailActivationCode = CodeGenerator.GenerateActivationEmailCode();
+		user.IsActive = true;
+		user.IsEmailConfirmed = true;
+		await _userRepository.UpdateAsync(user, true);
+		return new OperationResult<User>(
+			true,
+			user,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
+	}
+
+	#endregion Forgot Password
 }

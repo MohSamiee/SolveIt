@@ -69,10 +69,3 @@ var timer = setInterval(function () {
     timerElement.innerText = minutes + ":" + seconds.toString().padStart(2, '0');
 
 }, 1000);
-
-
-
-// Resend Activation Code
-document.getElementById("resendBtn").addEventListener("click", function () {
-    window.location.href = "/Account/ResendMobileActivationCode?mobile=" + mobile;
-});
