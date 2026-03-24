@@ -33,7 +33,7 @@
 
     <div class="account-layer">
         <div class="container">
-            <partial name="_UserSidebar" />
+            @await Component.InvokeAsync("UserPanelSidebar")
             <div class="left-side">
 
                 <partial name="_UserTopHeaderInfo" />
