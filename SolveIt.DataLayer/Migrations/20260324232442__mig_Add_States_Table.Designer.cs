@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolveIt.DataLayer.Context;
 
@@ -11,9 +12,11 @@ using SolveIt.DataLayer.Context;
 namespace SolveIt.DataLayer.Migrations
 {
     [DbContext(typeof(SolveItDbContext))]
-    partial class SolveItDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260324232442__mig_Add_States_Table")]
+    partial class _mig_Add_States_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,15 +88,6 @@ namespace SolveIt.DataLayer.Migrations
                     b.Property<string>("AvatarAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CityId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CountryId")
-                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -180,10 +174,6 @@ namespace SolveIt.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("CountryId");
-
                     b.ToTable("Users", "auth");
                 });
 
@@ -197,30 +187,9 @@ namespace SolveIt.DataLayer.Migrations
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("SolveIt.Entities.Models.Users.User", b =>
-                {
-                    b.HasOne("SolveIt.Domain.Entities.Locations.State", "City")
-                        .WithMany("UserCities")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("SolveIt.Domain.Entities.Locations.State", "Country")
-                        .WithMany("UserCountries")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("City");
-
-                    b.Navigation("Country");
-                });
-
             modelBuilder.Entity("SolveIt.Domain.Entities.Locations.State", b =>
                 {
                     b.Navigation("Children");
-
-                    b.Navigation("UserCities");
-
-                    b.Navigation("UserCountries");
                 });
 #pragma warning restore 612, 618
         }

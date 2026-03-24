@@ -12,6 +12,8 @@ public class SolveItDbContext : DbContext
 
 	#region DbSets
 	public DbSet<User> Users { get; set; }
+	public DbSet<State> States { get; set; }
+
 	#endregion DbSets
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
