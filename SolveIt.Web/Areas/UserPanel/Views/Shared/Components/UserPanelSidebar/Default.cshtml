@@ -1,5 +1,4 @@
-﻿
-@model UserPanelSidebarViewModel
+﻿@model UserPanelSidebarViewModel
 @{
 }
 
@@ -7,7 +6,17 @@
     <!-- avatar -->
     <div class="quick-access layer-style">
         <div class="img-layer">
-            <a href="javascript:void(0)" class="change-image"><i class="icon-pencil-edit"></i></a>
+
+            <input type="file"
+                   class="display-none"
+                   name="avatarInput"
+                   id="avatarInput"
+                   accept="@(string.Join(", ", Model.AcceptableAvatarExtensions))"
+                   onchange="changeAvatar(this)" />
+
+            <a onclick="clickOnInput('avatarInput')" class="change-image">
+                <i class="icon-pencil-edit"></i>
+            </a>
             <img src="@PathTools.AvatarPath@Model.AvatarPath">
         </div>
         <!-- you can use "gold" , "silver , "bronze" for medals -->

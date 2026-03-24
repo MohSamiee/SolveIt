@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SolveIt.Application.Extensions;
+﻿namespace SolveIt.Application.Extensions;
 public static class UserExtensions
 {
 	public static string GetShowingName(this User user)
@@ -18,6 +12,7 @@ public static class UserExtensions
 			res = user.Mobile;
 		return res;
 	}
+	
 	public static string GetFullName(this User user)
 	{
 		var res = string.Empty;

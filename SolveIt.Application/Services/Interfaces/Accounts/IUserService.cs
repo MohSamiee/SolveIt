@@ -1,4 +1,6 @@
-﻿namespace SolveIt.Application.Services.Interfaces.Accounts;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace SolveIt.Application.Services.Interfaces.Accounts;
 public interface IUserService
 {
 	Task<OperationResult<User>> RegisterUser(RegisterViewModel register);
@@ -14,4 +16,5 @@ public interface IUserService
 
 
 	Task<OperationResult<UserPanelSidebarViewModel>> GetUserForSidebarPanel(long userId);
+	Task<OperationResult<bool>> ChangeUserAvatar(long userId, IFormFile avatar);
 }

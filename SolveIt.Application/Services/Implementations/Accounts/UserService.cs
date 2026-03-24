@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
@@ -672,6 +673,9 @@ public class UserService : IUserService
 			);
 	}
 
-
+	public async Task<OperationResult<bool>> ChangeUserAvatar(long userId, IFormFile avatar)
+	{
+		return new OperationResult<bool>(false, false, string.Empty, StatusResultEnum.Success,ModelStateError.MakeModelStateError("Test","Test"));
+	}
 	#endregion User Panel
 }

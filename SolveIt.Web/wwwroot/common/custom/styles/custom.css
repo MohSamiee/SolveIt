@@ -37,3 +37,8 @@
     font-size: 20px;
     text-align: center;
 }
+
+
+.display-none {
+    display: none !important;
+}
