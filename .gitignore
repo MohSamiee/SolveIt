@@ -363,3 +363,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 SolveIt.Web/appsettings.Development.json
+
+
+SolveIt.Web/wwwroot/content/user-avatar/*
+!SolveIt.Web/wwwroot/content/user-avatar/.gitkeep
+!SolveIt.Web/wwwroot/content/user-avatar/DefaultAvatar.PNG .gitkeep

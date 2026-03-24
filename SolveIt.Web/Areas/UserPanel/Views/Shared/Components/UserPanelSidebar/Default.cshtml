@@ -12,7 +12,7 @@
                    name="avatarInput"
                    id="avatarInput"
                    accept="@(string.Join(", ", Model.AcceptableAvatarExtensions))"
-                   onchange="changeAvatar(this)" />
+                   onchange="changeAvatar(this,'@(Url.Action("ChangeUserAvatar", "Home", new { area = "UserPanel" }))')" />
 
             <a onclick="clickOnInput('avatarInput')" class="change-image">
                 <i class="icon-pencil-edit"></i>

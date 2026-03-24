@@ -3,9 +3,9 @@
     input.click();
 }
 
-async function changeAvatar(fileInput) {
+async function changeAvatar(fileInput,actionUrl) {
     const file = fileInput.files[0];
-    var url = "/UserPanel/Home/ChangeUserAvatar"
+    //var url = "/UserPanel/Home/ChangeUserAvatar"
     var returnUrl = "/UserPanel/Home/Index";
     if (!file) {
         alert("Please select a file");
@@ -16,7 +16,7 @@ async function changeAvatar(fileInput) {
     const formData = new FormData();
     formData.append("userAvatar", file);
 
-    const response = await fetch(url, {
+    const response = await fetch(actionUrl, {
         method: 'POST',
         body: formData
     });

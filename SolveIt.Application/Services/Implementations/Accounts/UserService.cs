@@ -640,7 +640,7 @@ public class UserService : IUserService
 					);
 		}
 		user.HashedPassword = reset.NewPassword.Hash();
-		await _userRepository.UpdateAsync(user,true);
+		await _userRepository.UpdateAsync(user, true);
 		return new OperationResult<bool>(
 			true,
 			true,
@@ -675,7 +675,44 @@ public class UserService : IUserService
 
 	public async Task<OperationResult<bool>> ChangeUserAvatar(long userId, IFormFile avatar)
 	{
-		return new OperationResult<bool>(false, false, string.Empty, StatusResultEnum.Success,ModelStateError.MakeModelStateError("Test","Test"));
+		var user = _userRepository.GetById(userId);
+		if (user == null)
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+		var avatarValidation = new FileValidation().IsValidFile(avatar, _avatarSetting, true);
+		if (!avatarValidation.IsSuccess)
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				avatarValidation.ModelStateErrors!
+				);
+
+		var isDefaultAvatar = user.AvatarAddress == PathTools.DefaultUserAvatar;
+
+		var savingResult = new FileManagement().ReplaceFile(
+			avatar,
+			PathTools.AvatarServerPath,
+			isDefaultAvatar ? "" : user.AvatarAddress);
+	
+		if (!savingResult.IsSuccess)
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				savingResult.ModelStateErrors!
+				);
+		user.AvatarAddress = savingResult.Data!;
+		
+		await _userRepository.UpdateAsync(user, true);
+
+		return new OperationResult<bool>(true, true, PropertyDictionary.GnOperationSuccessfulltDone, StatusResultEnum.Success);
 	}
 	#endregion User Panel
 }

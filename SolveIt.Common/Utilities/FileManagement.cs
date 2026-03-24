@@ -3,13 +3,6 @@
 namespace SolveIt.Common.Utilities;
 public class FileManagement
 {
-	/// <summary>
-	/// Return File Name
-	/// </summary>
-	/// <param name="file"></param>
-	/// <param name="path"></param>
-	/// <param name="fileName"></param>
-	/// <returns></returns>
 	public OperationResult<string> SaveFile(IFormFile file, string path, string fileName = "")
 	{
 		var myFileName = string.Empty;
@@ -40,7 +33,6 @@ public class FileManagement
 		if (string.IsNullOrWhiteSpace(oldFileName))
 			return newFileName;
 
-
 		var deleteStatus = DeleteFile(path, oldFileName);
 
 		if (newFileName.IsSuccess && deleteStatus.IsSuccess)
@@ -58,10 +50,5 @@ public class FileManagement
 			File.Delete(fullPath);
 		}
 		return new OperationResult<bool>(true, true, string.Empty, StatusResultEnum.Success);
-	}
-
-	public static string GetProjectRootPath()
-	{
-		return Directory.GetCurrentDirectory();
 	}
 }
