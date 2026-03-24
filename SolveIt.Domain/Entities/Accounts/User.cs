@@ -6,7 +6,7 @@ public class User : BaseEntity
 	public string? LastName { get; set; }
 
 	public string? Email { get; set; }
-	public string? NormalizedEmail { get; set; }
+	public string? NormalizedEmail { get; set; } 
 	public string? EmailActivationCode { get; set; }
 	public DateTime? ExpireEmailActivationCode { get; set; }
 	public bool IsEmailConfirmed { get; set; }
@@ -23,7 +23,7 @@ public class User : BaseEntity
 
 	public int AccessFailedCount { get; set; }
 	public DateTime? LastLoginTime { get; set; }
-
+	
 	public bool IsBan { get; set; }
 	public bool IsAdmin { get; set; }
 	#endregion Properties

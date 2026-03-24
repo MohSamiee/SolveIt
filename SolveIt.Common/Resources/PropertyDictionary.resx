@@ -132,6 +132,9 @@
   <data name="ContactAdmin" xml:space="preserve">
     <value>خطایی رخ داده است. لطفا با ادمین تماس برقرار کنید</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>داشبورد</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
   </data>
@@ -287,6 +290,9 @@
   </data>
   <data name="UserIsNotActive" xml:space="preserve">
     <value>اکانت شما فعال نشده است.  ایمیل فعال سازی مجددا برای شما ارسال شد</value>
+  </data>
+  <data name="UserPanel" xml:space="preserve">
+    <value>پنل کاربری</value>
   </data>
   <data name="VerificationCode" xml:space="preserve">
     <value>کد احراز هویت</value>

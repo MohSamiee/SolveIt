@@ -31,7 +31,7 @@ public interface IGenericRepository<TEntity> where TEntity : class, IEntity
 		bool includeDeleted = false,
 		params string[] includeProperties
 		);
-
+	
 	IQueryable<TEntity> GetAllAsNoTrackWithPaging(
 		BasePaging pager,
 		IQueryable<TEntity> query,

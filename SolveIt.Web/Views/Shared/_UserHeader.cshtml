@@ -1,7 +1,7 @@
 ﻿@using SolveIt.Web.Extensions
 @{
     var user = User;
-    UserInfo userInfo = LoginService.GetCurrentUserInfo(User);
+    UserInfo userInfo = LoginService.GetCurrentUserInfo(User)!;
 }
 
 <div class="clientarea-layer">
@@ -30,9 +30,10 @@
                 </div>
                 <ul>
                     <li>
-                        <a href="">
-                            مشاهده حساب کاربری
-
+                        <a asp-area="UserPanel"
+                           asp-controller="Home"
+                           asp-action="Index">
+                            @PropertyDictionary.UserPanel
                         </a>
                     </li>
                     <li>

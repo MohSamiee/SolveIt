@@ -106,6 +106,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to داشبورد.
+        /// </summary>
+        public static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ایمیل.
         /// </summary>
         public static string Email {
@@ -570,6 +579,15 @@ namespace SolveIt.Common.Resources {
         public static string UserIsNotActive {
             get {
                 return ResourceManager.GetString("UserIsNotActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پنل کاربری.
+        /// </summary>
+        public static string UserPanel {
+            get {
+                return ResourceManager.GetString("UserPanel", resourceCulture);
             }
         }
         

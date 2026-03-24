@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = ViewData["Title"];
+}
+
+@section Styles {
+    @await RenderSectionAsync("Styles", false)
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+}
+
+
+@section Header {
+    <partial name="_Header" />
+}
+
+@section Scripts {
+    <partial name="_UserFooterScripts" />
+    @await RenderSectionAsync("Scripts", false)
+
+}
+
+<div class="user-page-style">
+
+    <div class="breadcumb-layer">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li itemscope="" itemprop="itemListElement"><a href="/" itemprop="item"><span itemprop="name"> @PropertyDictionary.LandingPage </span></a></li>
+                <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @PropertyDictionary.UserPanel </span></a></li>
+                @await RenderSectionAsync("Breadcrumb", true)
+            </ul>
+        </div>
+    </div>
+
+    <div class="account-layer">
+        <div class="container">
+            <partial name="_UserSidebar" />
+            <div class="left-side">
+
+                <partial name="_UserTopHeaderInfo" />
+
+                @RenderBody()
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+

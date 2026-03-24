@@ -633,7 +633,7 @@ public class UserService : IUserService
 					);
 		}
 		user.HashedPassword = reset.NewPassword.Hash();
-		await _userRepository.UpdateAsync(user, true);
+		await _userRepository.UpdateAsync(user,true);
 		return new OperationResult<bool>(
 			true,
 			true,
