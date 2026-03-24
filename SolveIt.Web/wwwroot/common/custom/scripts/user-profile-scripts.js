@@ -1,11 +1,15 @@
-﻿function clickOnInput(avatarInput) {
+﻿import { Loading } from './loading.js';
+
+window.clickOnInput = function (avatarInput) {
     var input = document.getElementById(avatarInput);
     input.click();
 }
 
-async function changeAvatar(fileInput,actionUrl) {
+window.changeAvatar = async  function (fileInput, actionUrl) {
+    //Loading.start('#userInfo');
+    Loading.start();
+
     const file = fileInput.files[0];
-    //var url = "/UserPanel/Home/ChangeUserAvatar"
     var returnUrl = "/UserPanel/Home/Index";
     if (!file) {
         alert("Please select a file");
@@ -27,7 +31,7 @@ async function changeAvatar(fileInput,actionUrl) {
         displayModelStateErrors(result);
         return;
     }
-    showSuccessMessage("Success Message")
+    //showSuccessMessage("Success Message")
     goToUrl(returnUrl);
 }
 
