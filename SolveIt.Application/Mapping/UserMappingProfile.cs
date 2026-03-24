@@ -26,17 +26,15 @@ public class UserMappingProfile : Profile
 
 		#region User Pnael
 		CreateMap<User, UserPanelSidebarViewModel>()
-			.AfterMap((src, dest) =>
-			{
-				dest.RegisterDate = src.CreatedDate;
-				dest.AvatarPath = src.AvatarAddress;
-				dest.ShowName = src.GetShowingName();
-				dest.FirstName = src.FirstName;
-				dest.LastName = src.LastName;
-				dest.FullName = src.GetFullName();
-				dest.Email = src.Email;
-				dest.Mobile = src.Mobile;
-	});
+			.ForMember(d => d.AcceptableAvatarExtensions, o => o.MapFrom<AvatarExtensionsResolver<UserPanelSidebarViewModel>>())
+			.ForMember(d => d.AvatarPath, o => o.MapFrom(src => src.AvatarAddress))
+			.ForMember(d => d.ShowName, o => o.MapFrom(src => src.GetShowingName()))
+			.ForMember(d => d.FirstName, o => o.MapFrom(src => src.FirstName))
+			.ForMember(d => d.LastName, o => o.MapFrom(src => src.LastName))
+			.ForMember(d => d.FullName, o => o.MapFrom(src => src.GetFullName()))
+			.ForMember(d => d.Email, o => o.MapFrom(src => src.Email))
+			.ForMember(d => d.RegisterDate, o => o.MapFrom(src => src.CreatedDate))
+			.ForMember(d => d.Mobile, o => o.MapFrom(src => src.Mobile));
 		#endregion User Pnael
 	}
 }

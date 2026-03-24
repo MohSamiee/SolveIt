@@ -7,3 +7,8 @@ public class FileSetting
 	public List<string> AcceptableContentType { get; set; } = [];
 
 }
+
+public enum FileTypeEnum
+{
+	Avatar = 1
+}

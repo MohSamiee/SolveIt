@@ -138,9 +138,3 @@ public class FileValidation
 	}
 	#endregion Privates
 }
-
-public enum FileTypeEnum
-{
-	Avatar = 0,
-	ProductImage = 1
-}

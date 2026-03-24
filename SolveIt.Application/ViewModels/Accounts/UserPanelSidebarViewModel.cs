@@ -9,4 +9,5 @@ public class UserPanelSidebarViewModel
 	public string ShowName { get; set; } = "";
 	public string AvatarPath { get; set; } = "";
 	public DateTime RegisterDate { get; set; }
+	public List<string> AcceptableAvatarExtensions { get; set; }
 }

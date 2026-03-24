@@ -13,5 +13,6 @@ public static class RegisterOther
 		}, typeof(UserMappingProfile).Assembly);
 		services.AddScoped<LoginService>();
 		services.AddHttpContextAccessor();
+		services.AddTransient(typeof(AvatarExtensionsResolver<>));
 	}
 }

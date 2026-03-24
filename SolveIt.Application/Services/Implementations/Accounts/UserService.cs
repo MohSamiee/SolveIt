@@ -7,16 +7,22 @@ public class UserService : IUserService
 	#region Constructor
 	private readonly IUserRepository _userRepository;
 	private readonly SiteSetting _siteSettings;
+	private readonly FileSetting _avatarSetting;
+
 	public IMapper _mapper { get; }
 	public UserService(
 		IUserRepository userRepository,
 		IMapper mapper,
-		IOptions<SiteSetting> siteSettings
+		IOptions<SiteSetting> siteSettings,
+		IOptionsSnapshot<FileSetting> fileSettingOptions
+
 		)
 	{
 		_userRepository = userRepository;
 		_mapper = mapper;
 		_siteSettings = siteSettings.Value;
+		_avatarSetting = fileSettingOptions.Get(FileTypeEnum.Avatar.ToString());
+
 	}
 
 	#endregion Constructor
@@ -657,7 +663,7 @@ public class UserService : IUserService
 				);
 
 		var res = _mapper.Map<UserPanelSidebarViewModel>(user);
-
+		res.AcceptableAvatarExtensions = _avatarSetting.AcceptableExtensions;
 		return new OperationResult<UserPanelSidebarViewModel>(
 			true,
 			res,
