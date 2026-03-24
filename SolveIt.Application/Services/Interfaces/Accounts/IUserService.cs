@@ -11,4 +11,7 @@ public interface IUserService
 	Task<OperationResult<EmailForgotPasswordResponseViewModel>> ValidateForgotPasswordEmail(string emailCode);
 	Task<OperationResult<ResetPasswordViewModel>> ResetPasswordGetData(string emailOrMobile, bool isForgotPassword);
 	Task<OperationResult<bool>> ResetPassword(ResetPasswordViewModel reset);
+
+
+	Task<OperationResult<UserPanelSidebarViewModel>> GetUserForSidebarPanel(long userId);
 }

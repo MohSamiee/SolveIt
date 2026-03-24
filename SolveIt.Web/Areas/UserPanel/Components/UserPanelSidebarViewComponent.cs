@@ -1,11 +1,22 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace SolveIt.Web.Areas.UserPanel.Components;
 public class UserPanelSidebarViewComponent : ViewComponent
 {
+	#region Constructor
+	private readonly IUserService _userService;
+	private readonly LoginService _loginService;
+
+	public UserPanelSidebarViewComponent(IUserService userService, LoginService loginService)
+	{
+		_userService = userService;
+		_loginService = loginService;
+	}
+	#endregion Constructor
 	public async Task<IViewComponentResult> InvokeAsync()
 	{
-		return View();
+		var userInfo = _loginService.GetCurrentUserInfo();
+		var res = await _userService.GetUserForSidebarPanel(userInfo!.UserId);
+		return View(res.Data);
 	}
 }

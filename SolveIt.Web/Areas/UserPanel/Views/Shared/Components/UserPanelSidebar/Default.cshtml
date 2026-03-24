@@ -1,6 +1,6 @@
-﻿@{
-    var user = User;
-    UserInfo userInfo = LoginService.GetCurrentUserInfo(User);
+﻿
+@model UserPanelSidebarViewModel
+@{
 }
 
 <div class="right-side">
@@ -8,12 +8,12 @@
     <div class="quick-access layer-style">
         <div class="img-layer">
             <a href="javascript:void(0)" class="change-image"><i class="icon-pencil-edit"></i></a>
-            <img src="/images/pic/avatar.jpg">
+            <img src="@PathTools.AvatarPath@Model.AvatarPath">
         </div>
         <!-- you can use "gold" , "silver , "bronze" for medals -->
         <div class="detail gold">
-            <h3> <i class="icon-quality"></i> @userInfo.Name </h3>
-            <span> عضویت : 01/01/1395 </span>
+            <h3> <i class="icon-quality"></i> @Model.ShowName </h3>
+            <span> عضویت : @Model.RegisterDate.ToPersianDate() </span>
             <span> کاربری طلایی با 1563 امتیاز </span>
         </div>
         <ul>

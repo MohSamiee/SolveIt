@@ -643,4 +643,29 @@ public class UserService : IUserService
 	}
 
 	#endregion Forgot Password
+
+	#region User Panel
+	public async Task<OperationResult<UserPanelSidebarViewModel>> GetUserForSidebarPanel(long userId)
+	{
+		var user = _userRepository.GetById(userId);
+		if (user == null)
+			return new OperationResult<UserPanelSidebarViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.NotFound
+				);
+
+		var res = _mapper.Map<UserPanelSidebarViewModel>(user);
+
+		return new OperationResult<UserPanelSidebarViewModel>(
+			true,
+			res,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
+	}
+
+
+	#endregion User Panel
 }

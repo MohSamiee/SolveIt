@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SolveIt.Application.Extensions;
 
 namespace SolveIt.Data.Mapping;
 public class UserMappingProfile : Profile
@@ -23,5 +24,19 @@ public class UserMappingProfile : Profile
 			});
 		#endregion RegisterViewModel
 
+		#region User Pnael
+		CreateMap<User, UserPanelSidebarViewModel>()
+			.AfterMap((src, dest) =>
+			{
+				dest.RegisterDate = src.CreatedDate;
+				dest.AvatarPath = src.AvatarAddress;
+				dest.ShowName = src.GetShowingName();
+				dest.FirstName = src.FirstName;
+				dest.LastName = src.LastName;
+				dest.FullName = src.GetFullName();
+				dest.Email = src.Email;
+				dest.Mobile = src.Mobile;
+	});
+		#endregion User Pnael
 	}
 }

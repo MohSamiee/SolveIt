@@ -1,5 +1,8 @@
-﻿@section Breadcrumb{
-    <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @PropertyDictionary.Dashboard </span></a></li>
+﻿@{
+    ViewData["Title"] = PropertyDictionary.Dashboard;
+}
+@section Breadcrumb{
+    <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @ViewData["Title"] </span></a></li>
 
 }
 
