@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using SolveIt.Application.Statics;
-
 
 namespace SolveIt.Data.Mapping;
 public class UserMappingProfile : Profile

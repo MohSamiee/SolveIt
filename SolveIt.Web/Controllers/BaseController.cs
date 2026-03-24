@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace SolveIt.Web.Controllers;
-public class BaseController : Controller{
+public class BaseController : Controller
+{
 	public static string SuccessMessage = "SuccessMessage";
 	public static string WarningMessage = "WarningMessage";
 	public static string InfoMessage = "InfoMessage";
@@ -11,4 +12,4 @@ public class BaseController : Controller{
 }
 
 [Authorize]
-public class BaseAhtorizeController : BaseController{}
+public class BaseAhtorizeController : BaseController { }

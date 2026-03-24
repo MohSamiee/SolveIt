@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Elfie.Model;
-using Microsoft.IdentityModel.Tokens.Experimental;
-using SolveIt.Common.OperationResult;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-
 
 namespace SolveIt.Web.Controllers;
 public class AccountController : BaseController
@@ -134,6 +129,7 @@ public class AccountController : BaseController
 	}
 
 	[HttpGet]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> MobileRegisterVerification()
 	{
 		try
@@ -149,6 +145,8 @@ public class AccountController : BaseController
 	}
 
 	[HttpPost]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> MobileRegisterVerification(RegisterMobileVerficationViewModel vm)
 	{
 		var result = await _userService.ActivateMobile(vm);
@@ -164,6 +162,8 @@ public class AccountController : BaseController
 	}
 
 	[HttpGet]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ReSendMobileActivationCode(string mobile)
 	{
 		var result = await _userService.ReSendMobileActivationCode(mobile);
@@ -181,6 +181,8 @@ public class AccountController : BaseController
 
 	#region Forgot Password
 	[HttpGet("Forgot-Password")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ForgotPassword()
 	{
 		return View();
@@ -188,6 +190,8 @@ public class AccountController : BaseController
 
 
 	[HttpPost("Forgot-Password")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel vm)
 	{
 		if (!ModelState.IsValid)
@@ -204,7 +208,7 @@ public class AccountController : BaseController
 		this.SetOperationMessage(result);
 		if (result.IsSuccess)
 		{
-			if(result.Data!.ResponseType==ForgotPasswordResponseEnum.Email)
+			if (result.Data!.ResponseType == ForgotPasswordResponseEnum.Email)
 				return RedirectToAction("Login", "Account");
 			if (result.Data!.ResponseType == ForgotPasswordResponseEnum.Mobile)
 			{
@@ -219,6 +223,8 @@ public class AccountController : BaseController
 
 
 	[HttpGet("Forgot-Password-mobile")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> MobileForgotPasswordVerification()
 	{
 		try
@@ -234,6 +240,8 @@ public class AccountController : BaseController
 	}
 
 	[HttpPost("Forgot-Password-mobile")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> MobileForgotPasswordVerification(MobileForgotPasswordResponseViewModel vm)
 	{
 		var result = await _userService.ValidateForgotPasswordMobile(vm);
@@ -252,7 +260,7 @@ public class AccountController : BaseController
 				return View(vm);
 			else
 			{
-		
+
 				TempData["model"] = JsonSerializer.Serialize(result.Data);
 
 				return RedirectToAction("MobileForgotPasswordVerification", "Account");
@@ -267,6 +275,8 @@ public class AccountController : BaseController
 
 
 	[HttpGet("Forgot-Password-Email/{id}")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> EmailForgotPasswordVerification(string id)
 	{
 		var result = await _userService.ValidateForgotPasswordEmail(id);
@@ -295,6 +305,9 @@ public class AccountController : BaseController
 		});
 	}
 
+	[HttpGet]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ReSendMobileVerificationCode(string mobile)
 	{
 		var result = await _userService.ReSendMobileActivationCode(mobile);
@@ -310,6 +323,8 @@ public class AccountController : BaseController
 	}
 
 	[HttpGet("reset-password")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ResetPassword(string emailOrMobile, bool isForgotPassword)
 	{
 		var result = await _userService.ResetPasswordGetData(emailOrMobile, isForgotPassword);
@@ -330,6 +345,8 @@ public class AccountController : BaseController
 
 
 	[HttpPost("reset-password")]
+	[AutoValidateAntiforgeryToken]
+	[RedirectHomeIfUserLoggedInActionFiltrer]
 	public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
 	{
 		if (!ModelState.IsValid)

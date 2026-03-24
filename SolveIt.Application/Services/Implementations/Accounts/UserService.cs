@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
-using SolveIt.Entities.Models.Users;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -634,7 +633,7 @@ public class UserService : IUserService
 					);
 		}
 		user.HashedPassword = reset.NewPassword.Hash();
-		await _userRepository.UpdateAsync(user,true);
+		await _userRepository.UpdateAsync(user, true);
 		return new OperationResult<bool>(
 			true,
 			true,

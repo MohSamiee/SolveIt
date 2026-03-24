@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SolveIt.Domain.Entities.Common;
-using SolveIt.Domain.Interfaces.Accounts;
 using System.Linq.Expressions;
 
 namespace SolveIt.DataLayer.Repositories.Common;

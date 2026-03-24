@@ -114,10 +114,10 @@ public class FileValidation
 
 
 			return new OperationResult<bool>(
-				false, 
-				false, 
+				false,
+				false,
 				PropertyDictionary.GnSomethingWenWrong,
-				StatusResultEnum.AnyOtherError, 
+				StatusResultEnum.AnyOtherError,
 				new List<ModelStateError>()
 				{
 					new(){ModelStateField="",ModelStateErrorMessage = PropertyDictionary.FileFormatAllowedAsBelow}
@@ -126,10 +126,10 @@ public class FileValidation
 		catch
 		{
 			return new OperationResult<bool>(
-				false, 
-				false, 
-				PropertyDictionary.GnSomethingWenWrong, 
-				StatusResultEnum.AnyOtherError, 
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
 				new List<ModelStateError>()
 				{
 					new(){ModelStateField="",ModelStateErrorMessage = PropertyDictionary.FileFormatAllowedAsBelow}

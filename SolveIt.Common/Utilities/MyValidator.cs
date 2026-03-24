@@ -1,6 +1,4 @@
-﻿
-using System.Net.Mail;
-using System.Runtime.CompilerServices;
+﻿using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace SolveIt.Common.Utilities;

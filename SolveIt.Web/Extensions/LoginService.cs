@@ -65,11 +65,11 @@ public class LoginService
 	}
 
 	#endregion Cookie Login
-	public  bool IsUserAuthenticated()
+	public bool IsUserAuthenticated()
 	{
 		var status = false;
 		if (_httpContextAccessor.HttpContext != null)
-			if(_httpContextAccessor.HttpContext.User.Identity != null)
+			if (_httpContextAccessor.HttpContext.User.Identity != null)
 				status = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
 		return status;
 	}
@@ -77,8 +77,8 @@ public class LoginService
 	public static bool IsUserAuthenticated(ClaimsPrincipal user)
 	{
 		var status = false;
-			if (user.Identity != null)
-				status = user.Identity.IsAuthenticated;
+		if (user.Identity != null)
+			status = user.Identity.IsAuthenticated;
 		return status;
 	}
 
@@ -113,7 +113,7 @@ public class LoginService
 
 	private List<Claim> SetClaims(User user)
 	{
-		var claims = new List<Claim>() 
+		var claims = new List<Claim>()
 		{
 			new Claim(ClaimTypes.Name,($"{user.FirstName} {user.LastName}")??""),
 			new Claim(ClaimTypes.Email, value: user.Email?? string.Empty),

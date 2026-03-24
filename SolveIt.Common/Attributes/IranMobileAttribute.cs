@@ -1,5 +1,4 @@
-﻿using SolveIt.Common.Utilities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace SolveIt.Common.Attributes;

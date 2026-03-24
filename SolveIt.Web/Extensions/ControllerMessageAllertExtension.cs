@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SolveIt.Common.OperationResult;
 using SolveIt.Web.Controllers;
 
 public static class ControllerMessageAllertExtension
@@ -20,6 +19,6 @@ public static class ControllerMessageAllertExtension
 			controller.TempData[BaseController.ErrorMessage] = null;
 
 		else if (result.Status == StatusResultEnum.AnyOtherError && result.ModelStateErrors != null)
-			controller.TempData[BaseController.ErrorMessage] = string.Join(Environment.NewLine, result.ModelStateErrors.Select(a=>a.ModelStateErrorMessage).ToList());
+			controller.TempData[BaseController.ErrorMessage] = string.Join(Environment.NewLine, result.ModelStateErrors.Select(a => a.ModelStateErrorMessage).ToList());
 	}
 }
