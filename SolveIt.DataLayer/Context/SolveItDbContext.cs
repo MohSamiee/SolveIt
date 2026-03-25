@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SolveIt.DataLayer.SeedData;
 
 namespace SolveIt.DataLayer.Context;
 public class SolveItDbContext : DbContext
@@ -21,5 +22,7 @@ public class SolveItDbContext : DbContext
 		base.OnModelCreating(modelBuilder);
 
 		modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+		DbSeeder.Seed(modelBuilder);
+
 	}
 }
