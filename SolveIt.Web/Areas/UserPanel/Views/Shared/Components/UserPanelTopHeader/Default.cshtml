@@ -1,13 +1,28 @@
 ﻿@model UserPanelTopHeaderViewModel
-
+@{
+    var countrySection = string.IsNullOrWhiteSpace(Model.CountryTitle) ? "" : "از " + Model.CountryTitle;
+}
 <div class="account-heading layer-style">
     <span class="info">
-        <i class="icon-user-shape"></i>
-        @Model.JobTitle در
-        <i class="icon-briefcase"></i>
-        @Model.CompanyName از
-        <i class="icon-maps-and-flags"></i>
-        @Model.CountryTitle
+
+
+        @if (!string.IsNullOrWhiteSpace(Model.JobTitle))
+        {
+            <i class="icon-user-shape"></i>
+            @Model.JobTitle
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
+        {
+            <i class="icon-briefcase"></i>
+            @Model.CompanyName
+        }
+
+        @if (!string.IsNullOrWhiteSpace(Model.CountryTitle))
+        {
+            <i class="icon-maps-and-flags"></i>
+            @Model.CountryTitle
+        }
     </span>
     <span class="view">
         @Model.VisitCount بازدید از پروفایل

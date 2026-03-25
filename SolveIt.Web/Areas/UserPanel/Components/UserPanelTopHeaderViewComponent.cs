@@ -7,7 +7,7 @@ public class UserPanelTopHeaderViewComponent  : ViewComponent
 	private readonly IUserService _userService;
 	private readonly LoginService _loginService;
 
-	public UserPanelSidebarViewComponent(IUserService userService, LoginService loginService)
+	public UserPanelTopHeaderViewComponent(IUserService userService, LoginService loginService)
 	{
 		_userService = userService;
 		_loginService = loginService;
