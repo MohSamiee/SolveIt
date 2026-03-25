@@ -1,29 +1,38 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using SolveIt.Application.ViewModels.UserPanel.Accounts;
+using SolveIt.Domain.Interfaces.Locations;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
 {
 	#region Constructor
 	private readonly IUserRepository _userRepository;
+	private readonly IStateRepository _stateRepository;
+
 	private readonly SiteSetting _siteSettings;
 	private readonly FileSetting _avatarSetting;
 
-	public IMapper _mapper { get; }
+	private readonly IMapper _mapper;
+
 	public UserService(
 		IUserRepository userRepository,
-		IMapper mapper,
-		IOptions<SiteSetting> siteSettings,
-		IOptionsSnapshot<FileSetting> fileSettingOptions
+		IStateRepository stateRepository,
 
+		IOptions<SiteSetting> siteSettings,
+		IOptionsSnapshot<FileSetting> fileSettingOptions,
+
+		IMapper mapper
 		)
 	{
 		_userRepository = userRepository;
-		_mapper = mapper;
+		_stateRepository = stateRepository;
+
 		_siteSettings = siteSettings.Value;
 		_avatarSetting = fileSettingOptions.Get(FileTypeEnum.Avatar.ToString());
 
+		_mapper = mapper;
 	}
 
 	#endregion Constructor
@@ -699,7 +708,7 @@ public class UserService : IUserService
 			avatar,
 			PathTools.AvatarServerPath,
 			isDefaultAvatar ? "" : user.AvatarAddress);
-	
+
 		if (!savingResult.IsSuccess)
 			return new OperationResult<bool>(
 				false,
@@ -709,10 +718,56 @@ public class UserService : IUserService
 				savingResult.ModelStateErrors!
 				);
 		user.AvatarAddress = savingResult.Data!;
-		
+
 		await _userRepository.UpdateAsync(user, true);
 
 		return new OperationResult<bool>(true, true, PropertyDictionary.GnOperationSuccessfulltDone, StatusResultEnum.Success);
+	}
+
+	public async Task<OperationResult<UserPanelUserDataViewModel>> GetUserData(long userId)
+	{
+		var user = _userRepository.GetById(userId);
+		if (user == null)
+			return new OperationResult<UserPanelUserDataViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+
+		var result = _mapper.Map<UserPanelUserDataViewModel>(user);
+		return new OperationResult<UserPanelUserDataViewModel>(
+			true,
+			result,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
+	}
+
+	public async Task<OperationResult<UserPanelTopHeaderViewModel>> GetUserDataTopHeader(long userId)
+	{
+		var user = _userRepository.GetById(userId);
+		if (user == null)
+			return new OperationResult<UserPanelTopHeaderViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+
+		var result = new UserPanelTopHeaderViewModel()
+		{
+			CompanyName = "",
+			CountryTitle = _stateRepository.GetById(user.CountryId ?? 0L)?.Title ?? "",
+			JobTitle = "",
+			VisitCount = 0
+		};
+		return new OperationResult<UserPanelTopHeaderViewModel>(
+			true,
+			result,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success
+			);
 	}
 	#endregion User Panel
 }

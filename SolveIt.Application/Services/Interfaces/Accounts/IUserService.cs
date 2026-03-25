@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SolveIt.Application.ViewModels.UserPanel.Accounts;
 
 namespace SolveIt.Application.Services.Interfaces.Accounts;
 public interface IUserService
@@ -17,4 +18,7 @@ public interface IUserService
 
 	Task<OperationResult<UserPanelSidebarViewModel>> GetUserForSidebarPanel(long userId);
 	Task<OperationResult<bool>> ChangeUserAvatar(long userId, IFormFile avatar);
+	Task<OperationResult<UserPanelUserDataViewModel>> GetUserData(long userId);
+	Task<OperationResult<UserPanelTopHeaderViewModel>> GetUserDataTopHeader(long userId);
+
 }

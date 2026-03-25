@@ -1,4 +1,4 @@
-﻿namespace SolveIt.Application.ViewModels.Accounts;
+﻿namespace SolveIt.Application.ViewModels.UserPanel.Accounts;
 public class UserPanelSidebarViewModel
 {
 	public string? FirstName { get; set; }

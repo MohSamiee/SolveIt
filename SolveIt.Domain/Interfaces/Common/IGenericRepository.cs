@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace SolveIt.Domain.Interfaces.Accounts;
+namespace SolveIt.Domain.Interfaces.Common;
 public interface IGenericRepository<TEntity> where TEntity : class, IEntity
 {
 	#region Create

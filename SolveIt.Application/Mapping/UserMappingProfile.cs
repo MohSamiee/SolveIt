@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SolveIt.Application.Extensions;
+using SolveIt.Application.ViewModels.UserPanel.Accounts;
 
 namespace SolveIt.Data.Mapping;
 public class UserMappingProfile : Profile
@@ -24,7 +25,7 @@ public class UserMappingProfile : Profile
 			});
 		#endregion RegisterViewModel
 
-		#region User Pnael
+		#region User Panel Sidebar
 		CreateMap<User, UserPanelSidebarViewModel>()
 			.ForMember(d => d.AcceptableAvatarExtensions, o => o.MapFrom<AvatarExtensionsResolver<UserPanelSidebarViewModel>>())
 			.ForMember(d => d.AvatarPath, o => o.MapFrom(src => src.AvatarAddress))
@@ -35,6 +36,27 @@ public class UserMappingProfile : Profile
 			.ForMember(d => d.Email, o => o.MapFrom(src => src.Email))
 			.ForMember(d => d.RegisterDate, o => o.MapFrom(src => src.CreatedDate))
 			.ForMember(d => d.Mobile, o => o.MapFrom(src => src.Mobile));
-		#endregion User Pnael
+		#endregion User Panel Sidebar
+
+		#region User Panel Data
+		CreateMap<User, UserPanelUserDataViewModel>()
+			.AfterMap((src, dest) =>
+			{
+				dest.Id = src.Id;
+				dest.FirstName = src.FirstName;
+				dest.LastName = src.LastName;
+				dest.FullName = src.GetFullName();
+				dest.ShowName = src.GetShowingName();
+				dest.BirthDate = src.BirthDate;
+				dest.Email = src.Email;
+				dest.Mobile = src.Mobile;
+				dest.CityId = src.CityId;
+				dest.CountryId = src.CountryId;
+				dest.AboutMe = "";
+				dest.JobTitle = "";
+				dest.Company = "";
+			});
+		#endregion User Panel Data
+
 	}
 }

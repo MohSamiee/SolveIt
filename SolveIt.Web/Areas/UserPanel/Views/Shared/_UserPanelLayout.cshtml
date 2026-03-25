@@ -38,7 +38,7 @@
             @await Component.InvokeAsync("UserPanelSidebar")
             <div class="left-side">
 
-                <partial name="_UserTopHeaderInfo" />
+                @await Component.InvokeAsync("UserPanelTopHeader")
 
                 @RenderBody()
             </div>
