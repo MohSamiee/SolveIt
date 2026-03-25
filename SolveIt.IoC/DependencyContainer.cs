@@ -7,11 +7,12 @@ public static class DependencyContainer
 	{
 		services.AddScoped<IUserService, UserService>();
 		services.AddScoped<ISmsService, SmsIrService>();
-
 	}
 
 	public static void RegisterRepositories(this IServiceCollection services)
 	{
 		services.AddScoped<IUserRepository, UserRepository>();
+		services.AddScoped<IStateRepository, StateRepository>();
+
 	}
 }
