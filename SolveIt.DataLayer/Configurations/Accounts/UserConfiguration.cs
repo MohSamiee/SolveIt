@@ -26,5 +26,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 		builder.Property(p => p.AccessFailedCount).HasDefaultValue(0);
 		builder.Property(p => p.LastLoginTime).IsRequired(false);
 		builder.Property(p => p.IsAdmin).HasDefaultValue(false);
+		builder.Property(p => p.AboutMe).IsRequired(false).HasMaxLength(2000);
+		builder.Property(p => p.GetNewLetter).IsRequired(true).HasDefaultValue(false);
+		builder.Property(p => p.JobTitle).IsRequired(false).HasMaxLength(200);
+		builder.Property(p => p.Company).IsRequired(false).HasMaxLength(200);
+
 	}
 }

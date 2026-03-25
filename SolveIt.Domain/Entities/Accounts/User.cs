@@ -26,6 +26,11 @@ public class User : BaseEntity
 	public long? CountryId { get; set; }
 	public long? CityId { get; set; }
 	public DateTime? BirthDate { get; set; }
+	public string? AboutMe { get; set; }
+	public bool GetNewLetter { get; set; }
+	public string? JobTitle { get; set; }
+	public string? Company { get; set; }
+
 	public int AccessFailedCount { get; set; }
 	public DateTime? LastLoginTime { get; set; }
 
