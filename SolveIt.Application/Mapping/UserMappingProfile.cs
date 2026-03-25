@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SolveIt.Application.Extensions;
 using SolveIt.Application.ViewModels.UserPanel.Accounts;
+using SolveIt.Common.Converter;
 
 namespace SolveIt.Data.Mapping;
 public class UserMappingProfile : Profile
@@ -42,19 +43,18 @@ public class UserMappingProfile : Profile
 		CreateMap<User, UserPanelUserDataViewModel>()
 			.AfterMap((src, dest) =>
 			{
-				dest.Id = src.Id;
 				dest.FirstName = src.FirstName;
 				dest.LastName = src.LastName;
 				dest.FullName = src.GetFullName();
 				dest.ShowName = src.GetShowingName();
-				dest.BirthDate = src.BirthDate;
+				dest.BirthDate = src.BirthDate?.ToPersianDate();
 				dest.Email = src.Email;
 				dest.Mobile = src.Mobile;
 				dest.CityId = src.CityId;
 				dest.CountryId = src.CountryId;
-				dest.AboutMe = "";
-				dest.JobTitle = "";
-				dest.Company = "";
+				dest.AboutMe = src.AboutMe;
+				dest.JobTitle = src.JobTitle;
+				dest.Company = src.Company;
 			});
 		#endregion User Panel Data
 

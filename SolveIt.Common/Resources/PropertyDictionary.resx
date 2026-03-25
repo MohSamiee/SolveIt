@@ -117,14 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMe" xml:space="preserve">
+    <value>درباره من</value>
+  </data>
   <data name="Authorize" xml:space="preserve">
     <value>احراز هویت</value>
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>آواتار</value>
   </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>تغییر کلمه عبور</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="CityNotFound" xml:space="preserve">
+    <value>شهر پیدا نشد</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>شرکت</value>
   </data>
   <data name="ComparePasswordErrorMessage" xml:space="preserve">
     <value>کلمات عبور  یکسان نیست</value>
@@ -132,8 +147,17 @@
   <data name="ContactAdmin" xml:space="preserve">
     <value>خطایی رخ داده است. لطفا با ادمین تماس برقرار کنید</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>کشور</value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>کشور پیدا نشد</value>
+  </data>
   <data name="Dashboard" xml:space="preserve">
     <value>داشبورد</value>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>ویرایش پروفایل</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>ایمیل</value>
@@ -156,8 +180,17 @@
   <data name="FileIsEmpty" xml:space="preserve">
     <value>فایلی انتخاب نشده است</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>فراموشی کلمه عبور</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام و نام خانوادگی</value>
+  </data>
+  <data name="GetNewsLetter" xml:space="preserve">
+    <value>دریافت خبرنامه</value>
   </data>
   <data name="GnAlert" xml:space="preserve">
     <value>اعلان</value>
@@ -198,8 +231,14 @@
   <data name="InputEmailOrMobileFormatIsWrong" xml:space="preserve">
     <value>تنها فرمت ایمیل و موبایل قابل قبول است.</value>
   </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>عنوان شغلی</value>
+  </data>
   <data name="LandingPage" xml:space="preserve">
     <value>صفحه اصلی</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>ورود</value>

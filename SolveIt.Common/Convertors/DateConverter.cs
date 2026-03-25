@@ -24,16 +24,18 @@ public static class DateConverter
 		return longTime;
 	}
 
-	public static DateTime? ToMildatiDate(this string value, char dateDelimeter = '/')
+	public static DateTime? ToMildatiDate(this string? value, char dateDelimeter = '/')
 	{
+		if (string.IsNullOrEmpty(value))
+			return null;
+
 		var gregorianDate = new DateTime();
 		var persianCalendar = new PersianCalendar();
 		var Gregoriancal = new GregorianCalendar();
 		var dateParts = value.Split(dateDelimeter).ToArray();
 
 
-		if (string.IsNullOrEmpty(value))
-			return null;
+	
 
 		var year = dateParts[0];
 		var month = dateParts[1];

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using SolveIt.Application.ViewModels.UserPanel.Accounts;
 
 namespace SolveIt.Application.Services.Interfaces.Accounts;
@@ -20,5 +21,6 @@ public interface IUserService
 	Task<OperationResult<bool>> ChangeUserAvatar(long userId, IFormFile avatar);
 	Task<OperationResult<UserPanelUserDataViewModel>> GetUserData(long userId);
 	Task<OperationResult<UserPanelTopHeaderViewModel>> GetUserDataTopHeader(long userId);
+	Task<OperationResult<UserPanelUserDataViewModel>> UpdateUserProfile(long userId, UserPanelUserDataViewModel profile);
 
 }

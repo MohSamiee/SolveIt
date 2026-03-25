@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Options;
+using Microsoft.Win32;
 using SolveIt.Application.ViewModels.UserPanel.Accounts;
+using SolveIt.Common.Converter;
 using SolveIt.Domain.Interfaces.Locations;
+using System.Runtime.InteropServices;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -757,9 +761,9 @@ public class UserService : IUserService
 
 		var result = new UserPanelTopHeaderViewModel()
 		{
-			CompanyName = "",
+			CompanyName = user.Company,
 			CountryTitle = _stateRepository.GetById(user.CountryId ?? 0L)?.Title ?? "",
-			JobTitle = "",
+			JobTitle = user.JobTitle,
 			VisitCount = 0
 		};
 		return new OperationResult<UserPanelTopHeaderViewModel>(
@@ -769,5 +773,76 @@ public class UserService : IUserService
 			StatusResultEnum.Success
 			);
 	}
+
+	public async Task<OperationResult<UserPanelUserDataViewModel>> UpdateUserProfile(long userId, UserPanelUserDataViewModel profile)
+	{
+		var validation = await new ModelVerification().ModelValidation(profile);
+		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
+			return new OperationResult<UserPanelUserDataViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				validation.ModelStateErrors);
+
+		var user = _userRepository.GetById(userId);
+
+		if (user == null)
+			return new OperationResult<UserPanelUserDataViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.AnyOtherError,
+				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
+
+		// Check Country
+		if (profile.CountryId != null && !_stateRepository.GetEntity(a => a.Id == profile.CountryId && a.ParentId == null).Any())
+			return new OperationResult<UserPanelUserDataViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError(
+					nameof(profile.CityId),
+					PropertyDictionary.CountryNotFound
+					)
+				);
+
+		// Check City
+		if (profile.CityId != null && !_stateRepository.GetEntity(a => a.Id == profile.CityId && a.ParentId == profile.CountryId).Any())
+			return new OperationResult<UserPanelUserDataViewModel>(
+				false,
+				null!,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError(
+					nameof(profile.CityId),
+					PropertyDictionary.CityNotFound
+					)
+				);
+
+		user.FirstName = profile.FirstName;
+		user.LastName = profile.LastName;
+		user.Company = profile.Company;
+		user.JobTitle = profile.JobTitle;
+		user.BirthDate = profile.BirthDate?.ToMildatiDate();
+		user.CountryId = profile.CountryId;
+		user.CityId = profile.CityId;
+		user.AboutMe = profile.AboutMe;
+		user.GetNewLetter = profile.GetNewsLetter;
+
+		if (string.IsNullOrWhiteSpace(user.Email))
+			user.Email = profile.Email;
+
+		if (string.IsNullOrWhiteSpace(user.Mobile))
+			user.Mobile = profile.Mobile;
+		await _userRepository.UpdateAsync(user, true);
+		return new OperationResult<UserPanelUserDataViewModel>(
+			true,
+			profile,
+			PropertyDictionary.GnOperationSuccessfulltDone,
+			StatusResultEnum.Success);
+	}
+
 	#endregion User Panel
 }

@@ -8,3 +8,4 @@ global using SolveIt.Application.Services.Interfaces.Accounts;
 global using SolveIt.Application.ViewModels.Accounts;
 global using SolveIt.Common.OperationResult;
 global using BestShop.Data.Resolver;
+global using SolveIt.Application.ViewModels.UserPanel.Accounts;

@@ -8,20 +8,28 @@
 
         @if (!string.IsNullOrWhiteSpace(Model.JobTitle))
         {
-            <i class="icon-user-shape"></i>
-            @Model.JobTitle
+            <span>
+                <i class="icon-briefcase"></i>
+                @Model.JobTitle
+            </span>
+
         }
 
         @if (!string.IsNullOrWhiteSpace(Model.CompanyName))
         {
-            <i class="icon-briefcase"></i>
-            @Model.CompanyName
+            <span>
+                <i class="icon-work"></i>
+                @Model.CompanyName
+            </span>
         }
 
         @if (!string.IsNullOrWhiteSpace(Model.CountryTitle))
         {
-            <i class="icon-maps-and-flags"></i>
-            @Model.CountryTitle
+            <span>
+                <i class="icon-maps-and-flags"></i>
+                @Model.CountryTitle
+            </span>
+
         }
     </span>
     <span class="view">
