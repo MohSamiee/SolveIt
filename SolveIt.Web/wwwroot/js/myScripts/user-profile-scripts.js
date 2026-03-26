@@ -1,11 +1,11 @@
-﻿import { Loading } from './loading.js';
+import { Loading } from '../../common/custom/scripts/loading.js';
 
 window.clickOnInput = function (avatarInput) {
     var input = document.getElementById(avatarInput);
     input.click();
 }
 
-window.changeAvatar = async  function (fileInput, actionUrl) {
+window.changeAvatar = async function (fileInput, actionUrl) {
     //Loading.start('#userInfo');
     Loading.start();
 
@@ -26,7 +26,7 @@ window.changeAvatar = async  function (fileInput, actionUrl) {
     });
 
     const result = await response.json();
-
+    debugger;
     if (!result.isSuccess) {
         displayModelStateErrors(result);
         return;
