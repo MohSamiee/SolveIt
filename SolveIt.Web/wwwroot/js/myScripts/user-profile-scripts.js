@@ -1,4 +1,5 @@
 import { Loading } from '../../common/custom/scripts/loading.js';
+import { ApiClient } from '../../common/custom/scripts/api-client.js';
 
 window.clickOnInput = function (avatarInput) {
     var input = document.getElementById(avatarInput);
@@ -76,4 +77,14 @@ function displayModelStateErrors(result) {
         icon: "error",
         button: "باشه"
     });
+}
+
+window.GetCities = async function (el) {
+    var countryId = el.value;
+    if (countryId !== '' && countryId.length) {
+        const result =await ApiClient.get('/UserPanel/Profile/GetCities', { countryId: countryId }, '');
+        console.log(result);
+    } else {
+
+    }
 }

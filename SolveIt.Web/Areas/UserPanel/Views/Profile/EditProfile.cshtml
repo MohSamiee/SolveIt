@@ -154,7 +154,7 @@
                             <i class="icon-maps-and-flags"></i>
                             @Html.DisplayNameFor(a => a.CountryId)
                         </label>
-                        <select asp-for="CountryId">
+                        <select onchange="GetCities(this)" asp-for="CountryId">
                             <option value="">@PropertyDictionary.DoChose</option>
                             @if (Model.Countries != null && Model.Countries.Any())
                             {
