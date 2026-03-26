@@ -29,9 +29,21 @@ public class UserPanelUserDataViewModel
 	[Display(Name = "Email", ResourceType = typeof(PropertyDictionary))]
 	public string? Email { get; set; }
 
+	
+	public bool IsEmailConfirmed { get; set; }
+
+
+	public bool CanEditEmail { get; set; }
+
 
 	[Display(Name = "Mobile", ResourceType = typeof(PropertyDictionary))]
 	public string? Mobile { get; set; }
+
+
+	public bool IsMobileConfirmed { get; set; }
+
+
+	public bool CanEditMobile { get; set; }
 
 
 	[Display(Name = "City", ResourceType = typeof(PropertyDictionary))]

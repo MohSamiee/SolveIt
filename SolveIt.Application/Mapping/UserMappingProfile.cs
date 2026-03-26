@@ -55,6 +55,10 @@ public class UserMappingProfile : Profile
 				dest.AboutMe = src.AboutMe;
 				dest.JobTitle = src.JobTitle;
 				dest.Company = src.Company;
+				dest.IsEmailConfirmed = src.IsEmailConfirmed;
+				dest.IsMobileConfirmed = src.IsMobileConfirmed;
+				dest.CanEditEmail = (string.IsNullOrWhiteSpace(src.Email));
+				dest.CanEditMobile= (string.IsNullOrWhiteSpace(src.Mobile) || !string.IsNullOrWhiteSpace(src.Email));
 			});
 		#endregion User Panel Data
 

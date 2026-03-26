@@ -1,6 +1,7 @@
 ﻿@model UserPanelUserDataViewModel
 @{
     ViewData["Title"] = PropertyDictionary.EditProfile;
+    const string disabled = "disabled";
 }
 @section Breadcrumb {
     <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @ViewData["Title"] </span></a></li>
@@ -8,6 +9,7 @@
 }
 @section Scripts {
     <partial name="_JqueryValidation" />
+    <script src="/common//custom/scripts/mobile-verification-code-modal.js"></script>
 }
 <div class="account-content-layer layer-style">
     <h3> @ViewData["Title"]  </h3>
@@ -71,36 +73,80 @@
                             @Html.DisplayNameFor(a => a.BirthDate)
                             <span asp-validation-for="BirthDate" />
                         </label>
-                        <input asp-for="BirthDate"  @*  id="birthday-date" *@ data-mddatetimepicker="true" data-placement="right">
+                        <input asp-for="BirthDate" data-mddatetimepicker="true" data-placement="right">
                     </div>
                     <!--/ input -->
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <!-- input -->
-                    <div class="input-layer">
-                        <label asp-for="Email">
-                            <i class="icon-mail-envelope"></i>
-                            @Html.DisplayNameFor(a => a.Email)
-                            <span asp-validation-for="Email" />
-                        </label>
-                        <input type="text" asp-for="Email" disabled>
-                    </div>
-                    <!--/ input -->
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <!-- input -->
                     <div class="input-layer">
                         <label asp-for="Mobile">
-                            <i class="icon-smartphone"></i>
+                            <i class="icon-mobile-phone"></i>
                             @Html.DisplayNameFor(a => a.Mobile)
+
+                            @if (Model.IsMobileConfirmed)
+                            {
+                                <span style="color:gray" class="pull-left disabled">
+                                    تایید شده
+                                    <i class="icon-check" style="color:green"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span style="color:gray" class="pull-left disabled">
+                                        ارسال مجدد لینک فعال سازی
+                                </span>
+                            }
                         </label>
-                        <input type="text" asp-for="Mobile" disabled>
-                        <span asp-validation-for="Mobile" />
+
+                        @if (Model.CanEditMobile)
+                        {
+                            <input asp-for="Mobile" type="text">
+
+                        }
+                        else
+                        {
+                            <input asp-for="Mobile" type="text">
+                        }
                     </div>
-                    <!-- /input -->
+                    <span asp-validation-for="Mobile" />
+
                 </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="input-layer">
+                        <label asp-for="Email">
+                            <i class="icon-mail"></i>
+                            @Html.DisplayNameFor(a => a.Email)
+
+                            @if (Model.IsEmailConfirmed)
+                            {
+                                <span style="color:gray" class="pull-left disabled">
+                                    تایید شده
+                                    <i class="icon-check" style="color:green"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span style="color:gray" class="pull-left disabled">
+                                    ارسال مجدد لینک فعال سازی
+                                </span>
+                            }
+                        </label>
+                        @if (Model.CanEditEmail)
+                        {
+                            <input asp-for="Email" type="text">
+                        }
+                        else
+                        {
+                            <input asp-for="Email" type="text" disabled>
+                        }
+                    </div>
+                    <span asp-validation-for="Email" />
+
+                </div>
+
+
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <!-- select -->
@@ -145,7 +191,7 @@
                     <!-- /textarea -->
                 </div>
 
-         
+
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
 
