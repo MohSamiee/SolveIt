@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Options;
-using Microsoft.Win32;
-using SolveIt.Application.ViewModels.UserPanel.Accounts;
-using SolveIt.Common.Converter;
-using SolveIt.Domain.Interfaces.Locations;
-using System.Runtime.InteropServices;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -14,6 +8,8 @@ public class UserService : IUserService
 	#region Constructor
 	private readonly IUserRepository _userRepository;
 	private readonly IStateRepository _stateRepository;
+
+	private readonly IStateService _stateService;
 
 	private readonly SiteSetting _siteSettings;
 	private readonly FileSetting _avatarSetting;
@@ -24,6 +20,8 @@ public class UserService : IUserService
 		IUserRepository userRepository,
 		IStateRepository stateRepository,
 
+		IStateService stateService,
+
 		IOptions<SiteSetting> siteSettings,
 		IOptionsSnapshot<FileSetting> fileSettingOptions,
 
@@ -32,6 +30,8 @@ public class UserService : IUserService
 	{
 		_userRepository = userRepository;
 		_stateRepository = stateRepository;
+
+		_stateService = stateService;
 
 		_siteSettings = siteSettings.Value;
 		_avatarSetting = fileSettingOptions.Get(FileTypeEnum.Avatar.ToString());
@@ -740,6 +740,8 @@ public class UserService : IUserService
 				ModelStateError.MakeModelStateError("", PropertyDictionary.GnSomethingWenWrong));
 
 		var result = _mapper.Map<UserPanelUserDataViewModel>(user);
+		result.Countries = (await _stateService.GetCuntries()).Data;
+
 		return new OperationResult<UserPanelUserDataViewModel>(
 			true,
 			result,

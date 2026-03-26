@@ -21,7 +21,7 @@ public class StateRepository : GenericRepository<State>, IStateRepository
 	public async Task<List<State>> GetCities(long? countryId = 0)
 	{
 		var cityQuery = GetEntity();
-		if ((countryId ?? 0) == 0)
+		if ((countryId ?? 0) != 0)
 			cityQuery = cityQuery.Where(a => a.ParentId == countryId);
 		return await cityQuery.ToListAsync();
 	}

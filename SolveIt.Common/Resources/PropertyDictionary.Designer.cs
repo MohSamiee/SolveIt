@@ -178,6 +178,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to انتخاب کنید.
+        /// </summary>
+        public static string DoChose {
+            get {
+                return ResourceManager.GetString("DoChose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ویرایش پروفایل.
         /// </summary>
         public static string EditProfile {

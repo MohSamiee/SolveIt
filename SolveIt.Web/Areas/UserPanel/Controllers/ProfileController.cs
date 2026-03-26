@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SolveIt.Application.Services.Interfaces.Locations;
 
 namespace SolveIt.Web.Areas.UserPanel.Controllers;
 public class ProfileController : UserPanelBaseController
 {
 	#region Constructor
 	private readonly IUserService _userService;
+	private readonly IStateService _stateService;
 	private readonly LoginService _loginService;
-	public ProfileController(IUserService userService, LoginService loginService)
+	public ProfileController(IUserService userService, IStateService stateService, LoginService loginService)
 	{
 		_userService = userService;
 		_loginService = loginService;
+		_stateService = stateService;
 	}
 	#endregion Constructor
 
@@ -34,11 +37,20 @@ public class ProfileController : UserPanelBaseController
 			return View(vm);
 		}
 		var userInfo = _loginService.GetCurrentUserInfo();
-		var result = await _userService.UpdateUserProfile(userInfo!.UserId,vm);
+		var result = await _userService.UpdateUserProfile(userInfo!.UserId, vm);
 		if (!result.IsSuccess)
 			return NotFound();
 
 		return View(vm);
 	}
 	#endregion Edit Profile
+
+	#region Load Cities
+	public async Task<IActionResult> GetCities(long countryId)
+	{
+		var res =await  _stateService.GetCities(countryId);
+		return Json(res);
+	}
+
+	#endregion Load Cities
 }

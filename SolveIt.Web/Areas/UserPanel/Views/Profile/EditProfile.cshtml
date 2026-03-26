@@ -1,7 +1,6 @@
 ﻿@model UserPanelUserDataViewModel
 @{
     ViewData["Title"] = PropertyDictionary.EditProfile;
-    const string disabled = "disabled";
 }
 @section Breadcrumb {
     <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @ViewData["Title"] </span></a></li>
@@ -9,7 +8,7 @@
 }
 @section Scripts {
     <partial name="_JqueryValidation" />
-    <script src="/common//custom/scripts/mobile-verification-code-modal.js"></script>
+    
 }
 <div class="account-content-layer layer-style">
     <h3> @ViewData["Title"]  </h3>
@@ -94,7 +93,7 @@
                             else
                             {
                                 <span style="color:gray" class="pull-left disabled">
-                                        ارسال مجدد لینک فعال سازی
+                                    ارسال مجدد لینک فعال سازی
                                 </span>
                             }
                         </label>
@@ -156,6 +155,14 @@
                             @Html.DisplayNameFor(a => a.CountryId)
                         </label>
                         <select asp-for="CountryId">
+                            <option value="">@PropertyDictionary.DoChose</option>
+                            @if (Model.Countries != null && Model.Countries.Any())
+                            {
+                                foreach (var country in Model.Countries)
+                                {
+                                    <option value="@country.Id">@country.Title</option>
+                                }
+                            }
                         </select>
                         <span asp-validation-for="CountryId" />
 

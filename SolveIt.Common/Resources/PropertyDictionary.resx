@@ -156,6 +156,9 @@
   <data name="Dashboard" xml:space="preserve">
     <value>داشبورد</value>
   </data>
+  <data name="DoChose" xml:space="preserve">
+    <value>انتخاب کنید</value>
+  </data>
   <data name="EditProfile" xml:space="preserve">
     <value>ویرایش پروفایل</value>
   </data>

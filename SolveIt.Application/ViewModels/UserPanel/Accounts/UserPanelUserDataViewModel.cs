@@ -70,4 +70,6 @@ public class UserPanelUserDataViewModel
 
 	[Display(Name = "GetNewsLetter", ResourceType = typeof(PropertyDictionary))]
 	public bool GetNewsLetter { get; set; }
+
+	public List<SelectListViewModel>? Countries { get; set; } = new List<SelectListViewModel>();
 }

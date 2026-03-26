@@ -13,4 +13,7 @@ global using SolveIt.Common.ViewModels.Options;
 global using SolveIt.Application.Statics;
 global using BestShop.Data.Resolver;
 global using SolveIt.Application.ViewModels.Common;
-
+global using SolveIt.Application.Services.Interfaces.Locations;
+global using SolveIt.Application.ViewModels.UserPanel.Accounts;
+global using SolveIt.Common.Converter;
+global using SolveIt.Domain.Interfaces.Locations;
