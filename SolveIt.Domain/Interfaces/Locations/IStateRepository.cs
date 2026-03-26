@@ -8,7 +8,7 @@ public interface IStateRepository : IGenericRepository<State>
 	#endregion
 
 	#region Cities
-	Task<List<State>> GetCities(long? countryId);
+	Task<List<State>> GetCities(long? countryId = 0);
 	#endregion Cities
 
 }

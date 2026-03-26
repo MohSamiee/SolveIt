@@ -12,5 +12,5 @@ global using SolveIt.Common.Utilities;
 global using SolveIt.Common.ViewModels.Options;
 global using SolveIt.Application.Statics;
 global using BestShop.Data.Resolver;
-
+global using SolveIt.Application.ViewModels.Common;
 

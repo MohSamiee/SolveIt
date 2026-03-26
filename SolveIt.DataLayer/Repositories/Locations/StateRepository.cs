@@ -18,7 +18,7 @@ public class StateRepository : GenericRepository<State>, IStateRepository
 	#endregion Countries
 
 	#region Cities
-	public async Task<List<State>> GetCities(long? countryId)
+	public async Task<List<State>> GetCities(long? countryId = 0)
 	{
 		var cityQuery = GetEntity();
 		if ((countryId ?? 0) == 0)
