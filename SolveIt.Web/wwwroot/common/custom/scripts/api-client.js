@@ -2,6 +2,13 @@
 
 export const ApiClient = {
 
+/**
+ * @template T
+ * @param {string} url
+ * @param {object|null} params
+ * @returns {Promise<OperationResult<T>>}
+ */
+
     async get(url, params = null, selector = 'body') {
 
         Loading.start(selector);

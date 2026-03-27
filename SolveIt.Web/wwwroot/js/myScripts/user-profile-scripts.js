@@ -1,3 +1,4 @@
+/// <reference path="../../common/custom/scripts/types.js" />
 import { Loading } from '../../common/custom/scripts/loading.js';
 import { ApiClient } from '../../common/custom/scripts/api-client.js';
 
@@ -79,12 +80,22 @@ function displayModelStateErrors(result) {
     });
 }
 
+//Get Cities base on country and fill in dropdown
 window.GetCities = async function (el) {
     var countryId = el.value;
     if (countryId !== '' && countryId.length) {
-        const result =await ApiClient.get('/UserPanel/Profile/GetCities', { countryId: countryId }, '');
-        console.log(result);
+        var url = $('#' + el.id).attr("data-url");
+        /** @type {OperationResult<SelectListViewModel[]>} */
+        const result = await ApiClient.get('/UserPanel/Profile/GetCities', { countryId: countryId }, '');
+        $('#CityId option:not(:first)').remove();
+        if (result.data.length) {
+            $('#CityId').prop('disabled', false);
+            result.data.forEach(city => {
+                $('#CityId').append(`<option value="${city.id}">${city.title}</option>`)
+            });
+        }
     } else {
-
+        $('#CityId option:not(:first)').remove();
+        $('#CityId').prop('disabled', true);
     }
 }

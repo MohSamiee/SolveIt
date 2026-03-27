@@ -154,7 +154,9 @@
                             <i class="icon-maps-and-flags"></i>
                             @Html.DisplayNameFor(a => a.CountryId)
                         </label>
-                        <select onchange="GetCities(this)" asp-for="CountryId">
+                        <select onchange="GetCities(this)"
+                                data-url="@Url.Action("GetCities","Profile", new {area = "UserPanel"})"
+                            asp-for="CountryId">
                             <option value="">@PropertyDictionary.DoChose</option>
                             @if (Model.Countries != null && Model.Countries.Any())
                             {
@@ -177,8 +179,10 @@
                             <i class="icon-maps-and-flags"></i>
                             @Html.DisplayNameFor(a => a.CityId)
                         </label>
-                        <select asp-for="CityId">
+                        <select asp-for="CityId" disabled>
+                            <option value="">@PropertyDictionary.DoChose</option>
                         </select>
+
                         <span asp-validation-for="CityId" />
 
                     </div>

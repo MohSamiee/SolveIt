@@ -49,7 +49,7 @@ public class ProfileController : UserPanelBaseController
 	public async Task<IActionResult> GetCities(long countryId)
 	{
 		var res =await  _stateService.GetCities(countryId);
-		return Json(res);
+		return new JsonResult(res);
 	}
 
 	#endregion Load Cities
