@@ -99,3 +99,18 @@ window.GetCities = async function (el) {
         $('#CityId').prop('disabled', true);
     }
 }
+
+kamaDatepicker('BirthDate2', {
+    placeholder: 'مثال 1404/01/01',
+    twodigit: true,
+    closeAfterSelect: true,
+    nextButtonIcon: '',
+    previousButtonIcon: '',
+    buttonsColor: '#007cd4',
+    forceFarsiDigit: true,
+    markToday: true,
+    markHolidays: '',
+    highlighSelectedDay: true,
+    sync: true,
+    gotoToday: true
+});
