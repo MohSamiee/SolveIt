@@ -6,23 +6,27 @@
     <li itemscope="" itemprop="itemListElement"><a href="javascript:void(0)" itemprop="item"><span itemprop="name"> @ViewData["Title"] </span></a></li>
 
 }
-@section Scripts {
+
+@section Styles {
     <partial name="_JqueryValidation" />
-    
 }
+
+@section Scripts {
+}
+
+
 <div class="account-content-layer layer-style">
-    <h3> @ViewData["Title"]  </h3>
+    <h3> @ViewData["Title"] </h3>
     <div class="inner">
         <form class="form-layer-style"
-              asp-action="EditProfile"
-              asp-controller="Profile"
               asp-area="UserPanel"
-              method="post">
-
+              asp-controller="Profile"
+              asp-action="EditProfile">
             <div class="row">
+
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="FirstName">
+                        <label>
                             <i class="icon-user-shape"></i>
                             @Html.DisplayNameFor(a => a.FirstName)
                         </label>
@@ -33,7 +37,7 @@
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="LastName">
+                        <label>
                             <i class="icon-user-shape"></i>
                             @Html.DisplayNameFor(a => a.LastName)
                         </label>
@@ -44,7 +48,7 @@
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="Company">
+                        <label>
                             <i class="icon-work"></i>
                             @Html.DisplayNameFor(a => a.Company)
                         </label>
@@ -55,70 +59,32 @@
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="JobTitle">
+                        <label>
                             <i class="icon-briefcase"></i>
                             @Html.DisplayNameFor(a => a.JobTitle)
-                            <span asp-validation-for="JobTitle" />
                         </label>
                         <input asp-for="JobTitle" type="text">
+                        <span asp-validation-for="JobTitle" />
                     </div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <!-- input -->
-                    <div class="input-layer" data-mddatetimepicker="true" data-trigger="click" data-targetselector="#birthday-date">
-                        <label asp-for="BirthDate">
-                            <i class="icon-calendar"></i>
-                            @Html.DisplayNameFor(a => a.BirthDate)
-                            <span asp-validation-for="BirthDate" />
-                        </label>
-                        <input asp-for="BirthDate" data-mddatetimepicker="true" data-placement="right">
-                    </div>
-                    <!--/ input -->
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="Mobile">
+                        <label>
                             <i class="icon-mobile-phone"></i>
                             @Html.DisplayNameFor(a => a.Mobile)
-
-                            @if (Model.IsMobileConfirmed)
-                            {
-                                <span style="color:gray" class="pull-left disabled">
-                                    تایید شده
-                                    <i class="icon-check" style="color:green"></i>
-                                </span>
-                            }
-                            else
-                            {
-                                <span style="color:gray" class="pull-left disabled">
-                                    ارسال مجدد لینک فعال سازی
-                                </span>
-                            }
                         </label>
-
-                        @if (Model.CanEditMobile)
-                        {
-                            <input asp-for="Mobile" type="text">
-
-                        }
-                        else
-                        {
-                            <input asp-for="Mobile" type="text">
-                        }
+                        <input asp-for="Mobile" type="text">
+                        <span asp-validation-for="Mobile" />
                     </div>
-                    <span asp-validation-for="Mobile" />
-
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="input-layer">
-                        <label asp-for="Email">
+                        <label>
                             <i class="icon-mail"></i>
                             @Html.DisplayNameFor(a => a.Email)
-
-                            @if (Model.IsEmailConfirmed)
+                            @* @if (Model.IsEmailConfirmed)
                             {
                                 <span style="color:gray" class="pull-left disabled">
                                     تایید شده
@@ -130,7 +96,7 @@
                                 <span style="color:gray" class="pull-left disabled">
                                     ارسال مجدد لینک فعال سازی
                                 </span>
-                            }
+                            } *@
                         </label>
                         @if (Model.CanEditEmail)
                         {
@@ -140,23 +106,19 @@
                         {
                             <input asp-for="Email" type="text" disabled>
                         }
+                        <span asp-validation-for="Email" />
                     </div>
-                    <span asp-validation-for="Email" />
-
                 </div>
 
-
-
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <!-- select -->
                     <div class="select-layer">
-                        <label asp-for="CountryId">
+                        <label>
                             <i class="icon-maps-and-flags"></i>
                             @Html.DisplayNameFor(a => a.CountryId)
                         </label>
-                        <select onchange="GetCities(this)"
-                                data-url="@Url.Action("GetCities","Profile", new {area = "UserPanel"})"
-                            asp-for="CountryId">
+                        <select asp-for="CountryId"
+                                onchange="GetCities(this)"
+                                data-url="@Url.Action("GetCities","Profile", new {area = "UserPanel"})">
                             <option value="">@PropertyDictionary.DoChose</option>
                             @if (Model.Countries != null && Model.Countries.Any())
                             {
@@ -167,55 +129,46 @@
                             }
                         </select>
                         <span asp-validation-for="CountryId" />
-
                     </div>
-                    <!-- /select -->
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                    <!-- select -->
                     <div class="select-layer">
-                        <label asp-for="CityId">
+                        <label>
                             <i class="icon-maps-and-flags"></i>
                             @Html.DisplayNameFor(a => a.CityId)
                         </label>
-                        <select asp-for="CityId" disabled>
+                        <select asp-for="CityId">
                             <option value="">@PropertyDictionary.DoChose</option>
                         </select>
-
                         <span asp-validation-for="CityId" />
-
                     </div>
-                    <!-- /select -->
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <!-- textarea -->
                     <div class="textarea-layer">
-                        <label asp-for="AboutMe">
+                        <label>
                             <i class="icon-document"></i>
                             @Html.DisplayNameFor(a => a.AboutMe)
                         </label>
-                        <textarea asp-for="AboutMe"> </textarea>
+                        <textarea asp-for="AboutMe"></textarea>
                         <span asp-validation-for="AboutMe" />
                     </div>
-                    <!-- /textarea -->
                 </div>
 
-
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-
+@*                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="radio-selected">
-                        <span> @Html.DisplayNameFor(a => a.GetNewsLetter) </span>
+                        <span>
+                            @Html.DisplayNameFor(a => a.GetNewsLetter)
+                        </span>
                         <div class="select">
-                            <input asp-for="GetNewsLetter" type="checkbox" value="1" id="suggest-4" name="">
-                            <label for="suggest-4"></label>
+                            <input asp-for="GetNewsLetter" type="checkbox" value="1" id="suggest-1" name="">
+                            <label for="suggest-1"></label>
                         </div>
                     </div>
 
                 </div>
-
+ *@
                 <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
                     <button class="submit-button btn-primary" type="submit">
                         <span>
@@ -223,6 +176,7 @@
                         </span>
                     </button>
                 </div>
+
             </div>
         </form>
     </div>

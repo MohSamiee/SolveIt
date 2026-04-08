@@ -32,14 +32,23 @@ public class ProfileController : UserPanelBaseController
 	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> EditProfile(UserPanelUserDataViewModel vm)
 	{
-		if (!ModelState.IsValid)
-		{
-			return View(vm);
-		}
+	
+		//if (!ModelState.IsValid)
+		//{
+		//	return View(vm);
+		//}
 		var userInfo = _loginService.GetCurrentUserInfo();
 		var result = await _userService.UpdateUserProfile(userInfo!.UserId, vm);
+
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+		}
 		if (!result.IsSuccess)
-			return NotFound();
+			return View(vm);
 
 		return View(vm);
 	}
