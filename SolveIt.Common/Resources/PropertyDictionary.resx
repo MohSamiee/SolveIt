@@ -294,6 +294,9 @@
   <data name="PasswordMustContainUpperCase" xml:space="preserve">
     <value>کلمه عبور باید شامل حداقل 1 حرف بزرگ باشد</value>
   </data>
+  <data name="PersianDateIsNotInFormat" xml:space="preserve">
+    <value>فرمت تاریخ صحیح نیست</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>ثبت نام</value>
   </data>

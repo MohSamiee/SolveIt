@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace SolveIt.Common.Converter;
 public static class DateConverter
 {
@@ -28,36 +29,17 @@ public static class DateConverter
 	{
 		if (string.IsNullOrEmpty(value))
 			return null;
+		if (!value.IsPersianDateOrEmpty())
+			return null;
 
 		var gregorianDate = new DateTime();
 		var persianCalendar = new PersianCalendar();
 		var Gregoriancal = new GregorianCalendar();
 		var dateParts = value.Split(dateDelimeter).ToArray();
 
-
-	
-
 		var year = dateParts[0];
 		var month = dateParts[1];
 		var day = dateParts[2];
-		//if (!year.StartsWith("13") && !year.StartsWith("14"))
-		//	return null;
-
-		if (year.ToString().Count() != 4 || year.Contains("_"))
-			return null;
-
-		if (month.ToString().Count() != 2 || month.Contains("_"))
-			return null;
-
-		if (int.Parse(month) > 12)
-			return null;
-
-
-		if (day.ToString().Count() != 2 || day.Contains("_"))
-			return null;
-
-		if (int.Parse(day) > 31)
-			return null;
 
 		var date = persianCalendar.ToDateTime(int.Parse(year), int.Parse(month), int.Parse(day), 0, 0, 0, 0, 0);
 		int MiladiYear = int.Parse(Gregoriancal.GetYear(date).ToString());
@@ -66,5 +48,52 @@ public static class DateConverter
 		gregorianDate = DateTime.Parse(MiladiYear + "-" + MiladiMonth + "-" + MiladiDay).Date;
 		return gregorianDate;
 
+	}
+
+	public static bool IsPersianDateOrEmpty(this string value,char dateDelimiter = '/')
+	{
+		if (string.IsNullOrWhiteSpace(value))
+			return true;
+
+		var dateParts = value.Split('/');
+
+		if (dateParts.Length != 3)
+			return false;
+
+		if (!int.TryParse(dateParts[0], out var _) ||
+		!int.TryParse(dateParts[1], out var _) ||
+		!int.TryParse(dateParts[2], out var _))
+			return false;
+
+		var year = dateParts[0];
+		var month = dateParts[1];
+		var day = dateParts[2];
+
+		if (year.ToString().Count() != 4 || year.Contains("_"))
+			return false;
+
+		if (month.ToString().Count() != 2 || month.Contains("_"))
+			return false;
+
+		if (int.Parse(month) > 12)
+			return false;
+
+
+		if (day.ToString().Count() != 2 || day.Contains("_"))
+			return false;
+
+		if (int.Parse(day) > 31)
+			return false;
+
+		try
+		{
+			var pc = new PersianCalendar();
+			pc.ToDateTime(int.Parse(year), int.Parse(month), int.Parse(day), 0, 0, 0, 0);
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 }

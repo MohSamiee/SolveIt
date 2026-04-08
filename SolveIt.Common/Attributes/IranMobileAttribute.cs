@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-
-namespace SolveIt.Common.Attributes;
 
 public class IranMobileAttribute : ValidationAttribute
 {
+	public IranMobileAttribute()
+	{
+		ErrorMessageResourceType = typeof(PropertyDictionary);
+		ErrorMessageResourceName = "MobileFormatIsNotCorrect";
+	}
+	 
 	protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 	{
 		var mobile = value as string;
@@ -12,13 +15,11 @@ public class IranMobileAttribute : ValidationAttribute
 		if (string.IsNullOrEmpty(mobile))
 			return ValidationResult.Success;
 
-		var regex = new Regex(@"^09\d{9}$");
-
 		if (!mobile.IsIranMobileNumber())
 		{
 			return new ValidationResult(
-				PropertyDictionary.MobileFormatIsNotCorrect,
-				[validationContext.MemberName]
+				FormatErrorMessage(validationContext.DisplayName),
+				new[] { validationContext.MemberName! }
 			);
 		}
 

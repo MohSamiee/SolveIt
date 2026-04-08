@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SolveIt.Common.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace SolveIt.Application.ViewModels.UserPanel.Accounts;
 public class UserPanelUserDataViewModel
@@ -23,6 +24,7 @@ public class UserPanelUserDataViewModel
 
 
 	[Display(Name = "BirthDate", ResourceType = typeof(PropertyDictionary))]
+	[PersianDate]
 	public string? BirthDate{ get; set; }
 
 
@@ -37,6 +39,7 @@ public class UserPanelUserDataViewModel
 
 
 	[Display(Name = "Mobile", ResourceType = typeof(PropertyDictionary))]
+	[IranMobile]
 	public string? Mobile { get; set; }
 
 

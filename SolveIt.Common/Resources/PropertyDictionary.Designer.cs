@@ -592,6 +592,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فرمت تاریخ صحیح نیست.
+        /// </summary>
+        public static string PersianDateIsNotInFormat {
+            get {
+                return ResourceManager.GetString("PersianDateIsNotInFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ثبت نام.
         /// </summary>
         public static string Register {
