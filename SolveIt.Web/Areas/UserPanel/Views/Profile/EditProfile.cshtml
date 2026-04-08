@@ -23,68 +23,70 @@
               asp-controller="Profile"
               asp-action="EditProfile">
             <div class="row">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-user-shape"></i>
+                                @Html.DisplayNameFor(a => a.FirstName)
+                            </label>
+                            <input asp-for="FirstName" type="text">
+                            <span asp-validation-for="FirstName"></span>
+                        </div>
+                    </div>
 
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-user-shape"></i>
-                            @Html.DisplayNameFor(a => a.FirstName)
-                        </label>
-                        <input asp-for="FirstName" type="text">
-                        <span asp-validation-for="FirstName" />
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-user-shape"></i>
+                                @Html.DisplayNameFor(a => a.LastName)
+                            </label>
+                            <input asp-for="LastName" type="text">
+                            <span asp-validation-for="LastName"></span>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-work"></i>
+                                @Html.DisplayNameFor(a => a.Company)
+                            </label>
+                            <input asp-for="Company" type="text">
+                            <span asp-validation-for="Company"></span>
+                        </div>
+                    </div>
 
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-user-shape"></i>
-                            @Html.DisplayNameFor(a => a.LastName)
-                        </label>
-                        <input asp-for="LastName" type="text">
-                        <span asp-validation-for="LastName" />
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-briefcase"></i>
+                                @Html.DisplayNameFor(a => a.JobTitle)
+                            </label>
+                            <input asp-for="JobTitle" type="text">
+                            <span asp-validation-for="JobTitle"></span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-work"></i>
-                            @Html.DisplayNameFor(a => a.Company)
-                        </label>
-                        <input asp-for="Company" type="text">
-                        <span asp-validation-for="Company" />
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-mobile-phone"></i>
+                                @Html.DisplayNameFor(a => a.Mobile)
+                            </label>
+                            <input asp-for="Mobile" type="text">
+                            <span asp-validation-for="Mobile"></span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-briefcase"></i>
-                            @Html.DisplayNameFor(a => a.JobTitle)
-                        </label>
-                        <input asp-for="JobTitle" type="text">
-                        <span asp-validation-for="JobTitle" />
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-mobile-phone"></i>
-                            @Html.DisplayNameFor(a => a.Mobile)
-                        </label>
-                        <input asp-for="Mobile" type="text">
-                        <span asp-validation-for="Mobile" />
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="input-layer">
-                        <label>
-                            <i class="icon-mail"></i>
-                            @Html.DisplayNameFor(a => a.Email)
-                            @* @if (Model.IsEmailConfirmed)
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-mail"></i>
+                                @Html.DisplayNameFor(a => a.Email)
+                                @* @if (Model.IsEmailConfirmed)
                             {
                                 <span style="color:gray" class="pull-left disabled">
                                     تایید شده
@@ -97,64 +99,81 @@
                                     ارسال مجدد لینک فعال سازی
                                 </span>
                             } *@
-                        </label>
-                        @if (Model.CanEditEmail)
-                        {
-                            <input asp-for="Email" type="text">
-                        }
-                        else
-                        {
-                            <input asp-for="Email" type="text" disabled>
-                        }
-                        <span asp-validation-for="Email" />
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="select-layer">
-                        <label>
-                            <i class="icon-maps-and-flags"></i>
-                            @Html.DisplayNameFor(a => a.CountryId)
-                        </label>
-                        <select asp-for="CountryId"
-                                onchange="GetCities(this)"
-                                data-url="@Url.Action("GetCities","Profile", new {area = "UserPanel"})">
-                            <option value="">@PropertyDictionary.DoChose</option>
-                            @if (Model.Countries != null && Model.Countries.Any())
+                            </label>
+                            @if (Model.CanEditEmail)
                             {
-                                foreach (var country in Model.Countries)
-                                {
-                                    <option value="@country.Id">@country.Title</option>
-                                }
+                                <input asp-for="Email" type="text">
                             }
-                        </select>
-                        <span asp-validation-for="CountryId" />
+                            else
+                            {
+                                <input asp-for="Email" type="text" disabled>
+                            }
+                            <span asp-validation-for="Email"></span>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="select-layer">
+                            <label>
+                                <i class="icon-maps-and-flags"></i>
+                                @Html.DisplayNameFor(a => a.CountryId)
+                            </label>
+                            <select asp-for="CountryId"
+                                    onchange="GetCities(this)"
+                                    data-url="@Url.Action("GetCities","Profile", new {area = "UserPanel"})">
+                                <option value="">@PropertyDictionary.DoChose</option>
+                                @if (Model.Countries != null && Model.Countries.Any())
+                                {
+                                    foreach (var country in Model.Countries)
+                                    {
+                                        <option value="@country.Id">@country.Title</option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="CountryId"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="select-layer">
+                            <label>
+                                <i class="icon-maps-and-flags"></i>
+                                @Html.DisplayNameFor(a => a.CityId)
+                            </label>
+                            <select asp-for="CityId">
+                                <option value="">@PropertyDictionary.DoChose</option>
+                            </select>
+                            <span asp-validation-for="CityId"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="textarea-layer">
+                            <label>
+                                <i class="icon-document"></i>
+                                @Html.DisplayNameFor(a => a.AboutMe)
+                            </label>
+                            <textarea asp-for="AboutMe"></textarea>
+                            <span asp-validation-for="AboutMe"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
+                    <button class="submit-button btn-primary" type="submit">
+                        <span>
+                            @PropertyDictionary.EditProfile
+                        </span>
+                    </button>
                 </div>
 
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="select-layer">
-                        <label>
-                            <i class="icon-maps-and-flags"></i>
-                            @Html.DisplayNameFor(a => a.CityId)
-                        </label>
-                        <select asp-for="CityId">
-                            <option value="">@PropertyDictionary.DoChose</option>
-                        </select>
-                        <span asp-validation-for="CityId" />
-                    </div>
-                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="textarea-layer">
-                        <label>
-                            <i class="icon-document"></i>
-                            @Html.DisplayNameFor(a => a.AboutMe)
-                        </label>
-                        <textarea asp-for="AboutMe"></textarea>
-                        <span asp-validation-for="AboutMe" />
-                    </div>
-                </div>
+
 
 @*                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="radio-selected">
@@ -169,15 +188,6 @@
 
                 </div>
  *@
-                <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
-                    <button class="submit-button btn-primary" type="submit">
-                        <span>
-                            @PropertyDictionary.EditProfile
-                        </span>
-                    </button>
-                </div>
 
-            </div>
-        </form>
-    </div>
-</div>
+
+@* <div class="clearfix visible-md-block visible-lg-block"></div> *@

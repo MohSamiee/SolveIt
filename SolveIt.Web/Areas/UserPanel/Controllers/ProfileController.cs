@@ -32,11 +32,11 @@ public class ProfileController : UserPanelBaseController
 	[ValidateAntiForgeryToken]
 	public async Task<IActionResult> EditProfile(UserPanelUserDataViewModel vm)
 	{
-	
-		//if (!ModelState.IsValid)
-		//{
-		//	return View(vm);
-		//}
+
+		if (!ModelState.IsValid)
+		{
+			return View(vm);
+		}
 		var userInfo = _loginService.GetCurrentUserInfo();
 		var result = await _userService.UpdateUserProfile(userInfo!.UserId, vm);
 

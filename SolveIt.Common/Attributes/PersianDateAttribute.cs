@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace SolveIt.Common.Attributes;
 
-public class PersianDateAttribute : ValidationAttribute
+public class PersianDateAttribute : ValidationAttribute, IClientModelValidator
 {
 	protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 	{
@@ -28,5 +29,19 @@ public class PersianDateAttribute : ValidationAttribute
 				PropertyDictionary.PersianDateIsNotInFormat,
 				[validationContext.MemberName]);
 		}
+	}
+	public void AddValidation(ClientModelValidationContext context)
+	{
+		MergeAttribute(context.Attributes, "data-val", "true");
+		MergeAttribute(context.Attributes, "data-val-persianDate", FormatErrorMessage(context.ModelMetadata.GetDisplayName()));
+	}
+
+	private bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+	{
+		if (attributes.ContainsKey(key))
+			return false;
+
+		attributes.Add(key, value);
+		return true;
 	}
 }

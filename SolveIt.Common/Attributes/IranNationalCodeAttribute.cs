@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 
 namespace SolveIt.Common.Attributes;
-public class IranNationalCodeAttribute : ValidationAttribute
+public class IranNationalCodeAttribute : ValidationAttribute, IClientModelValidator
 {
 	protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
 	{
@@ -60,6 +61,21 @@ public class IranNationalCodeAttribute : ValidationAttribute
 			error = "کد ملی وارد شده صحیح نمی باشد";
 			return false;
 		}
+		return true;
+	}
+
+	public void AddValidation(ClientModelValidationContext context)
+	{
+		MergeAttribute(context.Attributes, "data-val", "true");
+		MergeAttribute(context.Attributes, "data-val-iranNationalCode", FormatErrorMessage(context.ModelMetadata.GetDisplayName()));
+	}
+
+	private bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+	{
+		if (attributes.ContainsKey(key))
+			return false;
+
+		attributes.Add(key, value);
 		return true;
 	}
 }
