@@ -24,7 +24,7 @@ public class User : BaseEntity
 	public long? CountryId { get; set; }
 	public long? CityId { get; set; }
 	public DateTime? BirthDate { get; set; }
-	public string? AboutMe { get; set; }
+	public string? AboutMe { get; set; } 
 	public bool GetNewLetter { get; set; }
 	public string? JobTitle { get; set; }
 	public string? Company { get; set; }
@@ -39,5 +39,6 @@ public class User : BaseEntity
 	#region Relation
 	public State? City { get; set; }
 	public State? Country { get; set; }
+	public ICollection<Question>? Questions { get; set; } = new List<Question>();
 	#endregion Relation
 }

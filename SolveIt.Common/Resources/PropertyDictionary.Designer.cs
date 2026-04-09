@@ -97,6 +97,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مدال برنزی.
+        /// </summary>
+        public static string BronzeMedal {
+            get {
+                return ResourceManager.GetString("BronzeMedal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تغییر کلمه عبور.
         /// </summary>
         public static string ChangePassword {
@@ -385,6 +394,15 @@ namespace SolveIt.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مدال طلایی.
+        /// </summary>
+        public static string GoldMedal {
+            get {
+                return ResourceManager.GetString("GoldMedal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کلمه عبور خود را فراموش کرده ام!.
         /// </summary>
         public static string IHaveForgotPassword {
@@ -525,6 +543,15 @@ namespace SolveIt.Common.Resources {
         public static string NewPassword {
             get {
                 return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بدون مدال.
+        /// </summary>
+        public static string NoMedal {
+            get {
+                return ResourceManager.GetString("NoMedal", resourceCulture);
             }
         }
         
@@ -696,6 +723,15 @@ namespace SolveIt.Common.Resources {
         public static string ResetPasswordVerificationCodeSentByMobile {
             get {
                 return ResourceManager.GetString("ResetPasswordVerificationCodeSentByMobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مدال نقره ای.
+        /// </summary>
+        public static string SilverMedal {
+            get {
+                return ResourceManager.GetString("SilverMedal", resourceCulture);
             }
         }
         

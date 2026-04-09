@@ -31,5 +31,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 		builder.Property(p => p.JobTitle).IsRequired(false).HasMaxLength(200);
 		builder.Property(p => p.Company).IsRequired(false).HasMaxLength(200);
 
+		builder.HasMany(s => s.Questions)
+			.WithOne(u => u.User)
+			.HasForeignKey(u => u.UserId)
+			.OnDelete(DeleteBehavior.Restrict);
 	}
 }

@@ -7,3 +7,4 @@ global using SolveIt.Domain.Interfaces.Accounts;
 global using SolveIt.Domain.Interfaces.Common;
 global using SolveIt.Domain.Interfaces.Locations;
 global using SolveIt.Entities.Models.Users;
+global using SolveIt.DataLayer.SeedData;

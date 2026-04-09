@@ -129,6 +129,9 @@
   <data name="BirthDate" xml:space="preserve">
     <value>تاریخ تولد</value>
   </data>
+  <data name="BronzeMedal" xml:space="preserve">
+    <value>مدال برنزی</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>تغییر کلمه عبور</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="GnSubmit" xml:space="preserve">
     <value>ثبت</value>
   </data>
+  <data name="GoldMedal" xml:space="preserve">
+    <value>مدال طلایی</value>
+  </data>
   <data name="IHaveForgotPassword" xml:space="preserve">
     <value>کلمه عبور خود را فراموش کرده ام!</value>
   </data>
@@ -272,6 +278,9 @@
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>کلمه عبور جدید</value>
+  </data>
+  <data name="NoMedal" xml:space="preserve">
+    <value>بدون مدال</value>
   </data>
   <data name="OldPassword" xml:space="preserve">
     <value>کلمه عبور فعلی</value>
@@ -329,6 +338,9 @@
   </data>
   <data name="ResetPasswordVerificationCodeSentByMobile" xml:space="preserve">
     <value>جهت تکمیل ریست کردن کلمه عبور کدی که برای موبایلتان ارسال شد.</value>
+  </data>
+  <data name="SilverMedal" xml:space="preserve">
+    <value>مدال نقره ای</value>
   </data>
   <data name="UserIsBan" xml:space="preserve">
     <value>کاربر مسدود شده است. برای اطلاع بیشتر با ادمین تماس بگیرید</value>

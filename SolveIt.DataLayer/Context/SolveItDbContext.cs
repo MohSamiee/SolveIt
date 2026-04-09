@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SolveIt.DataLayer.SeedData;
 
 namespace SolveIt.DataLayer.Context;
 public class SolveItDbContext : DbContext
@@ -14,6 +13,8 @@ public class SolveItDbContext : DbContext
 	#region DbSets
 	public DbSet<User> Users { get; set; }
 	public DbSet<State> States { get; set; }
+	public DbSet<Question> Questions { get; set; }
+
 
 	#endregion DbSets
 
