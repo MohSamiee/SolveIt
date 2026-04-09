@@ -75,8 +75,28 @@
                             <label>
                                 <i class="icon-mobile-phone"></i>
                                 @Html.DisplayNameFor(a => a.Mobile)
+                                @if (Model.IsMobileConfirmed)
+                                {
+                                    <span style="color:gray" class="pull-left disabled">
+                                        تایید شده
+                                        <i class="icon-check" style="color:green"></i>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span style="color:gray" class="pull-left disabled">
+                                        <a> ارسال مجدد لینک فعال سازی</a>
+                                    </span>
+                                }
                             </label>
-                            <input asp-for="Mobile" type="text">
+                            @if (Model.CanEditMobile)
+                            {
+                                <input asp-for="Mobile" type="text">
+                            }
+                            else
+                            {
+                                <input asp-for="Mobile" type="text" readonly>
+                            }
                             <span asp-validation-for="Mobile"></span>
                         </div>
                     </div>
@@ -86,19 +106,19 @@
                             <label>
                                 <i class="icon-mail"></i>
                                 @Html.DisplayNameFor(a => a.Email)
-                                @* @if (Model.IsEmailConfirmed)
-                            {
-                                <span style="color:gray" class="pull-left disabled">
-                                    تایید شده
-                                    <i class="icon-check" style="color:green"></i>
-                                </span>
-                            }
-                            else
-                            {
-                                <span style="color:gray" class="pull-left disabled">
-                                    ارسال مجدد لینک فعال سازی
-                                </span>
-                            } *@
+                                @if (Model.IsEmailConfirmed)
+                                {
+                                    <span style="color:gray" class="pull-left disabled">
+                                        تایید شده
+                                        <i class="icon-check" style="color:green"></i>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span style="color:gray" class="pull-left disabled">
+                                        <a> ارسال مجدد لینک فعال سازی</a>
+                                    </span>
+                                }
                             </label>
                             @if (Model.CanEditEmail)
                             {
@@ -106,7 +126,7 @@
                             }
                             else
                             {
-                                <input asp-for="Email" type="text" disabled>
+                                <input asp-for="Email" type="text" readonly>
                             }
                             <span asp-validation-for="Email"></span>
                         </div>
