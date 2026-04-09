@@ -134,6 +134,21 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="input-layer">
+                            <label>
+                                <i class="icon-date"></i>
+                                @Html.DisplayNameFor(a => a.BirthDate)
+                            </label>
+                            <input asp-for="BirthDate" type="text" class="form-date-picker datePicker">
+                            <span asp-validation-for="BirthDate"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="select-layer">
                             <label>
                                 <i class="icon-maps-and-flags"></i>

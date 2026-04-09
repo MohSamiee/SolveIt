@@ -100,17 +100,29 @@ window.GetCities = async function (el) {
     }
 }
 
-kamaDatepicker('BirthDate2', {
-    placeholder: 'مثال 1404/01/01',
-    twodigit: true,
-    closeAfterSelect: true,
-    nextButtonIcon: '',
-    previousButtonIcon: '',
-    buttonsColor: '#007cd4',
-    forceFarsiDigit: true,
-    markToday: true,
-    markHolidays: '',
-    highlighSelectedDay: true,
-    sync: true,
-    gotoToday: true
-});
+
+
+
+var datePickers = document.querySelectorAll(".datePicker");
+if (datePickers.length) {
+    debugger;
+    for (let datePicker of datePickers) {
+        debugger;
+
+        var id = $(datePicker).attr("id");
+        kamaDatepicker(id, {
+            placeholder: 'مثال 1404/01/01',
+            twodigit: true,
+            closeAfterSelect: true,
+            nextButtonIcon: '',
+            previousButtonIcon: '',
+            buttonsColor: '#007cd4',
+            forceFarsiDigit: true,
+            markToday: true,
+            markHolidays: '',
+            highlighSelectedDay: true,
+            sync: true,
+            gotoToday: true
+        });
+    }
+}
