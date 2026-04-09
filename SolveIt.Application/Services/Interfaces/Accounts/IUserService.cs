@@ -20,5 +20,6 @@ public interface IUserService
 	Task<OperationResult<UserPanelUserDataViewModel>> GetUserData(long userId);
 	Task<OperationResult<UserPanelTopHeaderViewModel>> GetUserDataTopHeader(long userId);
 	Task<OperationResult<UserPanelUserDataViewModel>> UpdateUserProfile(long userId, UserPanelUserDataViewModel profile);
+	Task<OperationResult<bool>> ChangePassword(long userId, ChangePassword change);
 
 }

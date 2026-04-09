@@ -62,4 +62,36 @@ public class ProfileController : UserPanelBaseController
 	}
 
 	#endregion Load Cities
+
+
+	#region Change Password
+	public async Task<IActionResult> ChangePassword()
+	{
+
+		return View();
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> ChangePassword(ChangePassword vm)
+	{
+		if (!ModelState.IsValid)
+		{
+			return View(vm);
+		}
+		var user = _loginService.GetCurrentUserInfo();
+		var result = await _userService.ChangePassword(user.UserId, vm);
+		if (!result.IsSuccess && result.ModelStateErrors != null && result.ModelStateErrors.Any())
+		{
+			foreach (var error in result.ModelStateErrors)
+			{
+				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
+			}
+			return View(vm);
+		}
+
+		this.SetOperationMessage(result);
+		await _loginService.LogoutUserByCookie();
+		return RedirectToAction("Login", "Account", new { area = "" });
+	}
+	#endregion Change Password
 }

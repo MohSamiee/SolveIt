@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace SolveIt.Application.ViewModels.Accounts;
-public class ChangePassword
+public class ResetPasswordViewModel
 {
-	[Display(Name = "OldPassword", ResourceType = typeof(PropertyDictionary))]
+	[Display(Name = "EmailOrMobile", ResourceType = typeof(PropertyDictionary))]
+	[MaxLength(100, ErrorMessageResourceName = "GnMaxLengthErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
+	public string EmailOrMobile { get; set; }
 
+
+	[Display(Name = "OldPassword", ResourceType = typeof(PropertyDictionary))]
 	[DataType(DataType.Password)]
-	public string OldPassword { get; set; }
+	public string? OldPassword { get; set; }
 
 
 	[Display(Name = "NewPassword", ResourceType = typeof(PropertyDictionary))]
@@ -21,4 +25,7 @@ public class ChangePassword
 	[DataType(DataType.Password)]
 	[Compare(nameof(NewPassword), ErrorMessageResourceName = "ComparePasswordErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	public string ReNewPassword { get; set; }
+
+
+	public bool IsForgotPassword { get; set; }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using SolveIt.Entities.Models.Users;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SolveIt.Application.Services.Implementations.Accounts;
 public class UserService : IUserService
@@ -856,5 +858,38 @@ public class UserService : IUserService
 			StatusResultEnum.Success);
 	}
 
+	public async Task<OperationResult<bool>> ChangePassword(long userId, ChangePassword change)
+	{
+		var validation = await new ModelVerification().ModelValidation(change);
+		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				validation.ModelStateErrors);
+		if (string.IsNullOrWhiteSpace(change.OldPassword))
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError(nameof(change.OldPassword), string.Format(PropertyDictionary.GnRequiredErrorMessage, PropertyDictionary.OldPassword)));
+		var user = _userRepository.GetById(userId);
+
+		if (!PasswordHasher.Verify(change.OldPassword, user.HashedPassword))
+		{
+			return new OperationResult<bool>(
+				false,
+				false,
+				PropertyDictionary.GnSomethingWenWrong,
+				StatusResultEnum.ValidationError,
+				ModelStateError.MakeModelStateError(nameof(change.OldPassword), PropertyDictionary.IncorrectPassword));
+		}
+
+		user.HashedPassword = change.NewPassword.Hash();
+		await _userRepository.UpdateAsync(user, true);
+		return new OperationResult<bool>(true, true, PropertyDictionary.GnOperationSuccessfulltDone, StatusResultEnum.Success);
+	}
 	#endregion User Panel
 }
