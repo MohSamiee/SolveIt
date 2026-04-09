@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace SolveIt.Common.Converter;
 public static class DateConverter
 {
@@ -50,7 +49,7 @@ public static class DateConverter
 
 	}
 
-	public static bool IsPersianDateOrEmpty(this string value,char dateDelimiter = '/')
+	public static bool IsPersianDateOrEmpty(this string value, char dateDelimiter = '/')
 	{
 		if (string.IsNullOrWhiteSpace(value))
 			return true;

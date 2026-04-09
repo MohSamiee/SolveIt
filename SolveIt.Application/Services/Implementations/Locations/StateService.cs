@@ -1,8 +1,4 @@
-﻿using SolveIt.Application.Services.Interfaces.Locations;
-using SolveIt.Domain.Interfaces.Locations;
-using System.Net.WebSockets;
-
-namespace SolveIt.Application.Services.Implementations.Locations;
+﻿namespace SolveIt.Application.Services.Implementations.Locations;
 public class StateService : IStateService
 {
 	private readonly IStateRepository _stateRepository;
@@ -14,7 +10,7 @@ public class StateService : IStateService
 	public async Task<OperationResult<List<SelectListViewModel>>> GetCuntries()
 	{
 		var countries = await _stateRepository.GetCountries();
-		
+
 		var res =
 			(from country in countries
 			 select new SelectListViewModel()
@@ -22,7 +18,7 @@ public class StateService : IStateService
 				 Id = country.Id,
 				 Title = country.Title,
 			 }).ToList();
-		
+
 		return new OperationResult<List<SelectListViewModel>>(
 			true,
 			res,
@@ -30,7 +26,7 @@ public class StateService : IStateService
 			StatusResultEnum.Success
 			);
 	}
-	
+
 	public async Task<OperationResult<List<SelectListViewModel>>> GetCities(long? countryId)
 	{
 		var cities = await _stateRepository.GetCities(countryId);

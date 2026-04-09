@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SolveIt.Common.ViewModels.Options;
 using Microsoft.Extensions.Options;
+using SolveIt.Common.ViewModels.Options;
 
 namespace BestShop.Data.Resolver;
 public class AvatarExtensionsResolver<TDestination> : IValueResolver<User, TDestination, List<string>>

@@ -2,7 +2,7 @@
 
 namespace SolveIt.Web.ActionFilters;
 
-public class RedirectHomeIfUserLoggedInActionFiltrer:ActionFilterAttribute
+public class RedirectHomeIfUserLoggedInActionFiltrer : ActionFilterAttribute
 {
 	public override void OnActionExecuting(ActionExecutingContext context)
 	{

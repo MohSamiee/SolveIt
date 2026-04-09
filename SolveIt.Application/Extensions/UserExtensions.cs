@@ -12,7 +12,7 @@ public static class UserExtensions
 			res = user.Mobile;
 		return res;
 	}
-	
+
 	public static string GetFullName(this User user)
 	{
 		var res = string.Empty;

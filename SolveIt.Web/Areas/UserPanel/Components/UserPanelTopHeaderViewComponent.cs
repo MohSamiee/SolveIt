@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 namespace SolveIt.Web.Areas.UserPanel.Components;
-public class UserPanelTopHeaderViewComponent  : ViewComponent
+public class UserPanelTopHeaderViewComponent : ViewComponent
 {
 	#region Constructor
 	private readonly IUserService _userService;

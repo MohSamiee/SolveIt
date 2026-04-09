@@ -208,7 +208,7 @@ public class AccountController : BaseController
 		this.SetOperationMessage(result);
 		if (result.IsSuccess)
 		{
-			if(result.Data!.ResponseType==ForgotPasswordResponseEnum.Email)
+			if (result.Data!.ResponseType == ForgotPasswordResponseEnum.Email)
 				return RedirectToAction("Login", "Account");
 			if (result.Data!.ResponseType == ForgotPasswordResponseEnum.Mobile)
 			{
@@ -260,7 +260,7 @@ public class AccountController : BaseController
 				return View(vm);
 			else
 			{
-		
+
 				TempData["model"] = JsonSerializer.Serialize(result.Data);
 
 				return RedirectToAction("MobileForgotPasswordVerification", "Account");

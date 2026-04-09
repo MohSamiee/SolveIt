@@ -1,6 +1,4 @@
-﻿using System.Net.Sockets;
-
-namespace SolveIt.Domain.Interfaces.Locations;
+﻿namespace SolveIt.Domain.Interfaces.Locations;
 public interface IStateRepository : IGenericRepository<State>
 {
 	#region Counteries

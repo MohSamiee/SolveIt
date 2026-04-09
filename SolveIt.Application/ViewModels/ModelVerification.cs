@@ -23,7 +23,7 @@ public class ModelVerification
 			validateAllProperties: true
 		);
 		if (res)
-			return new OperationResult<bool>(true, true, "",StatusResultEnum.Success);
+			return new OperationResult<bool>(true, true, "", StatusResultEnum.Success);
 
 		foreach (var item in validations)
 		{
@@ -35,9 +35,9 @@ public class ModelVerification
 
 		return new OperationResult<bool>(
 			false,
-			false, 
-			PropertyDictionary.GnSomethingWenWrong, 
-			StatusResultEnum.ValidationError, 
+			false,
+			PropertyDictionary.GnSomethingWenWrong,
+			StatusResultEnum.ValidationError,
 			errors);
 	}
 }

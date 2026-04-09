@@ -57,7 +57,7 @@ public class ProfileController : UserPanelBaseController
 	#region Load Cities
 	public async Task<IActionResult> GetCities(long countryId)
 	{
-		var res =await  _stateService.GetCities(countryId);
+		var res = await _stateService.GetCities(countryId);
 		return new JsonResult(res);
 	}
 

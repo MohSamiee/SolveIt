@@ -1,6 +1,4 @@
-﻿using SolveIt.Domain.Entities.Locations;
-
-namespace SolveIt.Entities.Models.Users;
+﻿namespace SolveIt.Entities.Models.Users;
 public class User : BaseEntity
 {
 	#region Properties

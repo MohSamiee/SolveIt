@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using SolveIt.Application.ViewModels.UserPanel.Accounts;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace SolveIt.Application.Services.Interfaces.Accounts;
 public interface IUserService

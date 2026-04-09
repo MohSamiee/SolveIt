@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace SolveIt.Application.ViewModels.UserPanel.Accounts;
 public class UserPanelUserDataViewModel
 {
-	[Display(Name  = "FirstName",ResourceType =typeof(PropertyDictionary))]
+	[Display(Name = "FirstName", ResourceType = typeof(PropertyDictionary))]
 	[MaxLength(100, ErrorMessageResourceName = "GnMaxLengthErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	[Required(ErrorMessageResourceName = "GnRequiredErrorMessage", ErrorMessageResourceType = typeof(PropertyDictionary))]
 	public string FirstName { get; set; }
@@ -25,13 +25,13 @@ public class UserPanelUserDataViewModel
 
 	[Display(Name = "BirthDate", ResourceType = typeof(PropertyDictionary))]
 	[PersianDate]
-	public string? BirthDate{ get; set; }
+	public string? BirthDate { get; set; }
 
 
 	[Display(Name = "Email", ResourceType = typeof(PropertyDictionary))]
 	public string? Email { get; set; }
 
-	
+
 	public bool IsEmailConfirmed { get; set; }
 
 
@@ -50,7 +50,7 @@ public class UserPanelUserDataViewModel
 
 
 	[Display(Name = "City", ResourceType = typeof(PropertyDictionary))]
-	public long? CityId{ get; set; }
+	public long? CityId { get; set; }
 
 
 	[Display(Name = "Country", ResourceType = typeof(PropertyDictionary))]

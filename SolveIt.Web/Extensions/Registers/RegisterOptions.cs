@@ -1,5 +1,4 @@
 ﻿using SolveIt.Common.Paging;
-using SolveIt.Common.Utilities;
 using SolveIt.Common.ViewModels.Options;
 
 namespace SolveIt.Web.Extensions.Registers;
@@ -14,9 +13,9 @@ public static class RegisterOptions
 			builder.Configuration.GetSection("AvatarSetting"));
 
 		builder.Services.Configure<PagingOptions>(builder.Configuration.GetSection("PagingOptions"));
-		
+
 		builder.Services.Configure<SmsSetting>(builder.Configuration.GetSection("SmsIrSetting"));
-		
+
 		builder.Services.Configure<SiteSetting>(builder.Configuration.GetSection("SiteSetting"));
 	}
 }
