@@ -1,4 +1,6 @@
-﻿namespace SolveIt.Entities.Models.Users;
+﻿using SolveIt.Domain.Enums;
+
+namespace SolveIt.Entities.Models.Users;
 public class User : BaseEntity
 {
 	#region Properties
@@ -34,6 +36,7 @@ public class User : BaseEntity
 
 	public bool IsBan { get; set; }
 	public bool IsAdmin { get; set; }
+	public UserMedalEnum Medal { get; set; }
 	#endregion Properties
 
 	#region Relation
