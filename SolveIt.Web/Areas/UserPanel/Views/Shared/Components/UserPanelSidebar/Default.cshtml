@@ -49,9 +49,21 @@
                                 @PropertyDictionary.UserPanel
                             </a>
                         </li>
-                        <li><a href="account-1.html"> ویرایش حساب کاربری </a></li>
+                        <li>
+                            <a asp-area="UserPanel"
+                               asp-controller="Profile"
+                               asp-action="EditProfile">
+                                @PropertyDictionary.EditProfile
+                            </a>
+                        </li>
                         <li class="active"><a href="account-2.html"> تنظیمات حساب کاربری </a></li>
-                        <li><a href="account-3.html"> تغییر رمز عبور </a></li>
+                        <li>
+                            <a asp-area="UserPanel"
+                               asp-controller="Profile"
+                               asp-action="ChangePassword">
+                                @PropertyDictionary.ChangePassword
+                            </a>
+                        </li>
                     </ul>
                     <label class="sign-dropdown"><i class="icon-chevron-down"></i></label>
                 </li>
