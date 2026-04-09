@@ -741,6 +741,10 @@ public class UserService : IUserService
 
 		var result = _mapper.Map<UserPanelUserDataViewModel>(user);
 		result.Countries = (await _stateService.GetCuntries()).Data;
+		if (user.CountryId != null)
+		{
+			result.Cities = (await _stateService.GetCities(user.CountryId)).Data;
+		}
 
 		return new OperationResult<UserPanelUserDataViewModel>(
 			true,
@@ -778,6 +782,12 @@ public class UserService : IUserService
 
 	public async Task<OperationResult<UserPanelUserDataViewModel>> UpdateUserProfile(long userId, UserPanelUserDataViewModel profile)
 	{
+		profile.Countries = (await _stateService.GetCuntries()).Data;
+		if (profile.CountryId != null)
+		{
+			profile.Cities = (await _stateService.GetCities(profile.CountryId)).Data;
+		}
+
 		var validation = await new ModelVerification().ModelValidation(profile);
 		if (!validation.IsSuccess && validation.ModelStateErrors != null && validation.ModelStateErrors.Any())
 			return new OperationResult<UserPanelUserDataViewModel>(

@@ -22,6 +22,9 @@
               asp-area="UserPanel"
               asp-controller="Profile"
               asp-action="EditProfile">
+            @Html.HiddenFor(a => a.Cities)
+            @Html.HiddenFor(a => a.Countries)
+
             <div class="row">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
@@ -178,6 +181,13 @@
                             </label>
                             <select asp-for="CityId">
                                 <option value="">@PropertyDictionary.DoChose</option>
+                                @if (Model.Cities != null && Model.Cities.Any())
+                                {
+                                    foreach (var city in Model.Cities)
+                                    {
+                                        <option value="@city.Id">@city.Title</option>
+                                    }
+                                }
                             </select>
                             <span asp-validation-for="CityId"></span>
                         </div>
@@ -195,6 +205,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="radio-selected">
+                            <span>
+                                @Html.DisplayNameFor(a => a.GetNewsLetter)
+                            </span>
+                            <div class="select">
+                                <input asp-for="GetNewsLetter" type="checkbox"  id="suggest-1" >
+                                <label for="suggest-1"></label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 pull-left">
                     <button class="submit-button btn-primary" type="submit">
                         <span>
@@ -210,19 +235,7 @@
 
 
 
-@*                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="radio-selected">
-                        <span>
-                            @Html.DisplayNameFor(a => a.GetNewsLetter)
-                        </span>
-                        <div class="select">
-                            <input asp-for="GetNewsLetter" type="checkbox" value="1" id="suggest-1" name="">
-                            <label for="suggest-1"></label>
-                        </div>
-                    </div>
 
-                </div>
- *@
 
 
 @* <div class="clearfix visible-md-block visible-lg-block"></div> *@

@@ -75,4 +75,6 @@ public class UserPanelUserDataViewModel
 	public bool GetNewsLetter { get; set; }
 
 	public List<SelectListViewModel>? Countries { get; set; } = new List<SelectListViewModel>();
+	public List<SelectListViewModel>? Cities { get; set; } = new List<SelectListViewModel>();
+
 }

@@ -47,8 +47,8 @@ public class ProfileController : UserPanelBaseController
 				ModelState.AddModelError(error.ModelStateField, error.ModelStateErrorMessage);
 			}
 		}
-		if (!result.IsSuccess)
-			return View(vm);
+		if (result.IsSuccess)
+			return RedirectToAction(nameof(EditProfile));
 
 		return View(vm);
 	}

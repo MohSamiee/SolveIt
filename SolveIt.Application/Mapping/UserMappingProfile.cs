@@ -59,6 +59,7 @@ public class UserMappingProfile : Profile
 				dest.IsMobileConfirmed = src.IsMobileConfirmed;
 				dest.CanEditEmail = (string.IsNullOrWhiteSpace(src.Email));
 				dest.CanEditMobile= (string.IsNullOrWhiteSpace(src.Mobile) || !string.IsNullOrWhiteSpace(src.Email));
+				dest.GetNewsLetter = src.GetNewLetter;
 			});
 		#endregion User Panel Data
 

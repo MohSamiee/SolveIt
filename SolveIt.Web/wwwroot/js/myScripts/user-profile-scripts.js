@@ -100,6 +100,11 @@ window.GetCities = async function (el) {
     }
 }
 
+$(function () {
+    if ($("#CountryId").val() === "") {
+        $("#CityId").prop("disabled", true);
+    }
+});
 
 
 
